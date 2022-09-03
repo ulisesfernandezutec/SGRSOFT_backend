@@ -1,0 +1,73 @@
+package com.sgr.api;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.sgr.bussines.Messages;
+import com.sgr.entities.Persona;
+import com.sgr.entities.PuntoDR;
+
+@Service
+@Transactional
+public class PuntoDRServiceImplement implements PuntoDRService {
+
+	@Autowired
+	PuntoDRRepository puntoDRRepository;
+
+	@Override
+	public PuntoDR create(PuntoDR puntoDR) {
+		return puntoDRRepository.save(puntoDR);
+	}
+
+	@Override
+	public PuntoDR update(PuntoDR puntoDR) {
+		Optional<PuntoDR> puntodrrepo = this.puntoDRRepository.findById(Long.parseLong(puntoDR.getId()));
+
+		if (puntodrrepo.isPresent()) {
+			PuntoDR pdr = puntodrrepo.get();
+			pdr.setId(puntoDR.getId());
+			pdr.setTipoDeResiduo(puntoDR.getTipoDeResiduo());
+			pdr.setUsuario(puntoDR.getUsuario());
+			pdr.setZona(puntoDR.getZona());
+			this.puntoDRRepository.save(pdr);
+			return pdr;
+		} else {
+			System.out.printf(Messages.pdrNotFound, puntoDR.getId());
+			return null;
+		}
+	}
+
+	@Override
+	public List<PuntoDR> list() {
+		return this.puntoDRRepository.findAll();
+	}
+
+	@Override
+	public PuntoDR getById(long id) {
+		Optional<PuntoDR> pdr = this.puntoDRRepository.findById(id);
+		if (pdr.isPresent()) {
+			return pdr.get();
+		} else {
+			return null;
+		}
+	}
+
+	@Override
+	public boolean delete(long id) {
+		Optional<PuntoDR> pdr = this.puntoDRRepository.findById(id);
+		if (pdr.isPresent()) {
+			try {
+				this.puntoDRRepository.delete(pdr.get());
+				return true;
+			} catch (Exception e) {
+				return false;
+			}
+		} else {
+			return false;
+		}
+	}
+}
