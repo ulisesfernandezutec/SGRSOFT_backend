@@ -47,7 +47,7 @@ public class ZonaController {
 	@PostMapping("/zona/update/")
 	public boolean updateRol(@RequestBody Zona zona) {
 		try {
-			if (zonaServiceImplement.getById(Long.parseLong(zona.getId())) != null) {
+			if (zonaServiceImplement.getById(zona.getId()) != null) {
 				zonaServiceImplement.update(zona);
 			}
 			return true;

@@ -11,7 +11,7 @@ import lombok.NonNull;
 @Document("Zonas")
 public class Zona {
 	@Id
-	private String id;
+	private Long id;
 	private String nombre;
 	private String coordenadas;
 }

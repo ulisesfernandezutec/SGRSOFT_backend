@@ -24,7 +24,7 @@ public class PersonaServiceImplement implements PersonaService {
 
 	@Override
 	public Persona update(Persona persona) {
-		Optional<Persona> personarepo = this.personarepository.findById(Long.parseLong(persona.getId()));
+		Optional<Persona> personarepo = this.personarepository.findById(persona.getId());
 
 		if (personarepo.isPresent()) {
 			Persona pu = personarepo.get();
@@ -33,7 +33,6 @@ public class PersonaServiceImplement implements PersonaService {
 			pu.setApellido(persona.getApellido());
 			pu.setTelefono(persona.getTelefono());
 			pu.setDireccion(persona.getTelefono());
-			pu.setZona(persona.getZona());
 			pu.setObservaciones(persona.getObservaciones());
 			this.personarepository.save(pu);
 			return pu;
@@ -50,8 +49,8 @@ public class PersonaServiceImplement implements PersonaService {
 	}
 
 	@Override
-	public Persona getById(long id) {
-		Optional<Persona> personarepo = this.personarepository.findById(id);
+	public Persona getById(Long p) {
+		Optional<Persona> personarepo = this.personarepository.findById(p);
 		if (personarepo.isPresent()) {
 			return personarepo.get();
 		} else {
@@ -60,7 +59,7 @@ public class PersonaServiceImplement implements PersonaService {
 	}
 
 	@Override
-	public boolean delete(long id) {
+	public boolean delete(Long id) {
 		Optional<Persona> personarepo = this.personarepository.findById(id);
 		if (personarepo.isPresent()) {
 			try {
@@ -73,5 +72,4 @@ public class PersonaServiceImplement implements PersonaService {
 			return false;
 		}
 	}
-
 }

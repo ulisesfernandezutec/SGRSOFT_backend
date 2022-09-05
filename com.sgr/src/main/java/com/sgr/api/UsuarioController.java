@@ -47,7 +47,7 @@ public class UsuarioController {
 	@PostMapping("/usuario/update/")
 	public boolean updateRol(@RequestBody Usuario usuario) {
 		try {
-			if (usuarioServiceImplement.getById(Long.parseLong(usuario.getId())) != null) {
+			if (usuarioServiceImplement.getById(usuario.getId()) != null) {
 				usuarioServiceImplement.update(usuario);
 			}
 			return true;

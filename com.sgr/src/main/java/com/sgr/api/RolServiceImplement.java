@@ -8,8 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.sgr.bussines.Messages;
-import com.sgr.entities.Persona;
-import com.sgr.entities.PuntoDR;
 import com.sgr.entities.Rol;
 
 @Service
@@ -26,7 +24,7 @@ public class RolServiceImplement implements RolService {
 
 	@Override
 	public Rol update(Rol rolParam) {
-		Optional<Rol> rolrepo = this.rolRepository.findById(Long.parseLong(rolParam.getId()));
+		Optional<Rol> rolrepo = this.rolRepository.findById(rolParam.getId());
 
 		if (rolrepo.isPresent()) {
 			Rol rol = rolrepo.get();

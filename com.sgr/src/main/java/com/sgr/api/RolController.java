@@ -47,7 +47,7 @@ public class RolController {
 	@PostMapping("/rol/update/")
 	public boolean updateRol(@RequestBody Rol rol) {
 		try {
-			if (rolServiceImplement.getById(Long.parseLong(rol.getId())) != null) {
+			if (rolServiceImplement.getById(rol.getId()) != null) {
 				rolServiceImplement.update(rol);
 			}
 			return true;

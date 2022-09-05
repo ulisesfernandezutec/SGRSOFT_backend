@@ -11,7 +11,7 @@ import lombok.Data;
 public class PuntoDR {
 
 	@Id
-	private String id;
+	private Long id;
 	private String zona;
 	private TipoDeResiduo tipoDeResiduo;
 	private Usuario usuario;
