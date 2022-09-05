@@ -10,11 +10,10 @@ public interface PersonaService {
 
 	Persona update(Persona persona);
 	
-	Persona getById(long id);
+	Persona getById(Long id);
 
-	boolean delete(long id);
+	boolean delete(Long id);
     
     List < Persona > list();
-
 
 }

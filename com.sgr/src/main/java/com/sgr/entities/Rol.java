@@ -10,7 +10,7 @@ import lombok.Data;
 @Document("Roles")
 public class Rol {
 	@Id
-	private String id;
+	private Long id;
 	private String nombre;
 
 }

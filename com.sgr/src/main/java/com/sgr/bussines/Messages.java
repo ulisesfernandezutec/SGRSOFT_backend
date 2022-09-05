@@ -12,7 +12,12 @@ public class Messages {
 	public static String colZonas 		= "Zonas"; 
 	
 	//Messages
-	public static String personaNotFound = "No se encuentra el registro id: %d de Persona";
-	public static String pdrNotFound 	 = "No se encuentra el registro id: %d de Punto de Recolección";
+	public static String personaNotFound = "No se encuentra el registro id: %s de Persona";
+	public static String perNotFound 	 = "No se encuentra el registro id: %s de Punto de Persona";
+	public static String pdrNotFound 	 = "No se encuentra el registro id: %s de Punto de Recolección";
+	public static String ptrNotFound 	 = "No se encuentra el registro id: %s de Punto de Tipo de Residuo";
+	public static String pusNotFound 	 = "No se encuentra el registro id: %s de Punto de Usuario";
+	public static String pvhNotFound 	 = "No se encuentra el registro id: %s de Vehiculo";
+	public static String pznNotFound 	 = "No se encuentra el registro id: %s de Zona";
 
 }

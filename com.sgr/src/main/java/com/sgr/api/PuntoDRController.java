@@ -47,7 +47,7 @@ public class PuntoDRController {
 	@PostMapping("/puntodr/update/")
 	public boolean updatePuntoR(@RequestBody PuntoDR puntoDr) {
 		try {
-			if (puntoDRServiceImplement.getById(Long.parseLong(puntoDr.getId())) != null) {
+			if (puntoDRServiceImplement.getById(puntoDr.getId()) != null) {
 				puntoDRServiceImplement.update(puntoDr);
 			}
 			return true;

@@ -24,7 +24,7 @@ public class VehiculoServiceImplement implements VehiculoService {
 
 	@Override
 	public Vehiculo update(Vehiculo vehiculoParam) {
-		Optional<Vehiculo> vehiculoOpt = this.vehiculorepository.findById(Long.parseLong(vehiculoParam.getId()));
+		Optional<Vehiculo> vehiculoOpt = this.vehiculorepository.findById(vehiculoParam.getId());
 
 		if (vehiculoOpt.isPresent()) {
 			Vehiculo vehiculo = vehiculoOpt.get();
@@ -36,7 +36,7 @@ public class VehiculoServiceImplement implements VehiculoService {
 			this.vehiculorepository.save(vehiculo);
 			return vehiculo;
 		} else {
-			System.out.printf(Messages.pdrNotFound, vehiculoParam.getId());
+			System.out.printf(Messages.pvhNotFound, vehiculoParam.getId());
 			return null;
 		}
 	}

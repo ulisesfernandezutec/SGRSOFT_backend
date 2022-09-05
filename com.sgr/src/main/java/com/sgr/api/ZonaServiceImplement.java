@@ -25,7 +25,7 @@ public class ZonaServiceImplement implements ZonaService {
 
 	@Override
 	public Zona update(Zona zonaParam) {
-		Optional<Zona> zonaOpt = this.zonarepository.findById(Long.parseLong(zonaParam.getId()));
+		Optional<Zona> zonaOpt = this.zonarepository.findById(zonaParam.getId());
 
 		if (zonaOpt.isPresent()) {
 			Zona zona = zonaOpt.get();
@@ -35,7 +35,7 @@ public class ZonaServiceImplement implements ZonaService {
 			this.zonarepository.save(zona);
 			return zona;
 		} else {
-			System.out.printf(Messages.pdrNotFound, zonaParam.getId());
+			System.out.printf(Messages.pznNotFound, zonaParam.getId());
 			return null;
 		}
 	}

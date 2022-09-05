@@ -12,7 +12,7 @@ import lombok.Data;
 public class Vehiculo {
 	
 	@Id
-	private String id;
+	private Long id;
 	private String nombre;
 	private String matricula;
 	private String marca;

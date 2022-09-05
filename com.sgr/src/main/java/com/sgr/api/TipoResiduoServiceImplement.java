@@ -26,7 +26,7 @@ public class TipoResiduoServiceImplement implements TipoResiduoService {
 
 	@Override
 	public TipoDeResiduo update(TipoDeResiduo tipoDeResiduo) {
-		Optional<TipoDeResiduo> tiporepo = this.tipoResiduoRepository.findById(Long.parseLong(tipoDeResiduo.getId()));
+		Optional<TipoDeResiduo> tiporepo = this.tipoResiduoRepository.findById(tipoDeResiduo.getId());
 
 		if (tiporepo.isPresent()) {
 			TipoDeResiduo tpr = tiporepo.get();
@@ -35,7 +35,7 @@ public class TipoResiduoServiceImplement implements TipoResiduoService {
 			this.tipoResiduoRepository.save(tpr);
 			return tpr;
 		} else {
-			System.out.printf(Messages.pdrNotFound, tipoDeResiduo.getId());
+			System.out.printf(Messages.ptrNotFound, tipoDeResiduo.getId());
 			return null;
 		}
 	}

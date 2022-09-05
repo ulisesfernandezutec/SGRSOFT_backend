@@ -11,7 +11,7 @@ import lombok.Data;
 @Document("TipoDeResiduo")
 public class TipoDeResiduo {
 	@Id
-	private String id;
+	private Long id;
 	private String nombre;
 
 }

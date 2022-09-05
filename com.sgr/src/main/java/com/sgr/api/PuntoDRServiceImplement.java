@@ -25,7 +25,7 @@ public class PuntoDRServiceImplement implements PuntoDRService {
 
 	@Override
 	public PuntoDR update(PuntoDR puntoDR) {
-		Optional<PuntoDR> puntodrrepo = this.puntoDRRepository.findById(Long.parseLong(puntoDR.getId()));
+		Optional<PuntoDR> puntodrrepo = this.puntoDRRepository.findById(Long.parseLong(String.valueOf(puntoDR.getId())));
 
 		if (puntodrrepo.isPresent()) {
 			PuntoDR pdr = puntodrrepo.get();

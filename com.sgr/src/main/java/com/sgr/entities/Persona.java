@@ -16,11 +16,10 @@ import lombok.Data;
 public class Persona {
 	
 	@Id
-	private String 	id;
+	private Long 	id;
 	private String 	nombre;
 	private String 	apellido;
 	private String 	direccion;
-	private short 	zona;
 	private String 	telefono;
 	private String 	observaciones;
 	private String 	otros;

@@ -27,7 +27,7 @@ public class UsuarioServiceImplement implements UsuarioService {
 
 	@Override
 	public Usuario update(Usuario user) {
-		Optional<Usuario> userOpt = this.usuariorepository.findById(Long.parseLong(user.getId()));
+		Optional<Usuario> userOpt = this.usuariorepository.findById(user.getId());
 
 		if (userOpt.isPresent()) {
 			Usuario usr = userOpt.get();
@@ -37,7 +37,7 @@ public class UsuarioServiceImplement implements UsuarioService {
 			this.usuariorepository.save(usr);
 			return usr;
 		} else {
-			System.out.printf(Messages.pdrNotFound, user.getId());
+			System.out.printf(Messages.pusNotFound, user.getId());
 			return null;
 		}
 	}
