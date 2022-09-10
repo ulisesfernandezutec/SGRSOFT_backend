@@ -2,11 +2,6 @@ package com.sgr.api;
 
 import java.util.List;
 
-import com.sgr.entities.Persona;
-import com.sgr.entities.PuntoDR;
-import com.sgr.entities.Rol;
-import com.sgr.entities.TipoDeResiduo;
-import com.sgr.entities.Usuario;
 import com.sgr.entities.Vehiculo;
 
 public interface VehiculoService {
@@ -15,9 +10,9 @@ public interface VehiculoService {
 
 	Vehiculo update(Vehiculo u);
 	
-	Vehiculo getById(long id);
+	Vehiculo getById(Long id);
 
-	boolean delete(long id);
+	boolean delete(Long id);
     
     List < Vehiculo > list();
 }
