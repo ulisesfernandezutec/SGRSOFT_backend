@@ -47,7 +47,7 @@ public class VehiculoServiceImplement implements VehiculoService {
 	}
 
 	@Override
-	public Vehiculo getById(long id) {
+	public Vehiculo getById(Long id) {
 		Optional<Vehiculo> vehiculo = this.vehiculorepository.findById(id);
 		if (vehiculo.isPresent()) {
 			return vehiculo.get();
@@ -57,7 +57,7 @@ public class VehiculoServiceImplement implements VehiculoService {
 	}
 
 	@Override
-	public boolean delete(long id) {
+	public boolean delete(Long id) {
 		Optional<Vehiculo> vehiculo = this.vehiculorepository.findById(id);
 		if (vehiculo.isPresent()) {
 			try {
@@ -70,4 +70,5 @@ public class VehiculoServiceImplement implements VehiculoService {
 			return false;
 		}
 	}
+
 }
