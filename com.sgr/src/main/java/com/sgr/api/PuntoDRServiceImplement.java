@@ -32,7 +32,7 @@ public class PuntoDRServiceImplement implements PuntoDRService {
 			pdr.setId(puntoDR.getId());
 			pdr.setTipoDeResiduo(puntoDR.getTipoDeResiduo());
 			pdr.setUsuario(puntoDR.getUsuario());
-			pdr.setZona(puntoDR.getZona());
+			pdr.setCoordenadas(puntoDR.getCoordenadas());
 			this.puntoDRRepository.save(pdr);
 			return pdr;
 		} else {

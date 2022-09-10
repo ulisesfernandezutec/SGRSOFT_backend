@@ -29,7 +29,7 @@ public class VehiculoControllerw {
 	}
 
 	@GetMapping("/vehiculo/{id}")
-	public Vehiculo getUsuario(@PathVariable int id) {
+	public Vehiculo getUsuario(@PathVariable Long id) {
 		return vehiculoServiceImplement.getById(id);
 	}
 
