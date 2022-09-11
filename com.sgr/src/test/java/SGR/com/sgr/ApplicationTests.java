@@ -4,6 +4,9 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.Optional;
 
+import com.sgr.api.*;
+import com.sgr.bussines.Utils;
+import com.sgr.entities.*;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
@@ -12,13 +15,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.ComponentScan;
-
-import com.sgr.api.PersonaServiceImplement;
-import com.sgr.api.PuntoDRServiceImplement;
-import com.sgr.api.VehiculoServiceImplement;
-import com.sgr.entities.Persona;
-import com.sgr.entities.PuntoDR;
-import com.sgr.entities.Vehiculo;
 
 @SpringBootTest
 @SpringBootConfiguration
@@ -33,7 +29,12 @@ class ApplicationTests {
 	VehiculoServiceImplement servicevh;
 	@Autowired
 	PuntoDRServiceImplement servicepd;
-	
+	@Autowired
+	TipoResiduoServiceImplement servicetr;
+	@Autowired
+	UsuarioServiceImplement serviceur;
+	@Autowired
+	RolServiceImplement servicerol;
 	//TEST DE PERSONAS
 	@Test
 	@Order(1)
@@ -47,7 +48,7 @@ class ApplicationTests {
 	@Order(2)
 	void obtenerPersonaTest() {
 		System.out.println("Obteniendo Persona Test");
-		Optional<Persona> po = Optional.of(servicepr.getById(999999996L));
+		Optional<Persona> po = Optional.of(servicepr.getById(Utils.intToLong(999999996)));
 		assertTrue(po.isPresent());
 	}
 
@@ -159,5 +160,119 @@ class ApplicationTests {
 		}
 		assertTrue(servicevh.getById(999999996L) == null);
 	}
-	
+	//TEST TIPO DE RESIDUO
+	@Test
+	@Order(13)
+	void crearTipoR() {
+		System.out.println("Creando Tipo de Residuo Test");
+		TipoDeResiduo tr = new TipoDeResiduo(999999996L,"Tipo1");
+		servicetr.create(tr);
+
+	}
+	@Test
+	@Order(14)
+	void obtenerTipoR() {
+		System.out.println("Obteniendo Tipo de Residuo Test");
+		Optional<TipoDeResiduo> po = Optional.of(servicetr.getById(999999996L));
+		assertTrue(po.isPresent());
+	}
+	@Test
+	@Order(15)
+	void actualizarTipoR() {
+		System.out.println("Actualizando Tipo de Residuo Test");
+		TipoDeResiduo p = servicetr.getById(999999996L);
+		if (p != null) {
+			p.setNombre(var);
+			servicetr.update(p);
+		}
+		assertTrue(servicetr.getById(999999996L).getNombre().equals(var));
+
+	}
+	@Test
+	@Order(16)
+	void eliminarTipoR() {
+		System.out.println("Eliminando Usuario Test");
+		Optional<TipoDeResiduo> po = Optional.of(servicetr.getById(999999996L));
+		if (po.isPresent()) {
+			servicetr.delete(999999996L);
+		}
+		assertTrue(servicetr.getById(999999996L) == null);
+	}
+	//TEST USUARIO
+	@Test
+	@Order(17)
+	void crearUsuario() {
+		System.out.println("Creando Usuario Test");
+		Usuario u = new Usuario(999999996L, "Usuario", "contraseña");
+		serviceur.create(u);
+
+	}
+
+	@Test
+	@Order(18)
+	void obtenerUsuario() {
+		System.out.println("Obteniendo Usuario Test");
+		Optional<Usuario> po = Optional.of(serviceur.getById(999999996L));
+		assertTrue(po.isPresent());
+	}
+	@Test
+	@Order(19)
+	void actualizarUsuario() {
+		System.out.println("Actualizando Usuario Test");
+		Usuario p = serviceur.getById(999999996L);
+		if (p != null) {
+			p.setUsuario(var);
+			serviceur.update(p);
+		}
+		assertTrue(serviceur.getById(999999996L).getUsuario().equals(var));
+
+	}
+	@Test
+	@Order(20)
+	void eliminarUsuario() {
+		System.out.println("Eliminando Usuario Test");
+		Optional<Usuario> po = Optional.of(serviceur.getById(999999996L));
+		if (po.isPresent()) {
+			servicetr.delete(999999996L);
+		}
+		assertTrue(servicetr.getById(999999996L) == null);
+	}
+	//TEST ROL
+	@Test
+	@Order(21)
+	void crearRol() {
+		System.out.println("Creando Rol Test");
+		Rol u = new Rol(999999996L, "Rol");
+		servicerol.create(u);
+
+	}
+	@Test
+	@Order(22)
+	void obtenerRol() {
+		System.out.println("Obteniendo Rol Test");
+		Optional<Rol> po = Optional.of(servicerol.getById(999999996L));
+		assertTrue(po.isPresent());
+	}
+	@Test
+	@Order(23)
+	void actualizarRol() {
+		System.out.println("Actualizando Rol Test");
+		Rol p = servicerol.getById(999999996L);
+		if (p != null) {
+			p.setNombre(var);
+			servicerol.update(p);
+		}
+		assertTrue(servicerol.getById(999999996L).getNombre().equals(var));
+
+	}
+	@Test
+	@Order(24)
+	void eliminarRol() {
+		System.out.println("Eliminando Rol Test");
+		Optional<Rol> po = Optional.of(servicerol.getById(999999996L));
+		if (po.isPresent()) {
+			servicerol.delete(999999996L);
+		}
+		assertTrue(servicerol.getById(999999996L) == null);
+	}
 }

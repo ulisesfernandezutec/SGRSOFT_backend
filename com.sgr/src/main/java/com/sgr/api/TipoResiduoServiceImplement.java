@@ -3,13 +3,13 @@ package com.sgr.api;
 import java.util.List;
 import java.util.Optional;
 
+import com.sgr.api.interfaces.TipoResiduoRepository;
+import com.sgr.api.interfaces.TipoResiduoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.sgr.bussines.Messages;
-import com.sgr.entities.Persona;
-import com.sgr.entities.PuntoDR;
 import com.sgr.entities.TipoDeResiduo;
 
 @Service
@@ -17,7 +17,7 @@ import com.sgr.entities.TipoDeResiduo;
 public class TipoResiduoServiceImplement implements TipoResiduoService {
 
 	@Autowired
-	TipoResiduoRepository tipoResiduoRepository;
+    TipoResiduoRepository tipoResiduoRepository;
 
 	@Override
 	public TipoDeResiduo create(TipoDeResiduo tipoDeResiduo) {
@@ -26,16 +26,16 @@ public class TipoResiduoServiceImplement implements TipoResiduoService {
 
 	@Override
 	public TipoDeResiduo update(TipoDeResiduo tipoDeResiduo) {
-		Optional<TipoDeResiduo> tiporepo = this.tipoResiduoRepository.findById(tipoDeResiduo.getId());
+		Optional<TipoDeResiduo> tiporepo = this.tipoResiduoRepository.findById(tipoDeResiduo.get_id());
 
 		if (tiporepo.isPresent()) {
 			TipoDeResiduo tpr = tiporepo.get();
-			tpr.setId(tipoDeResiduo.getId());
+			tpr.set_id(tipoDeResiduo.get_id());
 			tpr.setNombre(tipoDeResiduo.getNombre());
 			this.tipoResiduoRepository.save(tpr);
 			return tpr;
 		} else {
-			System.out.printf(Messages.ptrNotFound, tipoDeResiduo.getId());
+			System.out.printf(Messages.ptrNotFound, tipoDeResiduo.get_id());
 			return null;
 		}
 	}

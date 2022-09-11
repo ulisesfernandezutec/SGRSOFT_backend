@@ -47,7 +47,7 @@ public class VehiculoControllerw {
 	@PostMapping("/vehiculo/update/")
 	public boolean updateRol(@RequestBody Vehiculo vehiculo) {
 		try {
-			if (vehiculoServiceImplement.getById(vehiculo.getId()) != null) {
+			if (vehiculoServiceImplement.getById(vehiculo.get_id()) != null) {
 				vehiculoServiceImplement.update(vehiculo);
 			}
 			return true;
