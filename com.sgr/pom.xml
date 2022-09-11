@@ -73,6 +73,10 @@
 			<artifactId>springdoc-openapi-ui</artifactId>
 			<version>1.6.11</version>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
 	</dependencies>
 	<repositories>
 		<repository>
@@ -85,6 +89,11 @@
 			<name>Spring Milestone Maven Repository</name>
 			<url>http://oss.jfrog.org/artifactory/oss-snapshot-local/</url>
 		</repository>
+		<dependency>
+			<groupId>com.github.ulisesbocchio</groupId>
+			<artifactId>jasypt-spring-boot-starter</artifactId>
+			<version>3.0.3</version>
+		</dependency>
 	</repositories>
 	<pluginRepositories>
 		<pluginRepository>

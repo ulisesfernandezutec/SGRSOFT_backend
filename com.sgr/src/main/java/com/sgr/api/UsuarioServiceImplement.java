@@ -11,9 +11,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.sgr.bussines.Messages;
 import com.sgr.entities.Usuario;
-
 @Service
 @Transactional
+@EnableEncryptableProperties
 public class UsuarioServiceImplement implements UsuarioService {
 
 	@Autowired
@@ -27,11 +27,14 @@ public class UsuarioServiceImplement implements UsuarioService {
 	@Override
 	public Usuario update(Usuario user) {
 		Optional<Usuario> userOpt = this.usuariorepository.findById(user.get_id());
-
+		
+		AES256TextEncryptor passwordEncryptor = new StrongPasswordEncryptor();
+		
 		if (userOpt.isPresent()) {
 			Usuario usr = userOpt.get();
 			usr.set_id(user.get_id());
 			usr.setUsuario(user.getUsuario());
+			
 			usr.setContraseña(user.getContraseña());
 			this.usuariorepository.save(usr);
 			return usr;
