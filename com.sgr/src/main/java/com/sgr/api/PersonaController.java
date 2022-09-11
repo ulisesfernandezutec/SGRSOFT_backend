@@ -16,19 +16,21 @@ public class PersonaController {
 	@Autowired
 	PersonaServiceImplement personaService;
 
-	//list
+	// list
 	@GetMapping("/persona")
 	public List<Persona> getAllPersona() {
 		return personaService.list();
 	}
-	//getone
+
+	// getone
 	@GetMapping("/persona/{id}")
 	public Persona getPersona(@PathVariable String id) {
 		Long idl = Long.parseLong(id);
 		return personaService.getById(idl);
 	}
-	//create
-	@PostMapping("/persona/{id}")
+
+	// create
+	@PostMapping("/persona/")
 	public boolean setPersona(@RequestBody Persona persona) {
 		try {
 			personaService.create(persona);
@@ -38,7 +40,20 @@ public class PersonaController {
 			return false;
 		}
 	}
-	//delete
+
+	// update
+	@PutMapping("/persona/")
+	public boolean updatePersona(@RequestBody Persona persona) {
+		try {
+			personaService.update(persona);
+			return true;
+		} catch (Exception ex) {
+			System.out.printf(Messages.perNotFound, persona.get_id());
+			return false;
+		}
+	}
+
+	// delete
 	@DeleteMapping("/persona/{id}")
 	public boolean deletePersona(@PathVariable Long id) {
 		try {
@@ -46,17 +61,6 @@ public class PersonaController {
 			return true;
 		} catch (Exception e) {
 			e.getMessage();
-			return false;
-		}
-	}
-	//update
-	@PostMapping("/persona/update/{id}")
-	public boolean updatePersona(@RequestBody Persona persona) {
-		try {
-			personaService.update(persona);
-			return true;
-		} catch (Exception ex) {
-			System.out.printf(Messages.perNotFound, persona.get_id());
 			return false;
 		}
 	}
