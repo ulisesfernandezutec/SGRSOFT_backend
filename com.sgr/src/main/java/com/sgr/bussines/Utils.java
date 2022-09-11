@@ -12,6 +12,12 @@ public class Utils {
 		return document;
 
 	}
-	
+	public static Long intToLong(int l){
+		return Long.parseLong(String.valueOf(l));
+	}
+
+	public static int longToInt(Long l){
+		return Integer.parseInt(String.valueOf(l));
+	}
 
 }

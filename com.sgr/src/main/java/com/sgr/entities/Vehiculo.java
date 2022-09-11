@@ -12,9 +12,8 @@ import lombok.Data;
 @AllArgsConstructor
 @Document("Vehiculos")
 public class Vehiculo {
-	
-	@Id
-	private Long id;
+
+	private Long _id;
 	private String nombre;
 	private String matricula;
 	private String marca;

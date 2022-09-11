@@ -3,6 +3,8 @@ package com.sgr.api;
 import java.util.List;
 import java.util.Optional;
 
+import com.sgr.api.interfaces.VehiculoRepository;
+import com.sgr.api.interfaces.VehiculoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,7 +17,7 @@ import com.sgr.entities.Vehiculo;
 public class VehiculoServiceImplement implements VehiculoService {
 
 	@Autowired
-	VehiculoRepository vehiculorepository;
+    VehiculoRepository vehiculorepository;
 
 	@Override
 	public Vehiculo create(Vehiculo vehiculo) {
@@ -24,11 +26,11 @@ public class VehiculoServiceImplement implements VehiculoService {
 
 	@Override
 	public Vehiculo update(Vehiculo vehiculoParam) {
-		Optional<Vehiculo> vehiculoOpt = this.vehiculorepository.findById(vehiculoParam.getId());
+		Optional<Vehiculo> vehiculoOpt = this.vehiculorepository.findById(vehiculoParam.get_id());
 
 		if (vehiculoOpt.isPresent()) {
 			Vehiculo vehiculo = vehiculoOpt.get();
-			vehiculo.setId(vehiculoParam.getId());
+			vehiculo.set_id(vehiculoParam.get_id());
 			vehiculo.setMarca(vehiculoParam.getMarca());
 			vehiculo.setMatricula(vehiculoParam.getMatricula());
 			vehiculo.setNombre(vehiculoParam.getNombre());
@@ -36,7 +38,7 @@ public class VehiculoServiceImplement implements VehiculoService {
 			this.vehiculorepository.save(vehiculo);
 			return vehiculo;
 		} else {
-			System.out.printf(Messages.pvhNotFound, vehiculoParam.getId());
+			System.out.printf(Messages.pvhNotFound, vehiculoParam.get_id());
 			return null;
 		}
 	}

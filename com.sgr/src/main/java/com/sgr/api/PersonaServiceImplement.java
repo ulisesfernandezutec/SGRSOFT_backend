@@ -3,19 +3,23 @@ package com.sgr.api;
 import java.util.List;
 import java.util.Optional;
 
+import com.sgr.api.interfaces.PersonaRepository;
+import com.sgr.api.interfaces.PersonaService;
+import com.sgr.bussines.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.sgr.bussines.Messages;
 import com.sgr.entities.Persona;
+import org.springframework.web.bind.annotation.DeleteMapping;
 
 @Service
 @Transactional
 public class PersonaServiceImplement implements PersonaService {
 
 	@Autowired
-	PersonaRepository personarepository;
+    PersonaRepository personarepository;
 
 	@Override
 	public Persona create(Persona persona) {
@@ -24,11 +28,11 @@ public class PersonaServiceImplement implements PersonaService {
 
 	@Override
 	public Persona update(Persona persona) {
-		Optional<Persona> personarepo = this.personarepository.findById(persona.getId());
+		Optional<Persona> personarepo = this.personarepository.findById(persona.get_id());
 
 		if (personarepo.isPresent()) {
 			Persona pu = personarepo.get();
-			pu.setId(persona.getId());
+			pu.set_id(persona.get_id());
 			pu.setNombre(persona.getNombre());
 			pu.setApellido(persona.getApellido());
 			pu.setTelefono(persona.getTelefono());
@@ -37,7 +41,7 @@ public class PersonaServiceImplement implements PersonaService {
 			this.personarepository.save(pu);
 			return pu;
 		} else {
-			System.out.printf(Messages.personaNotFound, persona.getId());
+			System.out.printf(Messages.personaNotFound, persona.get_id());
 			return null;
 		}
 	}
@@ -58,7 +62,7 @@ public class PersonaServiceImplement implements PersonaService {
 		}
 	}
 
-	@Override
+	@DeleteMapping("/employees/{id}")
 	public boolean delete(Long id) {
 		Optional<Persona> personarepo = this.personarepository.findById(id);
 		if (personarepo.isPresent()) {
@@ -72,4 +76,5 @@ public class PersonaServiceImplement implements PersonaService {
 			return false;
 		}
 	}
+
 }

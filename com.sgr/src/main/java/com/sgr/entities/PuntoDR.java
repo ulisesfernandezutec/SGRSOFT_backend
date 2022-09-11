@@ -12,8 +12,7 @@ import lombok.Data;
 @AllArgsConstructor
 public class PuntoDR {
 
-	@Id
-	private Long id;
+	private Long _id;
 	private Long tipoDeResiduo;
 	private Long usuario;
 	private String Coordenadas;

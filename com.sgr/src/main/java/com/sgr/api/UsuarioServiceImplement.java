@@ -3,14 +3,13 @@ package com.sgr.api;
 import java.util.List;
 import java.util.Optional;
 
+import com.sgr.api.interfaces.UsuarioRepository;
+import com.sgr.api.interfaces.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.sgr.bussines.Messages;
-import com.sgr.entities.Persona;
-import com.sgr.entities.PuntoDR;
-import com.sgr.entities.TipoDeResiduo;
 import com.sgr.entities.Usuario;
 
 @Service
@@ -18,7 +17,7 @@ import com.sgr.entities.Usuario;
 public class UsuarioServiceImplement implements UsuarioService {
 
 	@Autowired
-	UsuarioRepository usuariorepository;
+    UsuarioRepository usuariorepository;
 
 	@Override
 	public Usuario create(Usuario user) {
@@ -27,17 +26,17 @@ public class UsuarioServiceImplement implements UsuarioService {
 
 	@Override
 	public Usuario update(Usuario user) {
-		Optional<Usuario> userOpt = this.usuariorepository.findById(user.getId());
+		Optional<Usuario> userOpt = this.usuariorepository.findById(user.get_id());
 
 		if (userOpt.isPresent()) {
 			Usuario usr = userOpt.get();
-			usr.setId(user.getId());
+			usr.set_id(user.get_id());
 			usr.setUsuario(user.getUsuario());
 			usr.setContraseña(user.getContraseña());
 			this.usuariorepository.save(usr);
 			return usr;
 		} else {
-			System.out.printf(Messages.pusNotFound, user.getId());
+			System.out.printf(Messages.pusNotFound, user.get_id());
 			return null;
 		}
 	}

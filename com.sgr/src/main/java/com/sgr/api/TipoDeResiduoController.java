@@ -49,7 +49,7 @@ public class TipoDeResiduoController {
 	@PostMapping("/tiporesiduo/update/")
 	public boolean updateRol(@RequestBody TipoDeResiduo tipoRs) {
 		try {
-			if (tipoResiduoServiceImplement.getById(tipoRs.getId()) != null) {
+			if (tipoResiduoServiceImplement.getById(tipoRs.get_id()) != null) {
 				tipoResiduoServiceImplement.update(tipoRs);
 			}
 			return true;

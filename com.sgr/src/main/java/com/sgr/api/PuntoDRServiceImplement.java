@@ -3,12 +3,13 @@ package com.sgr.api;
 import java.util.List;
 import java.util.Optional;
 
+import com.sgr.api.interfaces.PuntoDRRepository;
+import com.sgr.api.interfaces.PuntoDRService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.sgr.bussines.Messages;
-import com.sgr.entities.Persona;
 import com.sgr.entities.PuntoDR;
 
 @Service
@@ -16,7 +17,7 @@ import com.sgr.entities.PuntoDR;
 public class PuntoDRServiceImplement implements PuntoDRService {
 
 	@Autowired
-	PuntoDRRepository puntoDRRepository;
+    PuntoDRRepository puntoDRRepository;
 
 	@Override
 	public PuntoDR create(PuntoDR puntoDR) {
@@ -25,18 +26,18 @@ public class PuntoDRServiceImplement implements PuntoDRService {
 
 	@Override
 	public PuntoDR update(PuntoDR puntoDR) {
-		Optional<PuntoDR> puntodrrepo = this.puntoDRRepository.findById(Long.parseLong(String.valueOf(puntoDR.getId())));
+		Optional<PuntoDR> puntodrrepo = this.puntoDRRepository.findById(Long.parseLong(String.valueOf(puntoDR.get_id())));
 
 		if (puntodrrepo.isPresent()) {
 			PuntoDR pdr = puntodrrepo.get();
-			pdr.setId(puntoDR.getId());
+			pdr.set_id(puntoDR.get_id());
 			pdr.setTipoDeResiduo(puntoDR.getTipoDeResiduo());
 			pdr.setUsuario(puntoDR.getUsuario());
 			pdr.setCoordenadas(puntoDR.getCoordenadas());
 			this.puntoDRRepository.save(pdr);
 			return pdr;
 		} else {
-			System.out.printf(Messages.pdrNotFound, puntoDR.getId());
+			System.out.printf(Messages.pdrNotFound, puntoDR.get_id());
 			return null;
 		}
 	}

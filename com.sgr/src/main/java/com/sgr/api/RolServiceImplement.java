@@ -3,6 +3,8 @@ package com.sgr.api;
 import java.util.List;
 import java.util.Optional;
 
+import com.sgr.api.interfaces.RolRepository;
+import com.sgr.api.interfaces.RolService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,7 +17,7 @@ import com.sgr.entities.Rol;
 public class RolServiceImplement implements RolService {
 
 	@Autowired
-	RolRepository rolRepository;
+    RolRepository rolRepository;
 
 	@Override
 	public Rol create(Rol rol) {
@@ -24,16 +26,16 @@ public class RolServiceImplement implements RolService {
 
 	@Override
 	public Rol update(Rol rolParam) {
-		Optional<Rol> rolrepo = this.rolRepository.findById(rolParam.getId());
+		Optional<Rol> rolrepo = this.rolRepository.findById(rolParam.get_id());
 
 		if (rolrepo.isPresent()) {
 			Rol rol = rolrepo.get();
-			rol.setId(rolParam.getId());
+			rol.set_id(rolParam.get_id());
 			rol.setNombre(rolParam.getNombre());
 			this.rolRepository.save(rolParam);
 			return rol;
 		} else {
-			System.out.printf(Messages.pdrNotFound, rolParam.getId());
+			System.out.printf(Messages.pdrNotFound, rolParam.get_id());
 			return null;
 		}
 	}
