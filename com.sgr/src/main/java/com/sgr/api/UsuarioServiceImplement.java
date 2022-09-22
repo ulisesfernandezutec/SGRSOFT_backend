@@ -6,6 +6,7 @@ import java.util.Optional;
 import com.sgr.api.interfaces.UsuarioRepository;
 import com.sgr.api.interfaces.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.encrypt.AesBytesEncryptor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,7 +14,6 @@ import com.sgr.bussines.Messages;
 import com.sgr.entities.Usuario;
 @Service
 @Transactional
-@EnableEncryptableProperties
 public class UsuarioServiceImplement implements UsuarioService {
 
 	@Autowired
@@ -27,8 +27,6 @@ public class UsuarioServiceImplement implements UsuarioService {
 	@Override
 	public Usuario update(Usuario user) {
 		Optional<Usuario> userOpt = this.usuariorepository.findById(user.get_id());
-		
-		AES256TextEncryptor passwordEncryptor = new StrongPasswordEncryptor();
 		
 		if (userOpt.isPresent()) {
 			Usuario usr = userOpt.get();
