@@ -5,23 +5,27 @@
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>2.7.3</version>
-		<relativePath /> <!-- lookup parent from repository -->
-		<!-- lookup parent from repository -->
+		<relativePath />
 	</parent>
+
 	<groupId>SGR</groupId>
 	<artifactId>com.sgr</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<name>com.sgr</name>
 	<description>Sistema de Gestión de Residuos</description>
 	<properties>
 		<java.version>11</java.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/com.google.guava/failureaccess -->
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-core</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>com.google.guava</groupId>
 			<artifactId>failureaccess</artifactId>
@@ -89,11 +93,6 @@
 			<name>Spring Milestone Maven Repository</name>
 			<url>http://oss.jfrog.org/artifactory/oss-snapshot-local/</url>
 		</repository>
-		<dependency>
-			<groupId>com.github.ulisesbocchio</groupId>
-			<artifactId>jasypt-spring-boot-starter</artifactId>
-			<version>3.0.3</version>
-		</dependency>
 	</repositories>
 	<pluginRepositories>
 		<pluginRepository>
