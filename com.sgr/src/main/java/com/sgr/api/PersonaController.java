@@ -1,13 +1,11 @@
 package com.sgr.api;
 
-import java.util.List;
+import com.sgr.bussines.*;
+import com.sgr.entities.Persona;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
-import com.sgr.bussines.Messages;
-import com.sgr.entities.Persona;
+import java.util.List;
 
 @RestController
 public class PersonaController {
@@ -16,7 +14,6 @@ public class PersonaController {
 	
 	@Autowired
 	PersonaServiceImplement personaService;
-	
 	
 	
 	// list
