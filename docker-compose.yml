@@ -1,0 +1,10 @@
+version: '3.7'
+
+services:
+  backend:
+    build: .
+    container_name: s22-backend
+    image: s22-backend
+    restart: always
+    ports:
+      - 8080:8080
