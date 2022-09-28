@@ -23,6 +23,10 @@ jobs:
           sudo apt clean -y
       - name: Test and Build
         run: mvn -B package -f com.sgr/pom.xml
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0          
       - name: Merge dev with main
         uses: devvspaces/merge-branches@v1
         with:
