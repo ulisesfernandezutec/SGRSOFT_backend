@@ -18,9 +18,9 @@ jobs:
           cd ..
       - name: Install Maven
         run: |
-          apt update
-          apt install maven -y
-          apt clean -y
+          sudo apt update
+          sudo apt install maven -y
+          sudo apt clean -y
       - name: Instal Maven Requierements
         run: mvn clean install -f com.sgr/pom.xml
       - name: Test and Build
