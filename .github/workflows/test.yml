@@ -5,15 +5,10 @@ on:
     branches: [dev]
 
 jobs:
-  requirements:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Install Maven
-        run: |
-              apt update
-              apt install maven -y
-              apt clean -y
       - name: Start mongodb
         run: |
               docker run \
@@ -25,9 +20,11 @@ jobs:
                     -e MONGO_INITDB_ROOT_PASSWORD=thisistherealadmin \
                     -e MONGO_INITDB_DATABASE=sgr \
                     mongo:latest
-  build: 
-    needs: mongodb
-    steps:
+      - name: Install Maven
+        run: |
+              apt update
+              apt install maven -y
+              apt clean -y
       - name: Instal Maven Requierements 
         run: mvn clean install -f com.sgr/pom.xml 
       - name: Test and Build 
