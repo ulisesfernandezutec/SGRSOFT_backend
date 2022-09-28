@@ -9,19 +9,21 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - name: Pull mongo
+        run: docker pull mongo:latest
       - name: Start mongodb
         run: docker run -it -p 27017:27017 --mount type=bind,source="$(pwd)"/mongodb/mongo-init.js,target=/docker-entrypoint-initdb.d/mongo-init.js --name mongodb -e MONGO_INITDB_ROOT_USERNAME=admin -e MONGO_INITDB_ROOT_PASSWORD=thisistherealadmin -e MONGO_INITDB_DATABASE=sgr mongo:latest
       - name: Install Maven
         run: |
-              apt update
-              apt install maven -y
-              apt clean -y
-      - name: Instal Maven Requierements 
-        run: mvn clean install -f com.sgr/pom.xml 
-      - name: Test and Build 
-        run: mvn -B package -f com.sgr/pom.xml   
+          apt update
+          apt install maven -y
+          apt clean -y
+      - name: Instal Maven Requierements
+        run: mvn clean install -f com.sgr/pom.xml
+      - name: Test and Build
+        run: mvn -B package -f com.sgr/pom.xml
   # merge-with-main:
-  #   needs: build 
+  #   needs: build
   #   steps:
   #     - uses: actions/checkout@v2
   #     - uses: everlytic/branch-merge@1.1.2
@@ -30,4 +32,3 @@ jobs:
   #         source_ref: ${{ github.ref }}
   #         target_branch: 'master'
   #         commit_message_template: '[Automated] Merged {source_ref} into target {target_branch}'
-
