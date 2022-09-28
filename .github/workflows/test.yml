@@ -15,15 +15,14 @@ jobs:
         run: |
           cd mongodb 
           docker-compose up -d
+          cd ..
       - name: Install Maven
         run: |
           apt update
           apt install maven -y
           apt clean -y
       - name: Instal Maven Requierements
-        run: |
-        cd ..
-        mvn clean install -f com.sgr/pom.xml
+        run: mvn clean install -f com.sgr/pom.xml
       - name: Test and Build
         run: mvn -B package -f com.sgr/pom.xml
   # merge-with-main:
