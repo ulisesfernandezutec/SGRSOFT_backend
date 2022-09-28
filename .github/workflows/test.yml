@@ -10,16 +10,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Start mongodb
-        run: |
-              docker run \
-                    -it \
-                    -p 27017:27017 \
-                    --mount type=bind,source="$(pwd)"/mongodb/mongo-init.js,target=/docker-entrypoint-initdb.d/mongo-init.js \
-                    --name mongodb \
-                    -e MONGO_INITDB_ROOT_USERNAME=admin \
-                    -e MONGO_INITDB_ROOT_PASSWORD=thisistherealadmin \
-                    -e MONGO_INITDB_DATABASE=sgr \
-                    mongo:latest
+        run: docker run -it -p 27017:27017 --mount type=bind,source="$(pwd)"/mongodb/mongo-init.js,target=/docker-entrypoint-initdb.d/mongo-init.js --name mongodb -e MONGO_INITDB_ROOT_USERNAME=admin -e MONGO_INITDB_ROOT_PASSWORD=thisistherealadmin -e MONGO_INITDB_DATABASE=sgr mongo:latest
       - name: Install Maven
         run: |
               apt update
