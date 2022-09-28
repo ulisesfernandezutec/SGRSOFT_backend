@@ -13,7 +13,7 @@ WORKDIR ${baseDir}
 
 RUN echo '192.168.2.22	mongodb' > /etc/hosts
 
-RUN mvn clean install -f com.sgr/pom.xml 
+# RUN mvn clean install -f com.sgr/pom.xml 
 RUN mvn -B package -f com.sgr/pom.xml
 
 EXPOSE 8080
