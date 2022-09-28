@@ -12,14 +12,18 @@ jobs:
       - name: Pull mongo
         run: docker pull mongo:latest
       - name: Start mongodb
-        run: docker run -it -p 27017:27017 --mount type=bind,source="$(pwd)"/mongodb/mongo-init.js,target=/docker-entrypoint-initdb.d/mongo-init.js --name mongodb -e MONGO_INITDB_ROOT_USERNAME=admin -e MONGO_INITDB_ROOT_PASSWORD=thisistherealadmin -e MONGO_INITDB_DATABASE=sgr mongo:latest
+        run: |
+          cd mongodb 
+          docker-compose up -d
       - name: Install Maven
         run: |
           apt update
           apt install maven -y
           apt clean -y
       - name: Instal Maven Requierements
-        run: mvn clean install -f com.sgr/pom.xml
+        run: |
+        cd ..
+        mvn clean install -f com.sgr/pom.xml
       - name: Test and Build
         run: mvn -B package -f com.sgr/pom.xml
   # merge-with-main:
