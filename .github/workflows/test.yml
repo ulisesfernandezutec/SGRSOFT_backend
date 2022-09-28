@@ -11,11 +11,11 @@ jobs:
       - uses: actions/checkout@v3
       - name: Pull mongo
         run: docker pull mongo:latest
-      - name: Start mongodb
-        run: |
-          cd mongodb 
-          docker-compose up -d
-          cd ..
+      # - name: Start mongodb
+      #   run: |
+      #     cd mongodb 
+      #     docker-compose up -d
+      #     cd ..
       - name: Install Maven
         run: |
           sudo apt update
