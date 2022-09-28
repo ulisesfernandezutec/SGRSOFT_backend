@@ -1,0 +1,35 @@
+name: MASTER/DEPLOY
+
+on:
+  push:
+    branches: [test]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Pull mongo
+        run: docker pull mongo:latest
+      - name: Start mongodb
+        run: |
+          cd mongodb 
+          docker-compose up -d
+          cd ..
+      - name: Install Maven
+        run: |
+          sudo apt update
+          sudo apt install maven -y
+          sudo apt clean -y
+      - name: Test and Build
+        run: mvn -B package -f com.sgr/pom.xml
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0          
+      - name: Merge dev with main
+        uses: devvspaces/merge-branches@v1
+        with:
+          token: ${{ github.TOKEN }}
+          from_branch: test
+          to_branch: main
