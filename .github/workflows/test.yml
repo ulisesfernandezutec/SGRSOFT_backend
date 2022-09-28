@@ -26,6 +26,6 @@ jobs:
       - name: Merge dev with main
         uses: devvspaces/merge-branches@v1
         with:
-          # token: ${{ github.token }}
+          token: ${{ github.TOKEN }}
           from_branch: test
           to_branch: main
