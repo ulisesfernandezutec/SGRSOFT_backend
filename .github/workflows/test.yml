@@ -27,6 +27,7 @@ jobs:
                     mongo:latest
   build: 
     needs: mongodb
+    steps:
       - name: Instal Maven Requierements 
         run: mvn clean install -f com.sgr/pom.xml 
       - name: Test and Build 
