@@ -1,4 +1,4 @@
-name: MASTER/DEPLOY
+name: TESTING
 
 on:
   push:
