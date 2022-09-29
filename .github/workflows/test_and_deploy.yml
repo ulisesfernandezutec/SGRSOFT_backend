@@ -4,6 +4,11 @@ on:
   push:
     branches: [test]
 
+env:
+  HOST: ${{ secrets.HOSTNAME }}
+  USER: ${{ secrets.USER_NAME }}
+  KEY: ${{ secrets.AWS_PRIVATE_KEY }}
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -33,16 +38,11 @@ jobs:
           token: ${{ github.TOKEN }}
           from_branch: test
           to_branch: main
-      - name: Build Docker Image
-        run: |
-          docker build -t s22-utec-pro-backend .
-          docker tag s22-utec-pro-backend:latest public.ecr.aws/s5z8r0i9/s22-utec-pro-backend:latest
-          docker push public.ecr.aws/s5z8r0i9/s22-utec-pro-backend:latest
-      - name: Push to AWS ECR
-        id: ecr
-        uses: jwalton/gh-ecr-push@v1
-        with:
-          access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          region: us-east-1
-          image: s22-utec-pro-backend:latest
+      - name: Create key.pem
+        run: echo "$KEY" | tr -d '\r' > key.pem && chmod 600 key.pem    
+      - name: Deploy in EC2
+        run:  | 
+            ssh -o StrictHostKeyChecking=no -i key.pem ${USER}@${HOST} '
+                cd /home/ubuntu/SGRSOFT_deploy &&
+                git pull --recurse-submodules &&
+                docker-compose up -d --build '
