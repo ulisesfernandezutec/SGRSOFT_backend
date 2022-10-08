@@ -19,20 +19,13 @@ public class PersonaController {
 	// list
 	@GetMapping("/persona")
 	public List<Persona> getAllPersona() {
-		/*Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		System.out.println("Principal ="+auth.getPrincipal());
-		System.out.println("Datos de los permisos ="+auth.getAuthorities());
-		System.out.println("Está autenticado="+auth.isAuthenticated());*/
+
 		return personaService.list();
 	}
 
 	// getone
 	@GetMapping("/persona/{id}")
 	public Persona getPersona(@PathVariable String id) {
-		/*Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		System.out.println("Principal ="+auth.getPrincipal());
-		System.out.println("Datos de los permisos ="+auth.getAuthorities());
-		System.out.println("Está autenticado="+auth.isAuthenticated());*/
 		Long idl = Long.parseLong(id);
 		return personaService.getById(idl);
 	}
@@ -40,10 +33,6 @@ public class PersonaController {
 	// create
 	@PostMapping("/persona/")
 	public boolean setPersona(@RequestBody Persona persona) {
-		/*Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		System.out.println("Principal ="+auth.getPrincipal());
-		System.out.println("Datos de los permisos ="+auth.getAuthorities());
-		System.out.println("Está autenticado="+auth.isAuthenticated());*/
 		try {
 			personaService.create(persona);
 			return true;
@@ -57,10 +46,6 @@ public class PersonaController {
 	@PutMapping("/persona/")
 	public boolean updatePersona(@RequestBody Persona persona) {
 		try {
-			/*Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-			System.out.println("Principal ="+auth.getPrincipal());
-			System.out.println("Datos de los permisos ="+auth.getAuthorities());
-			System.out.println("Está autenticado="+auth.isAuthenticated());*/
 			personaService.update(persona);
 			return true;
 		} catch (Exception ex) {
@@ -73,10 +58,6 @@ public class PersonaController {
 	@DeleteMapping("/persona/{id}")
 	public boolean deletePersona(@PathVariable Long id) {
 		try {
-			/*Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-			System.out.println("Principal ="+auth.getPrincipal());
-			System.out.println("Datos de los permisos ="+auth.getAuthorities());
-			System.out.println("Está autenticado="+auth.isAuthenticated());*/
 			personaService.delete(id);
 			return true;
 		} catch (Exception e) {
