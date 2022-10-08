@@ -28,7 +28,7 @@ jobs:
           sudo apt clean -y
       - name: Update Config
         run: |
-          sudo echo "127.0.0.1   mongodb" >> /etc/hosts
+          sudo sed -i "s/localhost/localhost mongodb/g" /etc/hosts 
           sed -i "s/localhost/mongodb/g" com.sgr/src/main/resources/application.properties 
       - name: Test and Build
         run: mvn -B package -f com.sgr/pom.xml
