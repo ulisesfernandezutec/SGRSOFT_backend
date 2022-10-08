@@ -1,5 +1,6 @@
 package com.sgr.api;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,6 +22,7 @@ public class UsuarioServiceImplement implements UsuarioService {
 
 	@Override
 	public Usuario create(Usuario user) {
+		user.set_id(new Date().getTime());
 		return usuariorepository.save(user);
 	}
 
@@ -32,8 +34,8 @@ public class UsuarioServiceImplement implements UsuarioService {
 			Usuario usr = userOpt.get();
 			usr.set_id(user.get_id());
 			usr.setUsuario(user.getUsuario());
-			
 			usr.setContraseña(user.getContraseña());
+			usr.setPersona(user.getPersona());
 			this.usuariorepository.save(usr);
 			return usr;
 		} else {

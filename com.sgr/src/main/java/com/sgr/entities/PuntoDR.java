@@ -15,6 +15,7 @@ public class PuntoDR {
 	private Long _id;
 	private Long tipoDeResiduo;
 	private Long usuario;
-	private String Coordenadas;
+	private float latitud;
+	private float longitud;
 
 }

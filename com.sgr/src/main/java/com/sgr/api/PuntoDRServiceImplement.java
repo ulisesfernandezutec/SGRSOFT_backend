@@ -1,5 +1,6 @@
 package com.sgr.api;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,6 +22,7 @@ public class PuntoDRServiceImplement implements PuntoDRService {
 
 	@Override
 	public PuntoDR create(PuntoDR puntoDR) {
+		puntoDR.set_id(new Date().getTime());
 		return puntoDRRepository.save(puntoDR);
 	}
 
@@ -33,7 +35,8 @@ public class PuntoDRServiceImplement implements PuntoDRService {
 			pdr.set_id(puntoDR.get_id());
 			pdr.setTipoDeResiduo(puntoDR.getTipoDeResiduo());
 			pdr.setUsuario(puntoDR.getUsuario());
-			pdr.setCoordenadas(puntoDR.getCoordenadas());
+			pdr.setLatitud(puntoDR.getLatitud());
+			pdr.setLatitud(puntoDR.getLatitud());
 			this.puntoDRRepository.save(pdr);
 			return pdr;
 		} else {

@@ -1,5 +1,6 @@
 package com.sgr.api;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,6 +22,7 @@ public class RolServiceImplement implements RolService {
 
 	@Override
 	public Rol create(Rol rol) {
+		rol.set_id(new Date().getTime());
 		return rolRepository.save(rol);
 	}
 

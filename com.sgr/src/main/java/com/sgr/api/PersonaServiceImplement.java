@@ -1,5 +1,6 @@
 package com.sgr.api;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,6 +24,7 @@ public class PersonaServiceImplement implements PersonaService {
 
 	@Override
 	public Persona create(Persona persona) {
+		persona.set_id(new Date().getTime());
 		return personarepository.save(persona);
 	}
 
@@ -76,5 +78,4 @@ public class PersonaServiceImplement implements PersonaService {
 			return false;
 		}
 	}
-
 }

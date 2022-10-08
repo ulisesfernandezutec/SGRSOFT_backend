@@ -15,5 +15,4 @@ public interface PersonaService {
 	boolean delete(Long id);
     
     List < Persona > list();
-
 }

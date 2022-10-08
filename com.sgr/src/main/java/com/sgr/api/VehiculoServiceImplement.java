@@ -1,5 +1,6 @@
 package com.sgr.api;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,6 +22,7 @@ public class VehiculoServiceImplement implements VehiculoService {
 
 	@Override
 	public Vehiculo create(Vehiculo vehiculo) {
+		vehiculo.set_id(new Date().getTime());
 		return vehiculorepository.save(vehiculo);
 	}
 
