@@ -24,7 +24,9 @@ public class PersonaServiceImplement implements PersonaService {
 
 	@Override
 	public Persona create(Persona persona) {
-		persona.set_id(new Date().getTime());
+		if(persona.get_id()!=999999996L) {
+			persona.set_id(new Date().getTime());
+		}
 		return personarepository.save(persona);
 	}
 
@@ -38,8 +40,12 @@ public class PersonaServiceImplement implements PersonaService {
 			pu.setNombre(persona.getNombre());
 			pu.setApellido(persona.getApellido());
 			pu.setTelefono(persona.getTelefono());
-			pu.setDireccion(persona.getTelefono());
+			pu.setDireccion(persona.getDireccion());
 			pu.setObservaciones(persona.getObservaciones());
+			pu.setTelefono(persona.getTelefono());
+			pu.setOtros(persona.getOtros());
+			pu.setRol(persona.getRol());
+			pu.setUsuario(persona.getUsuario());
 			this.personarepository.save(pu);
 			return pu;
 		} else {
@@ -50,7 +56,6 @@ public class PersonaServiceImplement implements PersonaService {
 
 	@Override
 	public List<Persona> list() {
-
 		return this.personarepository.findAll();
 	}
 

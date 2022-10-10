@@ -22,7 +22,9 @@ public class TipoResiduoServiceImplement implements TipoResiduoService {
 
 	@Override
 	public TipoDeResiduo create(TipoDeResiduo tipoDeResiduo) {
-		tipoDeResiduo.set_id(new Date().getTime());
+		if(tipoDeResiduo.get_id()!=999999996L) {
+			tipoDeResiduo.set_id(new Date().getTime());
+		}
 		return tipoResiduoRepository.save(tipoDeResiduo);
 	}
 

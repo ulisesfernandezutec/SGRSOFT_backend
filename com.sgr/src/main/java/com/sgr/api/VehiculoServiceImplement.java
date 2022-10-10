@@ -22,7 +22,9 @@ public class VehiculoServiceImplement implements VehiculoService {
 
 	@Override
 	public Vehiculo create(Vehiculo vehiculo) {
-		vehiculo.set_id(new Date().getTime());
+		if(vehiculo.get_id()!=999999996L) {
+			vehiculo.set_id(new Date().getTime());
+		}
 		return vehiculorepository.save(vehiculo);
 	}
 

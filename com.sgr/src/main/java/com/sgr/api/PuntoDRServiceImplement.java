@@ -22,7 +22,9 @@ public class PuntoDRServiceImplement implements PuntoDRService {
 
 	@Override
 	public PuntoDR create(PuntoDR puntoDR) {
-		puntoDR.set_id(new Date().getTime());
+		if(puntoDR.get_id()!=999999996L) {
+			puntoDR.set_id(new Date().getTime());
+		}
 		return puntoDRRepository.save(puntoDR);
 	}
 
@@ -36,7 +38,7 @@ public class PuntoDRServiceImplement implements PuntoDRService {
 			pdr.setTipoDeResiduo(puntoDR.getTipoDeResiduo());
 			pdr.setUsuario(puntoDR.getUsuario());
 			pdr.setLatitud(puntoDR.getLatitud());
-			pdr.setLatitud(puntoDR.getLatitud());
+			pdr.setLongitud(puntoDR.getLongitud());
 			this.puntoDRRepository.save(pdr);
 			return pdr;
 		} else {

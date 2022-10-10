@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sgr.entities.PuntoDR;
-import com.sgr.entities.Rol;
 import com.sgr.entities.TipoDeResiduo;
 
 @RestController

@@ -20,4 +20,7 @@ public class Persona {
 	private String 	telefono;
 	private String 	observaciones;
 	private String 	otros;
+	private String  usuario;
+	private String  rol;
+	private String  idautorización;
 }
