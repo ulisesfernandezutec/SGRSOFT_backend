@@ -2,11 +2,17 @@ package SGR.com.sgr;
 
 import static org.junit.Assert.assertTrue;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
+import com.mongodb.internal.operation.CountOperation;
 import com.sgr.api.*;
 import com.sgr.bussines.Utils;
 import com.sgr.entities.*;
+
+import lombok.extern.log4j.Log4j2;
+
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
@@ -15,186 +21,285 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.util.AutoPopulatingList;
 
+@Log4j2
 @SpringBootTest
 @SpringBootConfiguration
 @ComponentScan(basePackages = { "com.sgr" })
 @TestMethodOrder(OrderAnnotation.class)
+
 class ApplicationTests {
+
 	String var = "Cambio de Información";
-	/*
 	@Autowired
-	//PersonaServiceImplement servicepr;
+	UsuarioServiceImplement usuario;
 	@Autowired
-	VehiculoServiceImplement servicevh;
+	PuntoRecoleccionEstadoServiceImplement puntorecoleccionestado;
 	@Autowired
-	PuntoRecoleccionServiceImplement servicepd;
+	VehiculoServiceImplement vehiculo;
 	@Autowired
-	TipoResiduoServiceImplement servicetr;
-	/*
-	//TEST DE PERSONAS
+	PuntoRecoleccionServiceImplement puntoderecoleccion;
+	@Autowired
+	TipoResiduoServiceImplement tiporesiduo;
+	@Autowired
+	RolServiceImplement rolservice;
+
+	// TEST DE USUARIOS
 	@Test
 	@Order(1)
-	void crearPersonaTest() {
-		System.out.println("Creando Persona Test");
-		Persona tp = new Persona(999999996L, "nombre", "apellido", "direccion", "telefono", "observaciones", "otros", "usuario", "rol", "idautorización");
-		servicepr.create(tp);
+	void createUsuario() {
+		log.info("TEST > Creando Usuario Test");
+		// Usuario tp = new Usuario(999999996L,);
+		Usuario usr = new Usuario(999999996L, "username", "apiId", null, "nombre", "apellido", "documento", "telefono",
+				"email", "direccion");
+		usuario.create(usr);
 	}
 
 	@Test
 	@Order(2)
-	void obtenerPersonaTest() {
-		System.out.println("Obteniendo Persona Test");
-		Optional<Persona> po = Optional.of(servicepr.getById(999999996L));
+	void getUsuarioTest() {
+		log.info("TEST > Obteniendo Usuario Test");
+		Optional<Usuario> po = Optional.of(usuario.getById(999999996L));
 		assertTrue(po.isPresent());
 	}
 
 	@Test
 	@Order(3)
-	void actualizarPersonaTest() {
-		System.out.println("Actualizando Persona Test");
-		Persona p = servicepr.getById(999999996L);
+	void updateUsuarioTest() {
+		log.info("TEST > Actualizando Usuario Test");
+		Usuario p = usuario.getById(999999996L);
 		if (p != null) {
 			p.setNombre(var);
-			servicepr.update(p);
+			usuario.update(p);
 		}
-		assertTrue(servicepr.getById(999999996L).getNombre().equals(var));
+		assertTrue(usuario.getById(999999996L).getNombre().equals(var));
 
 	}
 
 	@Test
 	@Order(4)
-	void eliminarPersonaTest() {
-		System.out.println("Eliminando Persona Test");
-		Optional<Persona> po = Optional.of(servicepr.getById(999999996L));
+	void deleteUsuario() {
+		log.info("TEST > Eliminando Persona Test");
+		Optional<Usuario> po = Optional.of(usuario.getById(999999996L));
 		if (po.isPresent()) {
-			servicepr.delete(999999996L);
+			usuario.delete(999999996L);
 		}
-		assertTrue(servicepr.getById(999999996L) == null);
+		assertTrue(usuario.getById(999999996L) == null);
 	}
-	
-	//TEST PUNTOS DE RECOLECCIÓN
+
+	// TEST PUNTOS DE RECOLECCIÓN ESTADO
 	@Test
 	@Order(5)
-	void crearPDRTest() {
-		System.out.println("Creando Punto de Recolección Test");
-		PuntoRecoleccion vh = new PuntoRecoleccion(999999996L, 999999996L, 999999996L, 00005.55f, 0.59877f);
-		servicepd.create(vh);
-
+	void createpdreTest() {
+		log.info("TEST > Creando Punto de Recolección Estado Test");
+		PuntoRecoleccionEstado pr = new PuntoRecoleccionEstado(999999996L, "22/05/1986", 1L, "Estado", "Estado");
+		puntorecoleccionestado.create(pr);
+		Optional<PuntoRecoleccionEstado> pdre = Optional.of(puntorecoleccionestado.getById(999999996L));
+		assertTrue(pdre.isPresent());
 	}
-	
+
 	@Test
 	@Order(6)
-	void obtenerPDRTest() {
-		System.out.println("Obteniendo Punto de Recolección Test");
-		Optional<PuntoDR> po = Optional.of(servicepd.getById(999999996L));
-		assertTrue(po.isPresent());
+	void getpdreTest() {
+		log.info("TEST > Obteniendo Punto de Recolección Estado Test");
+		Optional<PuntoRecoleccionEstado> pdre = Optional.of(puntorecoleccionestado.getById(999999996L));
+		assertTrue(pdre.isPresent());
 	}
-	
-	
+
 	@Test
 	@Order(7)
-	void actualizarPDRTest() {
-		System.out.println("Actualizando Punto de Recolección Test");
-		PuntoDR p = servicepd.getById(999999996L);
+	void updatepdreTest() {
+		log.info("TEST > Actualizando Punto de Recolección Estado Test");
+		String det = "Esto es un datalle de prueba";
+		PuntoRecoleccionEstado p = puntorecoleccionestado.getById(999999996L);
 		if (p != null) {
-			p.setLatitud(00.5f);
-			servicepd.update(p);
+			p.setDetalle(det);
+			puntorecoleccionestado.update(p);
 		}
-		Optional<PuntoDR> po = Optional.of(servicepd.getById(999999996L));
-		assertTrue(po.get().getLatitud()==00.5f);
+		Optional<PuntoRecoleccionEstado> po = Optional.of(puntorecoleccionestado.getById(999999996L));
+		assertTrue(po.get().getDetalle().equals(det));
 	}
-	
+
 	@Test
 	@Order(8)
-	void eliminarPDRTest() {
-		System.out.println("Eliminando Punto de Recolección Test");
-		Optional<PuntoDR> po = Optional.of(servicepd.getById(999999996L));
+	void deletepdreTest() {
+		log.info("TEST > Eliminando Punto de Recolección Estado Test");
+		Optional<PuntoRecoleccionEstado> po = Optional.of(puntorecoleccionestado.getById(999999996L));
 		if (po.isPresent()) {
-			servicepd.delete(999999996L);
+			puntorecoleccionestado.delete(999999996L);
 		}
-		assertTrue(servicepd.getById(999999996L) == null);
+		assertTrue(puntorecoleccionestado.getById(999999996L) == null);
 	}
-	
-	//TEST VEHICULOS
+
+	// TEST VEHICULOS
 	@Test
 	@Order(9)
-	void crearVehiculoTest() {
-		System.out.println("Creando Vehiculo Test");
-		Vehiculo vh = new Vehiculo(999999996L,"vh1", "MatTest", "MarcaTest", "ModeloTest", 999999996L);
-		servicevh.create(vh);
+	void createVehiculosTest() {
+		log.info("TEST > Creando Vehiculo Test");
+		Vehiculo vh = new Vehiculo(999999996L, "vh1", "MatTest", "MarcaTest", "ModeloTest", 999999996L);
+		vehiculo.create(vh);
 
 	}
-	
+
 	@Test
 	@Order(10)
-	void obtenerVehiculoTest() {
-		System.out.println("Obteniendo Vehiculo Test");
-		Optional<Vehiculo> po = Optional.of(servicevh.getById(999999996L));
+	void getVehiculosTest() {
+		log.info("TEST > Obteniendo Vehiculo Test");
+		Optional<Vehiculo> po = Optional.of(vehiculo.getById(999999996L));
 		assertTrue(po.isPresent());
 	}
-	
-	
+
 	@Test
 	@Order(11)
-	void actualizarVehiculoTest() {
-		System.out.println("Actualizando Vehiculo Test");
-		Vehiculo p = servicevh.getById(999999996L);
+	void updateVehiculosTest() {
+		log.info("TEST > Actualizando Vehiculo Test");
+		Vehiculo p = vehiculo.getById(999999996L);
 		if (p != null) {
 			p.setMarca(var);
-			servicevh.update(p);
+			vehiculo.update(p);
 		}
-		assertTrue(servicevh.getById(999999996L).getMarca().equals(var));
+		assertTrue(vehiculo.getById(999999996L).getMarca().equals(var));
 
 	}
-	
+
 	@Test
 	@Order(12)
-	void eliminarVehiculoTest() {
-		System.out.println("Eliminando Vehiculo Test");
-		Optional<Vehiculo> po = Optional.of(servicevh.getById(999999996L));
+	void deleteVehiculosTest() {
+		log.info("TEST > Eliminando Vehiculo Test");
+		Optional<Vehiculo> po = Optional.of(vehiculo.getById(999999996L));
 		if (po.isPresent()) {
-			servicevh.delete(999999996L);
+			vehiculo.delete(999999996L);
 		}
-		assertTrue(servicevh.getById(999999996L) == null);
+		assertTrue(vehiculo.getById(999999996L) == null);
 	}
-	//TEST TIPO DE RESIDUO
+
+	// TEST TIPO DE RESIDUO
 	@Test
 	@Order(13)
 	void crearTipoR() {
-		System.out.println("Creando Tipo de Residuo Test");
-		TipoDeResiduo tr = new TipoDeResiduo(999999996L,"Tipo1");
-		servicetr.create(tr);
+		log.info("TEST > Creando Tipo de Residuo Test");
+		TipoDeResiduo tr = new TipoDeResiduo(999999996L, "Tipo1");
+		tiporesiduo.create(tr);
 
 	}
+
 	@Test
 	@Order(14)
 	void obtenerTipoR() {
-		System.out.println("Obteniendo Tipo de Residuo Test");
-		Optional<TipoDeResiduo> po = Optional.of(servicetr.getById(999999996L));
+		log.info("TEST > Obteniendo Tipo de Residuo Test");
+		Optional<TipoDeResiduo> po = Optional.of(tiporesiduo.getById(999999996L));
 		assertTrue(po.isPresent());
 	}
+
 	@Test
 	@Order(15)
 	void actualizarTipoR() {
-		System.out.println("Actualizando Tipo de Residuo Test");
-		TipoDeResiduo p = servicetr.getById(999999996L);
+		log.info("TEST > Actualizando Tipo de Residuo Test");
+		TipoDeResiduo p = tiporesiduo.getById(999999996L);
 		if (p != null) {
 			p.setNombre(var);
-			servicetr.update(p);
+			tiporesiduo.update(p);
 		}
-		assertTrue(servicetr.getById(999999996L).getNombre().equals(var));
+		assertTrue(tiporesiduo.getById(999999996L).getNombre().equals(var));
 
 	}
+
 	@Test
 	@Order(16)
 	void eliminarTipoR() {
-		System.out.println("Eliminando Usuario Test");
-		Optional<TipoDeResiduo> po = Optional.of(servicetr.getById(999999996L));
+		log.info("TEST > Eliminando Tipo de Residuo Test");
+		Optional<TipoDeResiduo> po = Optional.of(tiporesiduo.getById(999999996L));
 		if (po.isPresent()) {
-			servicetr.delete(999999996L);
+			tiporesiduo.delete(999999996L);
 		}
-		assertTrue(servicetr.getById(999999996L) == null);
+		assertTrue(tiporesiduo.getById(999999996L) == null);
 	}
-	*/
+
+	// TEST PUNTO DE RECOLLECION
+	@Test
+	@Order(17)
+	void createpdrTest() {
+		log.info("TEST > Creando Punto de Recolección Test");
+		TipoDeResiduo tr = new TipoDeResiduo(1L, "Test");
+		PuntoRecoleccionEstado estado = new PuntoRecoleccionEstado(999999996L, "Fecha", 999999996L, "Estado",
+				"Detalles");
+		List<PuntoRecoleccionEstado> estados = new ArrayList<>();
+		estados.add(estado);
+		PuntoRecoleccion pr = new PuntoRecoleccion(999999996L, tr, 1L, 22.5f, 22.5f, "Dirección", "Descripción",
+				estados);
+		puntoderecoleccion.create(pr);
+	}
+
+	@Test
+	@Order(18)
+	void getpdrTest() {
+		log.info("TEST > Obtener Punto de Recolección Test");
+		Optional<PuntoRecoleccion> po = Optional.of(puntoderecoleccion.getById(999999996L));
+		assertTrue(po.isPresent());
+	}
+
+	@Test
+	@Order(19)
+	void updatepdrTest() {
+		log.info("TEST > Actualizando Punto de Recolección Test");
+		String desc = "Descripcion";
+		PuntoRecoleccion p = puntoderecoleccion.getById(999999996L);
+		if (p != null) {
+			p.setDescripcion(desc);
+			puntoderecoleccion.update(p);
+		}
+		assertTrue(puntoderecoleccion.getById(999999996L).getDescripcion().equals(desc));
+	}
+
+	@Test
+	@Order(20)
+	void deletepdrTest() {
+		log.info("TEST > Eliminando Punto de Recolección Test");
+		Optional<PuntoRecoleccion> po = Optional.of(puntoderecoleccion.getById(999999996L));
+		if (po.isPresent()) {
+			puntoderecoleccion.delete(999999996L);
+		}
+		assertTrue(puntoderecoleccion.getById(999999996L) == null);
+	}
+
+	// TEST DE ROL
+	@Test
+	@Order(21)
+	void createRol() {
+		log.info("TEST > Creando Rol Test");
+		Rol rol = new Rol(999999996L, "Nuevo Rol");
+		rolservice.create(rol);
+	}
+
+	@Test
+	@Order(22)
+	void getRolTest() {
+		log.info("TEST > Obteniendo Rol Test");
+		Optional<Rol> po = Optional.of(rolservice.getById(999999996L));
+		assertTrue(po.isPresent());
+	}
+	@Test
+	@Order(23)
+	void updateRol() {
+		log.info("TEST > Actualizando Rol Test");
+		String test = "Nuevo test";
+		Rol r = rolservice.getById(999999996L);
+		if (r != null) {
+			r.setNombre(test);
+			rolservice.update(r);
+		}
+		assertTrue(rolservice.getById(999999996L).getNombre().equals(test));
+	}
+	@Test
+	@Order(24)
+	void deleteRol() {
+		log.info("TEST > Eliminando Rol Test");
+		Optional<Rol> po = Optional.of(rolservice.getById(999999996L));
+		if (po.isPresent()) {
+			rolservice.delete(999999996L);
+		}
+		assertTrue(rolservice.getById(999999996L) == null);
+	}
+	
 }

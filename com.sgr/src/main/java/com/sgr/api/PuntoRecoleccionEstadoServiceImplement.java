@@ -33,8 +33,7 @@ public class PuntoRecoleccionEstadoServiceImplement implements PuntoRecoleccionE
 	@Override
 	public PuntoRecoleccionEstado update(PuntoRecoleccionEstado pdr) {
 
-		Optional<PuntoRecoleccionEstado> pre = this.puntoRecoleccionEstadoRepository
-				.findById(Long.parseLong(String.valueOf(pdr.get_id())));
+		Optional<PuntoRecoleccionEstado> pre = this.puntoRecoleccionEstadoRepository.findById(Long.parseLong(String.valueOf(pdr.get_id())));
 
 		if (pre.isPresent()) {
 			PuntoRecoleccionEstado pdre = pre.get();
@@ -43,6 +42,7 @@ public class PuntoRecoleccionEstadoServiceImplement implements PuntoRecoleccionE
 			pdre.setDetalle(pdr.getDetalle());
 			pdre.setEstado(pdr.getEstado());
 			pdre.setUsuario(pdr.getUsuario());
+			this.puntoRecoleccionEstadoRepository.save(pdre);
 			return this.puntoRecoleccionEstadoRepository.findById(Long.parseLong(String.valueOf(pdr.get_id()))).get();
 		} else {
 			System.out.printf(Messages.pdrNotFound, pdr.get_id());
