@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.sgr.entities.Usuario;
 
 @RestController
@@ -20,7 +19,7 @@ public class UsuarioController {
 	private UsuarioServiceImplement usuarioServiceImplement;
 
 	// getall
-	@GetMapping("/usuario")
+	@GetMapping("/usr")
 	public List<Usuario> getAll() {
 		try {
 			return usuarioServiceImplement.list();
@@ -32,13 +31,13 @@ public class UsuarioController {
 	}
 
 	// getone
-	@GetMapping("/usuario/{id}")
-	public Usuario getUsuario(@PathVariable int id) {
+	@GetMapping("/usr/{id}")
+	public Usuario getUsuario(@PathVariable Long id) {
 		return usuarioServiceImplement.getById(id);
 	}
 
-	// setone
-	@PostMapping("/usuario/")
+	//setone
+	@PostMapping("/usr/")
 	public boolean setUsuario(@RequestBody Usuario usuario) {
 		try {
 			usuarioServiceImplement.create(usuario);
@@ -49,7 +48,8 @@ public class UsuarioController {
 		}
 	}
 
-	@PutMapping("/usuario/")
+	// update
+	@PutMapping("/usr/")
 	public boolean updateUsuario(@RequestBody Usuario usuario) {
 		try {
 			if (usuarioServiceImplement.getById(usuario.get_id()) != null) {
@@ -63,7 +63,7 @@ public class UsuarioController {
 	}
 
 	// delete
-	@DeleteMapping("/usuario/{id}")
+	@DeleteMapping("/usr/{id}")
 	public boolean deleteUsuario(@PathVariable Long id) {
 		try {
 			usuarioServiceImplement.delete(id);
@@ -73,4 +73,5 @@ public class UsuarioController {
 			return false;
 		}
 	}
+
 }
