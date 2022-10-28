@@ -24,12 +24,14 @@
 /S22/SGRSOFT_backend/com.sgr/src/main/java/com/sgr/bussines/Messages.java
 /S22/SGRSOFT_backend/com.sgr/src/main/java/com/sgr/api/interfaces/RolRepository.java
 /S22/SGRSOFT_backend/com.sgr/src/main/java/com/sgr/api/RolServiceImplement.java
+/S22/SGRSOFT_backend/com.sgr/src/main/java/com/sgr/bussines/CustomOAuth2User.java
 /S22/SGRSOFT_backend/com.sgr/src/main/java/com/sgr/api/RolController.java
 /S22/SGRSOFT_backend/com.sgr/src/main/java/com/sgr/api/interfaces/PuntoDeRecoleccionService.java
 /S22/SGRSOFT_backend/com.sgr/src/main/java/com/sgr/api/interfaces/PuntoDeRecoleccionRepository.java
 /S22/SGRSOFT_backend/com.sgr/src/main/java/com/sgr/entities/TipoDeResiduo.java
 /S22/SGRSOFT_backend/com.sgr/src/main/java/com/sgr/api/VehiculoController.java
 /S22/SGRSOFT_backend/com.sgr/src/main/java/com/sgr/api/interfaces/RolService.java
+/S22/SGRSOFT_backend/com.sgr/src/main/java/com/sgr/entities/Provider.java
 /S22/SGRSOFT_backend/com.sgr/src/main/java/com/sgr/api/interfaces/VehiculoRepository.java
 /S22/SGRSOFT_backend/com.sgr/src/main/java/com/sgr/api/interfaces/UsuarioService.java
 /S22/SGRSOFT_backend/com.sgr/src/main/java/com/sgr/api/interfaces/PuntoRecoleccionEstadoService.java

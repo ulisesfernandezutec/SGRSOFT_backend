@@ -7,7 +7,7 @@
 		<version>2.7.3</version>
 		<relativePath />
 	</parent>
-
+	<packaging>war</packaging>
 	<groupId>SGR</groupId>
 	<artifactId>com.sgr</artifactId>
 	<version>0.0.1</version>
@@ -18,6 +18,13 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 	<dependencies>
+		<!-- https://mvnrepository.com/artifact/com.google.api-client/google-api-client -->
+		<dependency>
+			<groupId>com.google.api-client</groupId>
+			<artifactId>google-api-client</artifactId>
+			<version>2.0.0</version>
+		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
@@ -71,6 +78,10 @@
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-swagger-ui</artifactId>
 			<version>3.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-oauth2-client</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springdoc</groupId>

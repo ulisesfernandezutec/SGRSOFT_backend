@@ -22,4 +22,5 @@ public class Usuario {
 	private String telefono;
 	private String email;
 	private String direccion;
+	//private Provider provider;
 }
