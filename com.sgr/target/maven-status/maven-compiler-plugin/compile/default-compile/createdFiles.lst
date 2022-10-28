@@ -7,11 +7,13 @@ com/sgr/entities/Vehiculo.class
 com/sgr/api/interfaces/TipoResiduoService.class
 com/sgr/bussines/WebSecurityConfig.class
 com/sgr/api/interfaces/UsuarioService.class
+com/sgr/entities/Provider.class
 com/sgr/api/UsuarioController.class
 com/sgr/Application.class
 com/sgr/entities/PuntoRecoleccion.class
 com/sgr/entities/PuntoRecoleccionEstado.class
 com/sgr/api/PuntoRecoleccionController.class
+com/sgr/bussines/CustomOAuth2User.class
 com/sgr/entities/TipoDeResiduo.class
 com/sgr/api/interfaces/RolRepository.class
 com/sgr/api/PuntoRecoleccionEstadoServiceImplement.class
