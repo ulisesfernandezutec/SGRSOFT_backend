@@ -1,4 +1,0 @@
--------------------------------------------------------------------------------
-Test set: SGR.com.sgr.ApplicationTests
--------------------------------------------------------------------------------
-Tests run: 24, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.894 s - in SGR.com.sgr.ApplicationTests
