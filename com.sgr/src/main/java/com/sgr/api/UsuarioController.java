@@ -37,7 +37,7 @@ public class UsuarioController {
 	}
 
 	//setone
-	@PostMapping("/usr/")
+	@PostMapping("/usr")
 	public boolean setUsuario(@RequestBody Usuario usuario) {
 		try {
 			usuarioServiceImplement.create(usuario);
@@ -49,7 +49,7 @@ public class UsuarioController {
 	}
 
 	// update
-	@PutMapping("/usr/")
+	@PutMapping("/usr")
 	public boolean updateUsuario(@RequestBody Usuario usuario) {
 		try {
 			if (usuarioServiceImplement.getById(usuario.get_id()) != null) {

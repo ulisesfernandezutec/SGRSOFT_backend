@@ -1,31 +1,61 @@
-spring.security.oauth2.client.registration.google.client-id=369817168819-mpbt75buja55k58eiua8n489nkl6ih7e.apps.googleusercontent.com
-spring.security.oauth2.client.registration.google.client-secret=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
+spring:
+  profiles:
+    active: prod
+  data:
+    mongodb:
+      authentication-database: admin
+      database: sgr
+      host: localhost
+      password: thisistherealadmin
+      port: 27017
+      username: admin
 
-
-#---
-spring.profiles.active=prod
-#Mongo Info
-spring.data.mongodb.authentication-database=admin
-spring.data.mongodb.host=mongodb
-spring.data.mongodb.port=27017
-spring.data.mongodb.database=sgr
-spring.data.mongodb.username=admin
-spring.data.mongodb.password=thisistherealadmin
-#Spring security
-spring.security.user.name=demo
-spring.security.user.password=demo
-spring.security.user.roles=manager
-
-#---
-spring.config.active=devel
-#Mongo Info
-spring.data.mongodb.authentication-database=admin
-spring.data.mongodb.host=localhost
-spring.data.mongodb.port=27017
-spring.data.mongodb.database=sgr
-spring.data.mongodb.username=admin
-spring.data.mongodb.password=thisistherealadmin
-#Spring security
-spring.security.user.name=dev
-spring.security.user.password=dev
-spring.security.user.roles=manager
+  security:
+  #  oauth2:
+  #    client:
+  #      registration:
+  #        google:
+  #          client-id: 369817168819-mpbt75buja55k58eiua8n489nkl6ih7e.apps.googleusercontent.com
+  #          client-secret: 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
+  #          scope:
+  #           - email
+  #           - profile
+  #        facebook:
+  #         clientId: 1063752525024217
+  #         clientSecret: 699fd31f67ca8f1d52315c918285ca35
+  #         scope:
+  #           - email
+  #           - public_profile
+  #        github:
+  #         clientId: <GITHUB_CLIENT_ID>
+  #         clientSecret: <GITHUB_CLIENT_SECRET>
+  #        scope:
+  #           - user:email
+  #            - read:user
+    user:
+      name: demo
+      password: demo
+      roles: manager
+---
+spring:
+  profiles:
+    active: devel
+  data:
+    mongodb:
+      authentication-database: admin
+      database: sgr
+      host: localhost
+      password: thisistherealadmin
+      port: 27017
+      username: admin
+  security:
+   # oauth2:
+   #   client:
+   #     registration:
+   #       google:
+   #         client-id: 369817168819-mpbt75buja55k58eiua8n489nkl6ih7e.apps.googleusercontent.com
+   #        client-secret: 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
+    user:
+      name: dev
+      password: dev
+      roles: user

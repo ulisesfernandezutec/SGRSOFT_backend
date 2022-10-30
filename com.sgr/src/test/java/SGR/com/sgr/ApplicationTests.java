@@ -55,7 +55,6 @@ class ApplicationTests {
 				"email", "direccion");
 		usuario.create(usr);
 	}
-
 	@Test
 	@Order(2)
 	void getUsuarioTest() {
