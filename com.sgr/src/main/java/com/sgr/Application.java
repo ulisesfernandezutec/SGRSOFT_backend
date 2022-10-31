@@ -21,7 +21,7 @@ public class Application {
 	@Bean
     ApplicationRunner applicationRunner(Environment environment) {
         return args -> {
-            log.info("Perfil activo " + environment.getProperty("spring.profiles.active"));
+            log.warn("Perfil activo " + environment.getProperty("spring.profiles.active"));
         };
     }	
 

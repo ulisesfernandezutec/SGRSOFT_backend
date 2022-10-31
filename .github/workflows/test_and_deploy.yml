@@ -58,4 +58,5 @@ jobs:
             ssh -o StrictHostKeyChecking=no -i key.pem ${USER}@${HOST} '
                 cd /home/ubuntu/SGRSOFT_deploy &&
                 git pull &&
+                docker-compose pull &&
                 docker-compose up -d --build '
