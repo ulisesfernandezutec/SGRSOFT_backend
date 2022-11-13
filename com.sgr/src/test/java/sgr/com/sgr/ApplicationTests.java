@@ -1,4 +1,4 @@
-package SGR.com.sgr;
+package sgr.com.sgr;
 
 import static org.junit.Assert.assertTrue;
 
@@ -6,9 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import com.mongodb.internal.operation.CountOperation;
 import com.sgr.api.*;
-import com.sgr.bussines.Utils;
 import com.sgr.entities.*;
 
 import lombok.extern.log4j.Log4j2;
@@ -21,7 +19,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.util.AutoPopulatingList;
 
 @Log4j2
 @SpringBootTest
@@ -30,7 +27,7 @@ import org.springframework.util.AutoPopulatingList;
 @TestMethodOrder(OrderAnnotation.class)
 
 class ApplicationTests {
-
+	
 	String var = "Cambio de Información";
 	@Autowired
 	UsuarioServiceImplement usuario;
@@ -51,10 +48,10 @@ class ApplicationTests {
 	void createUsuario() {
 		log.info("TEST > Creando Usuario Test");
 		// Usuario tp = new Usuario(999999996L,);
-		Usuario usr = new Usuario(999999996L, "username", "apiId", null, "nombre", "apellido", "documento", "telefono",
-				"email", "direccion");
+		Usuario usr = new Usuario(999999996L, "username", "apiId", null, "nombre", "apellido", "documento", "telefono", "email", "direccion");
 		usuario.create(usr);
 	}
+
 	@Test
 	@Order(2)
 	void getUsuarioTest() {
@@ -278,6 +275,7 @@ class ApplicationTests {
 		Optional<Rol> po = Optional.of(rolservice.getById(999999996L));
 		assertTrue(po.isPresent());
 	}
+
 	@Test
 	@Order(23)
 	void updateRol() {
@@ -290,6 +288,7 @@ class ApplicationTests {
 		}
 		assertTrue(rolservice.getById(999999996L).getNombre().equals(test));
 	}
+
 	@Test
 	@Order(24)
 	void deleteRol() {
@@ -299,6 +298,96 @@ class ApplicationTests {
 			rolservice.delete(999999996L);
 		}
 		assertTrue(rolservice.getById(999999996L) == null);
+	}
+	
+	// CREAR USUARIOS TEST
+	@Test
+	@Order(25)
+	void findUsuarioByName() {
+		log.info("TEST > Buscando usuario por email Test");
+		String email = "test"+1+"@test.com";
+		Optional<Usuario> op = usuario.findByEmailLike(email);
+		if(!op.isPresent()) {
+			Usuario usr = new Usuario(1L, "username1", "apiId", new Rol(1, "ADMIN"), "nombre", "apellido", "documento", "telefono",
+					email, "direccion");
+			usuario.create(usr);
+			op = usuario.findByEmailLike(email);
+		}
+		assertTrue(op.isPresent());
+	}
+	
+	@Test
+	@Order(26)
+	void createUsuario0() {
+		log.info("TEST > Buscando usuario por email Test");
+		String email = "test"+2+"@test.com";
+		Optional<Usuario> op = usuario.findByEmailLike(email);
+		if(!op.isPresent()) {
+			Usuario usr = new Usuario(1L, "username2", "apiId", new Rol(2, "USER"), "nombre", "apellido", "documento", "telefono",
+					email, "direccion");
+			usuario.create(usr);
+			op = usuario.findByEmailLike(email);
+		}
+		assertTrue(op.isPresent());
+	}
+	
+	@Test
+	@Order(27)
+	void createUsuario1() {
+		log.info("TEST > Buscando usuario por email Test");
+		String email = "test"+3+"@test.com";
+		Optional<Usuario> op = usuario.findByEmailLike(email);
+		if(!op.isPresent()) {
+			Usuario usr = new Usuario(1L, "username3", "apiId", new Rol(3, "CHOFER"), "nombre", "apellido", "documento", "telefono",
+					email, "direccion");
+			usuario.create(usr);
+			op = usuario.findByEmailLike(email);
+		}
+		assertTrue(op.isPresent());
+	}
+	
+	@Test
+	@Order(28)
+	void createUsuario2() {
+		log.info("TEST > Buscando usuario por email Test");
+		String email = "test"+4+"@test.com";
+		Optional<Usuario> op = usuario.findByEmailLike(email);
+		if(!op.isPresent()) {
+			Usuario usr = new Usuario(1L, "username4", "apiId", new Rol(3, "CHOFER"), "nombre", "apellido", "documento", "telefono",
+					email, "direccion");
+			usuario.create(usr);
+			op = usuario.findByEmailLike(email);
+		}
+		assertTrue(op.isPresent());
+	}
+	
+	@Test
+	@Order(29)
+	void createUsuario4() {
+		log.info("TEST > Buscando usuario por email Test");
+		String email = "test"+5+"@test.com";
+		Optional<Usuario> op = usuario.findByEmailLike(email);
+		if(!op.isPresent()) {
+			Usuario usr = new Usuario(1L, "username5", "apiId", new Rol(3, "CHOFER"), "nombre", "apellido", "documento", "telefono",
+					email, "direccion");
+			usuario.create(usr);
+			op = usuario.findByEmailLike(email);
+		}
+		assertTrue(op.isPresent());
+	}
+	
+	@Test
+	@Order(30)
+	void findUsuarioByUsername() {
+		String u = "username5";
+		log.info("TEST > Buscando usuario por username "+u);
+		Optional<Usuario> op = usuario.findFirstByUsernameLike(u);
+		if(!op.isPresent()) {
+			Usuario usr = new Usuario(1L, u, "apiId", new Rol(3, "CHOFER"), "nombre", "apellido", "documento", "telefono", "test@i123.com", "direccion");
+			usuario.create(usr);
+			op = usuario.findByEmailLike(u);
+		}
+		assertTrue(op.isPresent());
 	}
 	
 }
