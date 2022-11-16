@@ -49,7 +49,7 @@ class ApplicationTests {
 	void createUsuario() {
 		log.info("TEST > Creando Usuario Test");
 		// Usuario tp = new Usuario(999999996L,);
-		Usuario usr = new Usuario(999999996L, "username", "apiId", null, "nombre", "apellido", "documento", "telefono", "email", "direccion");
+		Usuario usr = new Usuario(999999996L, "apiId", null, "nombre", "apellido", "documento", "telefono", "email", "direccion");
 		usuario.create(usr);
 	}
 
@@ -309,7 +309,7 @@ class ApplicationTests {
 		String email = "test"+1+"@test.com";
 		Optional<Usuario> op = usuario.findFirstByEmailLike(email);
 		if(!op.isPresent()) {
-			Usuario usr = new Usuario(1L, "username1", "apiId", new Rol(1, "ADMIN"), "nombre", "apellido", "documento", "telefono",
+			Usuario usr = new Usuario(1L, "apiId", new Rol(1, "ADMIN"), "nombre", "apellido", "documento", "telefono",
 					email, "direccion");
 			usuario.create(usr);
 			op = usuario.findFirstByEmailLike(email);
@@ -324,7 +324,7 @@ class ApplicationTests {
 		String email = "test"+2+"@test.com";
 		Optional<Usuario> op = usuario.findFirstByEmailLike(email);
 		if(!op.isPresent()) {
-			Usuario usr = new Usuario(1L, "username2", "apiId", new Rol(2, "USER"), "nombre", "apellido", "documento", "telefono",
+			Usuario usr = new Usuario(1L, "username2", new Rol(2, "USER"), "nombre", "apellido", "documento", "telefono",
 					email, "direccion");
 			usuario.create(usr);
 			op = usuario.findFirstByEmailLike(email);
@@ -339,7 +339,7 @@ class ApplicationTests {
 		String email = "test"+3+"@test.com";
 		Optional<Usuario> op = usuario.findFirstByEmailLike(email);
 		if(!op.isPresent()) {
-			Usuario usr = new Usuario(1L, "username3", "apiId", new Rol(3, "CHOFER"), "nombre", "apellido", "documento", "telefono",
+			Usuario usr = new Usuario(1L, "apiId", new Rol(3, "CHOFER"), "nombre", "apellido", "documento", "telefono",
 					email, "direccion");
 			usuario.create(usr);
 			op = usuario.findFirstByEmailLike(email);
@@ -354,7 +354,7 @@ class ApplicationTests {
 		String email = "test"+4+"@test.com";
 		Optional<Usuario> op = usuario.findFirstByEmailLike(email);
 		if(!op.isPresent()) {
-			Usuario usr = new Usuario(1L, "username4", "apiId", new Rol(3, "CHOFER"), "nombre", "apellido", "documento", "telefono",
+			Usuario usr = new Usuario(1L, "apiId", new Rol(3, "CHOFER"), "nombre", "apellido", "documento", "telefono",
 					email, "direccion");
 			usuario.create(usr);
 			op = usuario.findFirstByEmailLike(email);
@@ -369,7 +369,7 @@ class ApplicationTests {
 		String email = "test"+5+"@test.com";
 		Optional<Usuario> op = usuario.findFirstByEmailLike(email);
 		if(!op.isPresent()) {
-			Usuario usr = new Usuario(1L, "username5", "apiId", new Rol(3, "CHOFER"), "nombre", "apellido", "documento", "telefono",
+			Usuario usr = new Usuario(1L, "apiId", new Rol(3, "CHOFER"), "nombre", "apellido", "documento", "telefono",
 					email, "direccion");
 			usuario.create(usr);
 			op = usuario.findFirstByEmailLike(email);
@@ -379,12 +379,12 @@ class ApplicationTests {
 	
 	@Test
 	@Order(30)
-	void findUsuarioByUsername() {
-		String u = "username5";
+	void findUsuarioByEmail() {
+		String u = "test2@test.com";
 		log.info("TEST > Buscando usuario por username "+u);
 		Optional<Usuario> op = usuario.findFirstByEmailLike(u);
 		if(!op.isPresent()) {
-			Usuario usr = new Usuario(1L, u, "apiId", new Rol(3, "CHOFER"), "nombre", "apellido", "documento", "telefono", "test@i123.com", "direccion");
+			Usuario usr = new Usuario(1L, "apiId", new Rol(3, "CHOFER"), "nombre", "apellido", "documento", "telefono", "test@i123.com", "direccion");
 			usuario.create(usr);
 			op = usuario.findFirstByEmailLike(u);
 		}
