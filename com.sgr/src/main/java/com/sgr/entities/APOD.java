@@ -2,6 +2,11 @@ package com.sgr.entities;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.stereotype.Component;
+
+@Data
 public class APOD {
 
 	public final String scope;
@@ -19,7 +24,9 @@ public class APOD {
 	public final String typ;
 	public final String expires_in;
 	public final String access_type;
-
+	public final String error;
+	public final String error_description;
+	public String sgrToken;
 
 	public APOD(@JsonProperty("azp") String azp,
 				@JsonProperty("aud") String aud,
@@ -36,8 +43,11 @@ public class APOD {
 				@JsonProperty("scope") String scope,
 				@JsonProperty("exp") String exp,
 				@JsonProperty("expires_in") String expires_in,
-				@JsonProperty("access_type") String access_type) {
-
+				@JsonProperty("access_type") String access_type,
+				@JsonProperty("error") String error,
+				@JsonProperty("error_description") String error_description,
+				@JsonProperty("sgrToken") String sgrToken){
+				
 		this.azp = azp;
 		this.hd = hd;
 		this.sub = sub;
@@ -53,5 +63,8 @@ public class APOD {
 		this.exp = exp;
 		this.expires_in = expires_in;
 		this.access_type = access_type;
+		this.error = error;
+		this.error_description = error_description;
+		this.sgrToken = sgrToken;
 	}
 }

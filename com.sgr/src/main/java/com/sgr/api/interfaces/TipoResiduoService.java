@@ -12,7 +12,9 @@ public interface TipoResiduoService {
 	
 	TipoDeResiduo getById(long id);
 
-	boolean delete(long id);
+    TipoDeResiduo getById(Long id);
+
+    boolean delete(long id);
     
     List < TipoDeResiduo > list();
 }

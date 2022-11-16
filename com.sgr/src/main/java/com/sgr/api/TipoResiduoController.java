@@ -32,8 +32,9 @@ public class TipoResiduoController {
 
 	// getone
 	@GetMapping("/tiporesiduo/{id}")
-	public TipoDeResiduo getTipoDeResiduo(@PathVariable int id) {
-		return tipoResiduoServiceImplement.getById(id);
+	public TipoDeResiduo getTipoDeResiduo(@PathVariable("id") String id) {
+		Long idL = Long.parseLong(id);
+		return tipoResiduoServiceImplement.getById(idL);
 	}
 
 	// setone

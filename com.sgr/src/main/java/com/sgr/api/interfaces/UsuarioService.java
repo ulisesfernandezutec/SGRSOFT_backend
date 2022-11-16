@@ -1,6 +1,7 @@
 package com.sgr.api.interfaces;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.sgr.entities.Usuario;
 
@@ -16,4 +17,5 @@ public interface UsuarioService {
     
     List < Usuario > list();
 
+    Optional<Usuario> findFirstByEmailLike(String email);
 }

@@ -45,11 +45,6 @@ public class TipoResiduoServiceImplement implements TipoResiduoService {
 	}
 
 	@Override
-	public List<TipoDeResiduo> list() {
-		return this.tipoResiduoRepository.findAll();
-	}
-
-	@Override
 	public TipoDeResiduo getById(long id) {
 		Optional<TipoDeResiduo> tpr = this.tipoResiduoRepository.findById(id);
 		if (tpr.isPresent()) {
@@ -57,6 +52,21 @@ public class TipoResiduoServiceImplement implements TipoResiduoService {
 		} else {
 			return null;
 		}
+	}
+
+	@Override
+	public TipoDeResiduo getById(Long id) {
+		Optional<TipoDeResiduo> tpr = this.tipoResiduoRepository.findById(id);
+		if (tpr.isPresent()) {
+			return tpr.get();
+		} else {
+			return null;
+		}
+	}
+
+	@Override
+	public List<TipoDeResiduo> list() {
+		return this.tipoResiduoRepository.findAll();
 	}
 
 	@Override

@@ -9,8 +9,11 @@ public class Messages {
 	public static String colTipoResiduo = "TipoDeResiduo"; 
 	public static String colUsuarios 	= "Usuarios"; 
 	public static String colVehiculos 	= "Vehiculos"; 
-	public static String colZonas 		= "Zonas"; 
-	
+	public static String colZonas 		= "Zonas";
+	//Names
+	public static String token 		= "Token";
+	public static String msg 		= "Msg";
+
 	//Messages
 	public static String personaNotFound = "No se encuentra el registro id: %s de Persona";
 	public static String perNotFound 	 = "No se encuentra el registro id: %s de Punto de Persona";

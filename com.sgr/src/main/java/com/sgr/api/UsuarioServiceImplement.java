@@ -7,6 +7,9 @@ import java.util.Optional;
 import com.sgr.api.interfaces.UsuarioRepository;
 import com.sgr.api.interfaces.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.sgr.bussines.Messages;
@@ -14,14 +17,14 @@ import com.sgr.entities.Usuario;
 
 @Service
 @Transactional
+@Repository
 public class UsuarioServiceImplement implements UsuarioService {
-
 	@Autowired
-    UsuarioRepository usuarioRepository;
+	UsuarioRepository usuarioRepository;
 
 	@Override
 	public Usuario create(Usuario usuario) {
-		if(usuario.get_id()!=999999996L) {
+		if (usuario.get_id() != 999999996L) {
 			usuario.set_id(new Date().getTime());
 		}
 		return usuarioRepository.save(usuario);
@@ -36,13 +39,12 @@ public class UsuarioServiceImplement implements UsuarioService {
 			usr.set_id(usuario.get_id());
 			usr.setNombre(usuario.getNombre());
 			usr.setApellido(usuario.getApellido());
-			usr.setApiId(usuario.getApiId());
+			usr.setPwrd(usuario.getPwrd());
 			usr.setDireccion(usuario.getDireccion());
 			usr.setDocumento(usuario.getDocumento());
 			usr.setEmail(usuario.getEmail());
 			usr.setRol(usuario.getRol());
 			usr.setTelefono(usuario.getTelefono());
-			usr.setUsername(usuario.getUsername());
 			this.usuarioRepository.save(usr);
 			return usr;
 		} else {
@@ -53,7 +55,8 @@ public class UsuarioServiceImplement implements UsuarioService {
 
 	@Override
 	public List<Usuario> list() {
-		return this.usuarioRepository.findAll();
+		List<Usuario> lista = usuarioRepository.findAll();
+		return lista;
 	}
 
 	@Override
@@ -81,4 +84,9 @@ public class UsuarioServiceImplement implements UsuarioService {
 		}
 	}
 
+	@Override
+	public Optional<Usuario> findFirstByEmailLike(String email) {
+		Optional<Usuario> user = this.usuarioRepository.findFirstByEmailLike(email);
+		return user;
+	}
 }
