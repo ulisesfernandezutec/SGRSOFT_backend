@@ -17,8 +17,5 @@ public interface UsuarioService {
     
     List < Usuario > list();
 
-    Optional<Usuario> findByEmailLike(String email);
-    
-    Optional<Usuario> findFirstByUsernameLike(String username);
-    
+    Optional<Usuario> findFirstByEmailLike(String email);
 }

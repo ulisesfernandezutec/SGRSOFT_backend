@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.stereotype.Component;
+
 @Data
 public class APOD {
 
@@ -25,8 +27,6 @@ public class APOD {
 	public final String error;
 	public final String error_description;
 	public String sgrToken;
-	
-
 
 	public APOD(@JsonProperty("azp") String azp,
 				@JsonProperty("aud") String aud,

@@ -2,6 +2,8 @@ package com.sgr.api;
 
 import java.util.Optional;
 
+import com.google.gson.JsonObject;
+import com.sgr.entities.Rol;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,21 +17,28 @@ import com.sgr.entities.APOD;
 import com.sgr.entities.Usuario;
 
 @RestController
-public class GoogleToken {
+public class GoogleLogin {
 	@Autowired
-	UsuarioRepository repo;
+	UsuarioServiceImplement repo;
 
 	@GetMapping("/glogin/{token}")
-	public String getUsuario(@PathVariable String token) {
+	public String getUsuarioInfo(@PathVariable String token) {
 		token = token.replace("token=", "");
 		APOD resp = SecurityGoogleTokenVerifier.verificar(token);
 		if (resp.error == null && resp.error_description == null) {
-			Optional<Usuario> u = repo.findByEmailLike(resp.getEmail());
+			Optional<Usuario> u = repo.findFirstByEmailLike(resp.getEmail());
 			if (u.isPresent()) {
-				String tokensgr = SecurityBussines.getJWTToken(u.get().getUsername(), u.get());
+				String tokensgr = SecurityBussines.getJWTToken(u.get().getEmail(), u.get());
 				resp.sgrToken = tokensgr;
+
 			} else {
-				resp.sgrToken = "Usuario desconocido";
+				String userInfo = SecurityGoogleTokenVerifier.googleUserInfo(token);
+				JsonObject obj = new Gson().fromJson(userInfo, JsonObject.class);
+				Usuario user = new Usuario(1L,"",new Rol(3, "USER"),"","","","",obj.get("email").getAsString(),"");
+				repo.create(user);
+				Optional<Usuario> us = repo.findFirstByEmailLike(resp.getEmail());
+				String tokensgr = SecurityBussines.getJWTToken(us.get().getEmail(), us.get());
+				resp.sgrToken = tokensgr;
 			}
 		}
 		return new Gson().toJson(resp);

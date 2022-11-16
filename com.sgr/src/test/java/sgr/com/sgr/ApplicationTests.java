@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.sgr.api.*;
+import com.sgr.bussines.security.SecurityBussines;
 import com.sgr.entities.*;
 
 import lombok.extern.log4j.Log4j2;
@@ -306,12 +307,12 @@ class ApplicationTests {
 	void findUsuarioByName() {
 		log.info("TEST > Buscando usuario por email Test");
 		String email = "test"+1+"@test.com";
-		Optional<Usuario> op = usuario.findByEmailLike(email);
+		Optional<Usuario> op = usuario.findFirstByEmailLike(email);
 		if(!op.isPresent()) {
 			Usuario usr = new Usuario(1L, "username1", "apiId", new Rol(1, "ADMIN"), "nombre", "apellido", "documento", "telefono",
 					email, "direccion");
 			usuario.create(usr);
-			op = usuario.findByEmailLike(email);
+			op = usuario.findFirstByEmailLike(email);
 		}
 		assertTrue(op.isPresent());
 	}
@@ -321,12 +322,12 @@ class ApplicationTests {
 	void createUsuario0() {
 		log.info("TEST > Buscando usuario por email Test");
 		String email = "test"+2+"@test.com";
-		Optional<Usuario> op = usuario.findByEmailLike(email);
+		Optional<Usuario> op = usuario.findFirstByEmailLike(email);
 		if(!op.isPresent()) {
 			Usuario usr = new Usuario(1L, "username2", "apiId", new Rol(2, "USER"), "nombre", "apellido", "documento", "telefono",
 					email, "direccion");
 			usuario.create(usr);
-			op = usuario.findByEmailLike(email);
+			op = usuario.findFirstByEmailLike(email);
 		}
 		assertTrue(op.isPresent());
 	}
@@ -336,12 +337,12 @@ class ApplicationTests {
 	void createUsuario1() {
 		log.info("TEST > Buscando usuario por email Test");
 		String email = "test"+3+"@test.com";
-		Optional<Usuario> op = usuario.findByEmailLike(email);
+		Optional<Usuario> op = usuario.findFirstByEmailLike(email);
 		if(!op.isPresent()) {
 			Usuario usr = new Usuario(1L, "username3", "apiId", new Rol(3, "CHOFER"), "nombre", "apellido", "documento", "telefono",
 					email, "direccion");
 			usuario.create(usr);
-			op = usuario.findByEmailLike(email);
+			op = usuario.findFirstByEmailLike(email);
 		}
 		assertTrue(op.isPresent());
 	}
@@ -351,12 +352,12 @@ class ApplicationTests {
 	void createUsuario2() {
 		log.info("TEST > Buscando usuario por email Test");
 		String email = "test"+4+"@test.com";
-		Optional<Usuario> op = usuario.findByEmailLike(email);
+		Optional<Usuario> op = usuario.findFirstByEmailLike(email);
 		if(!op.isPresent()) {
 			Usuario usr = new Usuario(1L, "username4", "apiId", new Rol(3, "CHOFER"), "nombre", "apellido", "documento", "telefono",
 					email, "direccion");
 			usuario.create(usr);
-			op = usuario.findByEmailLike(email);
+			op = usuario.findFirstByEmailLike(email);
 		}
 		assertTrue(op.isPresent());
 	}
@@ -366,12 +367,12 @@ class ApplicationTests {
 	void createUsuario4() {
 		log.info("TEST > Buscando usuario por email Test");
 		String email = "test"+5+"@test.com";
-		Optional<Usuario> op = usuario.findByEmailLike(email);
+		Optional<Usuario> op = usuario.findFirstByEmailLike(email);
 		if(!op.isPresent()) {
 			Usuario usr = new Usuario(1L, "username5", "apiId", new Rol(3, "CHOFER"), "nombre", "apellido", "documento", "telefono",
 					email, "direccion");
 			usuario.create(usr);
-			op = usuario.findByEmailLike(email);
+			op = usuario.findFirstByEmailLike(email);
 		}
 		assertTrue(op.isPresent());
 	}
@@ -381,13 +382,19 @@ class ApplicationTests {
 	void findUsuarioByUsername() {
 		String u = "username5";
 		log.info("TEST > Buscando usuario por username "+u);
-		Optional<Usuario> op = usuario.findFirstByUsernameLike(u);
+		Optional<Usuario> op = usuario.findFirstByEmailLike(u);
 		if(!op.isPresent()) {
 			Usuario usr = new Usuario(1L, u, "apiId", new Rol(3, "CHOFER"), "nombre", "apellido", "documento", "telefono", "test@i123.com", "direccion");
 			usuario.create(usr);
-			op = usuario.findByEmailLike(u);
+			op = usuario.findFirstByEmailLike(u);
 		}
 		assertTrue(op.isPresent());
+	}
+	@Test
+	@Order(31)
+	void getTokenInfo() {
+		Boolean r = SecurityBussines.chekTockenExp("eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiJiODdkZjY3Mi0xNjYyLTQ2ZDMtODI0Mi00ZGUzODM5NjM1NDUiLCJzdWIiOiJ1c2VybmFtZTEwIiwiYXV0aG9yaXRpZXMiOlsiVVNFUiJdLCJpYXQiOjE2NjgzODQ0MDcsIkVtYWlsIjoidGVzdEBpMTIzLmNvbSIsImV4cCI6MTY2ODM4NTAwN30.T2xs_XvJbazp3O4Nq_5HeMgTn1YjnG4A8VMdjFVpgGvFCeCNAatwRwG1UlqLn7jpxr5OzfuLc7R9wifz4Unn4w");
+		assertTrue(r==false);
 	}
 	
 }

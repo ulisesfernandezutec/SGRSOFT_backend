@@ -7,17 +7,17 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.stereotype.Component;
+
+import java.util.Collection;
 
 //Annotations
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
-@Document
+@Document("Usuario")
 public class Usuario {
 	@Id
 	private Long _id;
-	@Indexed(unique = true)
-	private String username;
 	private String pwrd;
 	private Rol rol;
 	private String nombre;
@@ -27,5 +27,4 @@ public class Usuario {
 	@Indexed(unique = true)
 	private String email;
 	private String direccion;
-	//private Provider provider;
 }

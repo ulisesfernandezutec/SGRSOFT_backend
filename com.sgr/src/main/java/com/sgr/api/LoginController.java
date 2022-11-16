@@ -35,14 +35,13 @@ public class LoginController {
 	UsuarioRepository user;
 
 	@PostMapping("/login")
-	public AuthUser login(@RequestParam("user") String username, @RequestParam("pwd") String pwd) {
+	public AuthUser login(@RequestParam("email") String email, @RequestParam("pwd") String pwd) {
 		AuthUser authUser = new AuthUser();
 		
-		Optional<Usuario> u = user.findFirstByUsernameLike(username);
+		Optional<Usuario> u = user.findFirstByEmailLike(email);
 		//Veriicar PSW
 		if (u.isPresent() && u.get().getPwrd().equals(pwd)) {
-			String token = SecurityBussines.getJWTToken(username, u.get());
-			authUser.setUser(username);
+			String token = SecurityBussines.getJWTToken(email, u.get());
 			authUser.setToken(token);
 			authUser.setEmail(u.get().getEmail());
 			authUser.setRol(u.get().getRol());

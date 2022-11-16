@@ -6,6 +6,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import org.springframework.stereotype.Component;
 
 @Data
 @Document("PuntoRecoleccion")
@@ -20,5 +21,6 @@ public class PuntoRecoleccion {
 	private String direccion;
 	private String descripcion;
 	private List<PuntoRecoleccionEstado> estados;
+
 
 }

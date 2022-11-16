@@ -9,8 +9,6 @@ import org.springframework.data.mongodb.repository.Query;
 
 public interface UsuarioRepository extends MongoRepository <Usuario, Long >{
 
-	 @Query("{ 'email' : ?0 }")
-	 Optional<Usuario> findByEmailLike(String email);
+	 Optional<Usuario> findFirstByEmailLike(String email);
 
-	 Optional<Usuario> findFirstByUsernameLike(String username);
 }

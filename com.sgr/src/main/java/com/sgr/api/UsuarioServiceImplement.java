@@ -45,7 +45,6 @@ public class UsuarioServiceImplement implements UsuarioService {
 			usr.setEmail(usuario.getEmail());
 			usr.setRol(usuario.getRol());
 			usr.setTelefono(usuario.getTelefono());
-			usr.setUsername(usuario.getUsername());
 			this.usuarioRepository.save(usr);
 			return usr;
 		} else {
@@ -86,13 +85,8 @@ public class UsuarioServiceImplement implements UsuarioService {
 	}
 
 	@Override
-	public Optional<Usuario> findByEmailLike(String email) {
-		Optional<Usuario> user = this.usuarioRepository.findByEmailLike(email);
-		return user;
-	}
-
-	public Optional<Usuario> findFirstByUsernameLike(String u) {
-		Optional<Usuario> user = this.usuarioRepository.findFirstByUsernameLike(u);
+	public Optional<Usuario> findFirstByEmailLike(String email) {
+		Optional<Usuario> user = this.usuarioRepository.findFirstByEmailLike(email);
 		return user;
 	}
 }
