@@ -1,56 +1,37 @@
 package com.sgr.bussines.security;
 
-import java.lang.reflect.Type;
-import java.nio.charset.StandardCharsets;
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
+
 import java.util.*;
-import java.util.Map.Entry;
 import java.util.stream.Collectors;
-
-import javax.crypto.Mac;
-import javax.crypto.spec.SecretKeySpec;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import com.sgr.api.UsuarioController;
-import com.sgr.api.UsuarioServiceImplement;
-import io.jsonwebtoken.Jwt;
-import lombok.extern.java.Log;
-import net.minidev.json.JSONObject;
+import com.sgr.api.interfaces.impl.UsuarioServiceImplement;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
-
-import com.sgr.api.interfaces.UsuarioRepository;
 import com.sgr.entities.Usuario;
-
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-
-import static io.jsonwebtoken.SignatureAlgorithm.HS256;
-import static io.jsonwebtoken.SignatureAlgorithm.HS512;
-import static org.apache.tomcat.util.security.MD5Encoder.encode;
-
+@Slf4j
 public class SecurityBussines {
+
+	private SecurityBussines(){
+	}
 	@Autowired
 	private static UsuarioServiceImplement usuarioServiceImplement;
-	private final static String PREFIX = "Bearer";
-	private final static String HEADER = "Authorization";
-	private final static String SECRET = "sgrsoft2022";
-	public static boolean existeJWTToken(HttpServletRequest request, HttpServletResponse res) {
+	private static final String PREFIX = "Bearer";
+	private static final String HEADER = "Authorization";
+	private static final String SECRET = "sgrsoft2022";
+	public static boolean existeJWTToken(HttpServletRequest request) {
 		String authenticationHeader = request.getHeader(HEADER);
-		if (authenticationHeader == null || !authenticationHeader.startsWith(PREFIX))
-			return false;
-		return true;
+		return authenticationHeader != null && authenticationHeader.startsWith(PREFIX);
 	}
-
 	/**
 	 * Metodo para autenticarnos dentro del flujo de Spring
 	 * 
@@ -86,28 +67,12 @@ public class SecurityBussines {
 		String[] parts = oldToken.split("\\.");
 		JsonObject payloadJson = new Gson().fromJson(decode(parts[1]), JsonObject.class);
 		int exp = payloadJson.get("exp").getAsInt();
-		Boolean valid = exp > (System.currentTimeMillis() / 1000);
-		return valid;
+		return exp > (System.currentTimeMillis() / 1000);
 	}
 	public static String getTockenUsr(String oldToken){
 		String[] parts = oldToken.split("\\.");
 		JsonObject payloadJson = new Gson().fromJson(decode(parts[1]), JsonObject.class);
-		String usr = payloadJson.get("sub").getAsString();
-
-		return usr;
-	}
-	private String hmacSha512(String data, String secret) {
-		try {
-			byte[] hash = secret.getBytes(StandardCharsets.UTF_8);
-			Mac HS512 = Mac.getInstance("HS512");
-			SecretKeySpec secretKey = new SecretKeySpec(hash, "HS512");
-			HS512.init(secretKey);
-			byte[] signedBytes = HS512.doFinal(data.getBytes(StandardCharsets.UTF_8));
-			return encode(signedBytes);
-		} catch (NoSuchAlgorithmException | InvalidKeyException ex) {
-			//Log.getLogger(JWebToken.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
-			return null;
-		}
+		return payloadJson.get("sub").getAsString();
 	}
 
 	private static String decode(String encodedString) {

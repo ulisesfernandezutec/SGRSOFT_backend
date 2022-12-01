@@ -4,17 +4,16 @@ import com.google.gson.Gson;
 
 import java.util.Calendar;
 import java.util.Date;
-
 import org.bson.Document;
 
 public class Utils {
+	private Utils(){
+	}
 	
 	//Parsea una clase en un objeto Json
 	public static Document genJsonDocs(Object o) {
 		Gson gson = new Gson();
-		Document document = Document.parse(gson.toJson(o));
-		return document;
-
+		return Document.parse(gson.toJson(o));
 	}
 	public static Long intToLong(int l){
 		return Long.parseLong(String.valueOf(l));

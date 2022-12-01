@@ -3,8 +3,6 @@ package com.sgr.entities;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.springframework.stereotype.Component;
 
 @Data
 public class APOD {
@@ -16,16 +14,16 @@ public class APOD {
 	public final String hd;
 	public final String email;
 	public final String iat;
-	public final String email_verified;
-	public final String at_hash;
+	public final String emailVerified;
+	public final String atHash;
 	public final String exp;
 	public final String alg;
 	public final String kid;
 	public final String typ;
-	public final String expires_in;
-	public final String access_type;
+	public final String expiresIn;
+	public final String accessType;
 	public final String error;
-	public final String error_description;
+	public final String errorDescription;
 	public String sgrToken;
 
 	public APOD(@JsonProperty("azp") String azp,
@@ -33,19 +31,18 @@ public class APOD {
 				@JsonProperty("sub") String sub,
 				@JsonProperty("hd") String hd,
 				@JsonProperty("iat") String iat,
-				@JsonProperty("email_verified") String email_verified,
-				@JsonProperty("at_hash") String at_hash,
+				@JsonProperty("email_verified") String emailVerified,
+				@JsonProperty("at_hash") String atHash,
 				@JsonProperty("alg") String alg,
 				@JsonProperty("kid") String kid,
 				@JsonProperty("typ") String typ,
 				@JsonProperty("email") String email,
-				@JsonProperty("date") String date,
 				@JsonProperty("scope") String scope,
 				@JsonProperty("exp") String exp,
-				@JsonProperty("expires_in") String expires_in,
-				@JsonProperty("access_type") String access_type,
+				@JsonProperty("expires_in") String expiresIn,
+				@JsonProperty("access_type") String accessType,
 				@JsonProperty("error") String error,
-				@JsonProperty("error_description") String error_description,
+				@JsonProperty("error_description") String errorDescription,
 				@JsonProperty("sgrToken") String sgrToken){
 				
 		this.azp = azp;
@@ -53,18 +50,18 @@ public class APOD {
 		this.sub = sub;
 		this.aud = aud;
 		this.iat = iat;
-		this.email_verified = email_verified;
-		this.at_hash = at_hash;
+		this.emailVerified = emailVerified;
+		this.atHash = atHash;
 		this.alg = alg;
 		this.typ = typ;
 		this.kid = kid;
 		this.email = email;
 		this.scope = scope;
 		this.exp = exp;
-		this.expires_in = expires_in;
-		this.access_type = access_type;
+		this.expiresIn = expiresIn;
+		this.accessType = accessType;
 		this.error = error;
-		this.error_description = error_description;
+		this.errorDescription = errorDescription;
 		this.sgrToken = sgrToken;
 	}
 }

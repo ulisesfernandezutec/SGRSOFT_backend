@@ -1,19 +1,17 @@
 package com.sgr.entities;
 
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.springframework.stereotype.Component;
-
-import java.util.Collection;
 
 //Annotations
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 @Document("Usuario")
 public class Usuario {
 	@Id
