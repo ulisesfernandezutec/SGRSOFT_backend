@@ -1,12 +1,10 @@
 package sgr.com.sgr;
 
-import static org.junit.Assert.assertTrue;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import com.sgr.api.*;
+import com.sgr.api.interfaces.impl.*;
 import com.sgr.bussines.security.SecurityBussines;
 import com.sgr.entities.*;
 
@@ -21,6 +19,8 @@ import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.ComponentScan;
 
+import static org.junit.Assert.*;
+
 @Log4j2
 @SpringBootTest
 @SpringBootConfiguration
@@ -33,7 +33,7 @@ class ApplicationTests {
 	@Autowired
 	UsuarioServiceImplement usuario;
 	@Autowired
-	PuntoRecoleccionEstadoServiceImplement puntorecoleccionestado;
+    PuntoRecoleccionEstadoServiceImplement puntorecoleccionestado;
 	@Autowired
 	VehiculoServiceImplement vehiculo;
 	@Autowired
@@ -70,7 +70,7 @@ class ApplicationTests {
 			p.setNombre(var);
 			usuario.update(p);
 		}
-		assertTrue(usuario.getById(999999996L).getNombre().equals(var));
+		assertEquals(var, usuario.getById(999999996L).getNombre());
 
 	}
 
@@ -82,7 +82,7 @@ class ApplicationTests {
 		if (po.isPresent()) {
 			usuario.delete(999999996L);
 		}
-		assertTrue(usuario.getById(999999996L) == null);
+		assertNull(usuario.getById(999999996L));
 	}
 
 	// TEST PUNTOS DE RECOLECCIÓN ESTADO
@@ -115,7 +115,7 @@ class ApplicationTests {
 			puntorecoleccionestado.update(p);
 		}
 		Optional<PuntoRecoleccionEstado> po = Optional.of(puntorecoleccionestado.getById(999999996L));
-		assertTrue(po.get().getDetalle().equals(det));
+		assertEquals(det, po.get().getDetalle());
 	}
 
 	@Test
@@ -126,7 +126,7 @@ class ApplicationTests {
 		if (po.isPresent()) {
 			puntorecoleccionestado.delete(999999996L);
 		}
-		assertTrue(puntorecoleccionestado.getById(999999996L) == null);
+		assertNull(puntorecoleccionestado.getById(999999996L));
 	}
 
 	// TEST VEHICULOS
@@ -156,10 +156,8 @@ class ApplicationTests {
 			p.setMarca(var);
 			vehiculo.update(p);
 		}
-		assertTrue(vehiculo.getById(999999996L).getMarca().equals(var));
-
+		assertEquals(var, vehiculo.getById(999999996L).getMarca());
 	}
-
 	@Test
 	@Order(12)
 	void deleteVehiculosTest() {
@@ -168,7 +166,7 @@ class ApplicationTests {
 		if (po.isPresent()) {
 			vehiculo.delete(999999996L);
 		}
-		assertTrue(vehiculo.getById(999999996L) == null);
+		assertNull(vehiculo.getById(999999996L));
 	}
 
 	// TEST TIPO DE RESIDUO
@@ -198,7 +196,7 @@ class ApplicationTests {
 			p.setNombre(var);
 			tiporesiduo.update(p);
 		}
-		assertTrue(tiporesiduo.getById(999999996L).getNombre().equals(var));
+		assertEquals(var, tiporesiduo.getById(999999996L).getNombre());
 
 	}
 
@@ -210,7 +208,7 @@ class ApplicationTests {
 		if (po.isPresent()) {
 			tiporesiduo.delete(999999996L);
 		}
-		assertTrue(tiporesiduo.getById(999999996L) == null);
+		assertNull(tiporesiduo.getById(999999996L));
 	}
 
 	// TEST PUNTO DE RECOLLECION
@@ -246,7 +244,7 @@ class ApplicationTests {
 			p.setDescripcion(desc);
 			puntoderecoleccion.update(p);
 		}
-		assertTrue(puntoderecoleccion.getById(999999996L).getDescripcion().equals(desc));
+		assertEquals(desc, puntoderecoleccion.getById(999999996L).getDescripcion());
 	}
 
 	@Test
@@ -257,7 +255,7 @@ class ApplicationTests {
 		if (po.isPresent()) {
 			puntoderecoleccion.delete(999999996L);
 		}
-		assertTrue(puntoderecoleccion.getById(999999996L) == null);
+		assertNull(puntoderecoleccion.getById(999999996L));
 	}
 
 	// TEST DE ROL
@@ -287,7 +285,7 @@ class ApplicationTests {
 			r.setNombre(test);
 			rolservice.update(r);
 		}
-		assertTrue(rolservice.getById(999999996L).getNombre().equals(test));
+		assertEquals(test, rolservice.getById(999999996L).getNombre());
 	}
 
 	@Test
@@ -298,7 +296,7 @@ class ApplicationTests {
 		if (po.isPresent()) {
 			rolservice.delete(999999996L);
 		}
-		assertTrue(rolservice.getById(999999996L) == null);
+		assertNull(rolservice.getById(999999996L));
 	}
 	
 	// CREAR USUARIOS TEST
@@ -346,12 +344,11 @@ class ApplicationTests {
 		}
 		assertTrue(op.isPresent());
 	}
-	
 	@Test
-	@Order(28)
+	@Order(27)
 	void createUsuario2() {
 		log.info("TEST > Buscando usuario por email Test");
-		String email = "test"+4+"@test.com";
+		String email = "test"+3+"@test.com";
 		Optional<Usuario> op = usuario.findFirstByEmailLike(email);
 		if(!op.isPresent()) {
 			Usuario usr = new Usuario(1L, "apiId", new Rol(3, "CHOFER"), "nombre", "apellido", "documento", "telefono",
@@ -361,40 +358,27 @@ class ApplicationTests {
 		}
 		assertTrue(op.isPresent());
 	}
-	
+
 	@Test
-	@Order(29)
-	void createUsuario4() {
-		log.info("TEST > Buscando usuario por email Test");
-		String email = "test"+5+"@test.com";
-		Optional<Usuario> op = usuario.findFirstByEmailLike(email);
-		if(!op.isPresent()) {
-			Usuario usr = new Usuario(1L, "apiId", new Rol(3, "CHOFER"), "nombre", "apellido", "documento", "telefono",
-					email, "direccion");
-			usuario.create(usr);
-			op = usuario.findFirstByEmailLike(email);
-		}
-		assertTrue(op.isPresent());
-	}
-	
-	@Test
-	@Order(30)
+	@Order(28)
 	void findUsuarioByEmail() {
 		String u = "test2@test.com";
 		log.info("TEST > Buscando usuario por username "+u);
 		Optional<Usuario> op = usuario.findFirstByEmailLike(u);
 		if(!op.isPresent()) {
+
 			Usuario usr = new Usuario(1L, "apiId", new Rol(3, "CHOFER"), "nombre", "apellido", "documento", "telefono", "test@i123.com", "direccion");
 			usuario.create(usr);
 			op = usuario.findFirstByEmailLike(u);
 		}
 		assertTrue(op.isPresent());
 	}
+
 	@Test
-	@Order(31)
+	@Order(29)
 	void getTokenInfo() {
 		Boolean r = SecurityBussines.chekTockenExp("eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiJiODdkZjY3Mi0xNjYyLTQ2ZDMtODI0Mi00ZGUzODM5NjM1NDUiLCJzdWIiOiJ1c2VybmFtZTEwIiwiYXV0aG9yaXRpZXMiOlsiVVNFUiJdLCJpYXQiOjE2NjgzODQ0MDcsIkVtYWlsIjoidGVzdEBpMTIzLmNvbSIsImV4cCI6MTY2ODM4NTAwN30.T2xs_XvJbazp3O4Nq_5HeMgTn1YjnG4A8VMdjFVpgGvFCeCNAatwRwG1UlqLn7jpxr5OzfuLc7R9wifz4Unn4w");
-		assertTrue(r==false);
+		assertEquals(false,r);
 	}
 	
 }

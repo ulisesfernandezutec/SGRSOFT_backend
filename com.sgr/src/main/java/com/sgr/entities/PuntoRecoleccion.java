@@ -6,14 +6,13 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import org.springframework.stereotype.Component;
 
 @Data
 @Document("PuntoRecoleccion")
 @AllArgsConstructor
 public class PuntoRecoleccion {
 
-	private Long _id;
+	private long _id;
 	private TipoDeResiduo tipo;
 	private Long usuario;
 	private float latitud;
