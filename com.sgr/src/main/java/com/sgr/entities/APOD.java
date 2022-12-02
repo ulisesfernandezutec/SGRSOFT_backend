@@ -1,7 +1,6 @@
 package com.sgr.entities;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-
 import lombok.Data;
 
 @Data
