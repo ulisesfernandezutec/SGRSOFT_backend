@@ -6,24 +6,24 @@ import lombok.Data;
 @Data
 public class APOD {
 
-	public final String scope;
-	public final String azp;
-	public final String aud;
-	public final String sub;
-	public final String hd;
-	public final String email;
-	public final String iat;
-	public final String emailVerified;
-	public final String atHash;
-	public final String exp;
-	public final String alg;
-	public final String kid;
-	public final String typ;
-	public final String expiresIn;
-	public final String accessType;
-	public final String error;
-	public final String errorDescription;
-	public String sgrToken;
+	private final String scope;
+	private final String azp;
+	private final String aud;
+	private final String sub;
+	private final String hd;
+	private final String email;
+	private final String iat;
+	private final String emailVerified;
+	private final String atHash;
+	private final String exp;
+	private final String alg;
+	private final String kid;
+	private final String typ;
+	private final String expiresIn;
+	private final String accessType;
+	private final String error;
+	private final String errorDescription;
+	private String sgrToken;
 
 	public APOD(@JsonProperty("azp") String azp,
 				@JsonProperty("aud") String aud,

@@ -1,7 +1,6 @@
 package com.sgr.api.controllers;
 
 import java.util.Optional;
-
 import com.google.gson.JsonObject;
 import com.sgr.api.interfaces.impl.UsuarioServiceImplement;
 import com.sgr.entities.Rol;
@@ -9,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.google.gson.Gson;
 import com.sgr.bussines.security.SecurityGoogleTokenVerifier;
 import com.sgr.bussines.security.SecurityBussines;
@@ -25,11 +23,11 @@ public class GoogleLogin {
 	public String getUsuarioInfo(@PathVariable String token) {
 		token = token.replace("token=", "");
 		APOD resp = SecurityGoogleTokenVerifier.verificar(token);
-		if (resp.error == null && resp.errorDescription == null) {
+		if (resp.getError() == null && resp.getErrorDescription() == null) {
 			Optional<Usuario> u = repo.findFirstByEmailLike(resp.getEmail());
 			if (u.isPresent()) {
 				String tokensgr = SecurityBussines.getJWTToken(u.get().getEmail(), u.get());
-				resp.sgrToken = tokensgr;
+				resp.setSgrToken(tokensgr);
 
 			} else {
 				String userInfo = SecurityGoogleTokenVerifier.googleUserInfo(token);
@@ -39,7 +37,7 @@ public class GoogleLogin {
 				Optional<Usuario> us = repo.findFirstByEmailLike(resp.getEmail());
 				if(us.isPresent()){
 					String tokensgr = SecurityBussines.getJWTToken(us.get().getEmail(), us.get());
-					resp.sgrToken = tokensgr;
+					resp.setSgrToken(tokensgr);
 				}
 			}
 		}
