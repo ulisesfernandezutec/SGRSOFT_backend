@@ -16,7 +16,7 @@ public class SecurityWebConfig {
 
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-		http.csrf().disable().addFilterAfter(new SecurityJWTAuthFilter(), UsernamePasswordAuthenticationFilter.class)
+		http.csrf().disable().cors().disable().addFilterAfter(new SecurityJWTAuthFilter(), UsernamePasswordAuthenticationFilter.class)
 				.authorizeRequests().antMatchers(HttpMethod.GET, "/glogin/**").permitAll()
 				.antMatchers(HttpMethod.POST, "/login").permitAll()
 				.anyRequest().authenticated();
