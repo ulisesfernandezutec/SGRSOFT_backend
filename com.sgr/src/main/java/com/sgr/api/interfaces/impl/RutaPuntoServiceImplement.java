@@ -1,10 +1,8 @@
 package com.sgr.api.interfaces.impl;
 
-import com.sgr.api.interfaces.repository.RutaPuntoEstadoRepository;
 import com.sgr.api.interfaces.repository.RutaPuntoRepository;
 import com.sgr.api.interfaces.service.RutaPuntoService;
 import com.sgr.entities.RutaPunto;
-import com.sgr.entities.RutaPuntoEstado;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
