@@ -2,7 +2,6 @@ package com.sgr.api.interfaces.impl;
 
 import com.sgr.api.interfaces.repository.PuntoSalidaRepository;
 import com.sgr.api.interfaces.service.PuntoSalidaService;
-import com.sgr.entities.PuntoMapa;
 import com.sgr.entities.PuntoSalida;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
