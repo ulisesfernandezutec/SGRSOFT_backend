@@ -16,7 +16,7 @@ public class SecurityWebConfig {
 
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-		http.csrf().disable().cors().disable().addFilterAfter(new SecurityJWTAuthFilter(), UsernamePasswordAuthenticationFilter.class)
+		http.addFilterAfter(new SecurityJWTAuthFilter(), UsernamePasswordAuthenticationFilter.class)
 				.authorizeRequests().antMatchers(HttpMethod.GET, "/glogin/**").permitAll()
 				.antMatchers(HttpMethod.POST, "/login").permitAll()
 				.anyRequest().authenticated();
@@ -28,7 +28,8 @@ public class SecurityWebConfig {
 	            new UrlBasedCorsConfigurationSource();
 	        CorsConfiguration config = new CorsConfiguration();
 	        config.setAllowCredentials(true);
-	        config.addAllowedOrigin("*");
+	        config.addAllowedOrigin("https://www.karaiguazu.com/*");
+		 	config.addAllowedOrigin("https://api.karaiguazu.com/*");
 	        config.addAllowedHeader("*");
 	        config.addAllowedMethod("*");
 	        source.registerCorsConfiguration("/**", config);
