@@ -24,6 +24,7 @@ import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.ComponentScan;
 
+import static org.hamcrest.Matchers.containsString;
 import static org.junit.Assert.*;
 
 @Log4j2
@@ -678,17 +679,14 @@ class ApplicationTests {
 		rutaPuntoEstadoServiceImplement.delete(999999996L);
 		assertNull(rutaPuntoEstadoServiceImplement.getById(999999996L));
 	}
-
 	@Test
 	@Order(59)
 	void email(){
 		log.info(test+" > Enviando emails test");
 		Email mail = new Email();
 		mail.setMsgBody("Mensaje de prueba");
-		mail.setRecipient("christopher.rodriguez@estudiantes.utec.edu.uy");
+		mail.setRecipient("christopher.rodrigue@estudiantes.utec.edu.uy");
 		mail.setSubject("Email Test desde SGRSoft");
-		assertEquals(Messages.EMAIL_SEND,emailServiceImplement.sendSimpleMail(mail));
+		assertThat(emailServiceImplement.sendSimpleMail(mail), containsString(Messages.EMAIL_SEND));
 	}
-
-
 }

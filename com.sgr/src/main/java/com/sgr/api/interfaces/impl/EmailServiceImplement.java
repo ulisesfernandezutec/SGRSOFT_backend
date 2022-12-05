@@ -15,7 +15,7 @@ public class EmailServiceImplement implements EmailService {
     @Autowired
     private JavaMailSender javaMail;
 
-    private String USERNAME = "noreplysgrsoft@gmail.com";
+    private static final String USERNAME = "noreplysgrsoft@gmail.com";
 
 
     public String sendSimpleMail(Email details)
@@ -27,8 +27,8 @@ public class EmailServiceImplement implements EmailService {
             mailMessage.setText(details.getMsgBody());
             mailMessage.setSubject(details.getSubject());
             javaMail.send(mailMessage);
-            log.info(Messages.EMAIL_SEND);
-            return Messages.EMAIL_SEND;
+            log.info(Messages.EMAIL_SEND+" "+details.getRecipient());
+            return Messages.EMAIL_SEND+" "+details.getRecipient();
         }
 
         // Catch block to handle the exceptions
