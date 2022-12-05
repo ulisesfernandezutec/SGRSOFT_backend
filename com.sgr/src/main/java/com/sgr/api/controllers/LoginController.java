@@ -5,6 +5,7 @@ import com.sgr.api.interfaces.repository.UsuarioRepository;
 import com.sgr.bussines.security.SecurityBussines;
 import com.sgr.entities.AuthUser;
 import com.sgr.entities.Usuario;
+import com.sgr.entities.dto.google.LoginDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -19,13 +20,12 @@ public class LoginController {
 	UsuarioRepository user;
 
 	@PostMapping("/login")
-	public AuthUser login(@RequestBody String userLogin) {
+	public AuthUser login(@RequestBody LoginDTO loginDTO) {
 		String email = "";
 		String pwd = "";
 		try {
-			JsonObject body = new Gson().fromJson(userLogin, JsonObject.class);
-			email = body.get("email").getAsString();
-			pwd = body.get("pwd").getAsString();
+			email = loginDTO.getEmail();
+			pwd = loginDTO.getPwd();
 		}catch(JsonParseException pe){
 			AuthUser authUser = new AuthUser();
 			authUser.setToken("Error");
