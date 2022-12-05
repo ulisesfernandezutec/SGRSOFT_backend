@@ -1,5 +1,6 @@
 package com.sgr.bussines.security;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
@@ -11,7 +12,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-
+@Slf4j
 public class SecurityGoogleTokenVerifier {
 	private SecurityGoogleTokenVerifier() {
 	}
@@ -23,8 +24,7 @@ public class SecurityGoogleTokenVerifier {
 			HttpGet request = new HttpGet(GOOGLE+token.trim());
 			return client.execute(request,httpResponse -> mapper.readValue(httpResponse.getEntity().getContent(), APOD.class));
 		} catch (Exception e) {
-			e.printStackTrace();
-
+			log.error(e.getMessage());
 			return null;
 		}
 	}

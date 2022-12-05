@@ -43,5 +43,7 @@ public class Messages {
 	public static final String PDR_NOT_FOUND = "No se encuentra el registro id: %s de Punto de Recolección";
 	public static final String PTR_NOT_FOUND = "No se encuentra el registro id: %s de Punto de Tipo de Residuo";
 	public static final String ROL_NOT_FOUND = "No se encuentra el registro id: %s de Rol";
+	public static final String EMAIL_SEND = "Mensaje enviado a";
+	public static final String EMAIL_ERROR = "Error al enviar mensaje a";
 
 }

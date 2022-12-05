@@ -3,6 +3,8 @@ package sgr.com.sgr;
 import java.util.*;
 
 import com.sgr.api.interfaces.impl.*;
+import com.sgr.api.interfaces.service.EmailService;
+import com.sgr.bussines.Messages;
 import com.sgr.bussines.security.SecurityBussines;
 import com.sgr.bussines.security.SecurityGoogleTokenVerifier;
 import com.sgr.entities.*;
@@ -59,6 +61,8 @@ class ApplicationTests {
 	RutaPuntoServiceImplement rutaPuntoServiceImplement;
 	@Autowired
 	RutaPuntoEstadoServiceImplement rutaPuntoEstadoServiceImplement;
+	@Autowired
+	EmailServiceImplement emailServiceImplement;
 
 	// TEST DE USUARIOS
 	@Test
@@ -674,5 +678,17 @@ class ApplicationTests {
 		rutaPuntoEstadoServiceImplement.delete(999999996L);
 		assertNull(rutaPuntoEstadoServiceImplement.getById(999999996L));
 	}
+
+	@Test
+	@Order(59)
+	void email(){
+		log.info(test+" > Enviando emails test");
+		Email mail = new Email();
+		mail.setMsgBody("Mensaje de prueba");
+		mail.setRecipient("christopher.rodriguez@estudiantes.utec.edu.uy");
+		mail.setSubject("Email Test desde SGRSoft");
+		assertEquals(Messages.EMAIL_SEND,emailServiceImplement.sendSimpleMail(mail));
+	}
+
 
 }
