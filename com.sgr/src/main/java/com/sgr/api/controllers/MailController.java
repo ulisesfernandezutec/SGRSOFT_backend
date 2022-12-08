@@ -1,6 +1,5 @@
 package com.sgr.api.controllers;
 
-import com.sgr.api.interfaces.impl.EmailServiceImplement;
 import com.sgr.api.interfaces.service.EmailService;
 import com.sgr.entities.Email;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -13,7 +13,6 @@ import com.sgr.bussines.security.SecurityGoogleTokenVerifier;
 import com.sgr.bussines.security.SecurityBussines;
 import com.sgr.entities.APOD;
 import com.sgr.entities.Usuario;
-
 @RestController
 public class GoogleLogin {
 	@Autowired
