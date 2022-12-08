@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Metricas Usuarios</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://getbootstrap.com/docs/5.2/assets/css/docs.css" rel="stylesheet">
+    <title>Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+    #cont{
+        width: 80%;
+        margin: auto;
+    }
+    </style>
+
+</head>
+<body>
+<div id="cont">
+<div class="text-bg-primary fs-1 text-center">
+    <h1>Panel de control</h1>
+</div>
+    <div class="card text-bg-secondary mx-1" style="max-width: 20%;float: left">
+        <div class="card-header">Cantidad de Usuarios</div>
+        <div class="card-body">
+            <p class="card-text fs-1"  th:text="${cantidad}"></p>
+        </div>
+    </div>
+
+    <div class="card text-bg-secondary mx-1" style="max-width: 20%;float: left;">
+        <div class="card-header">Primer registro</div>
+        <div class="card-body">
+            <p class="card-text fs-1"  th:text="${primerreg}"></p>
+        </div>
+    </div>
+    <div class="card text-bg-secondary mx-1" style="max-width: 20%;  float: left;">
+        <div class="card-header">Último registo</div>
+        <div class="card-body">
+            <p class="card-text fs-1"  th:text="${ultimoreg}"></p>
+        </div>
+    </div>
+    <div class="card text-bg-secondary mx-1" style="max-width: 20%;  float: left;">
+        <div class="card-header">Listado de Usuarios</div>
+        <div class="card-body">
+            <ul class="list-group" th:each="usuario : ${usuarios}">
+                <li class="list-group-item" th:text="${usuario.email}"></li>
+            </ul>
+        </div>
+    </div>
+
+
+
+
+
+</div>
+</body>
+</html>

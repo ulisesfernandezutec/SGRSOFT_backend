@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>SGR API</title>
+</head>
+<body>
+
+<div id="logo">
+    <p align="center"><img src="./img/logo.png"></p>
+    <h2><p align="center">SGR Soft API</p></h2>
+    <h2><p align="center">Creadores:</p></h2>
+    <h2><p align="center">th:text"${session.user.name}"</p></h2>
+    <p align="center">Ulises Fernandez</p>
+    <p align="center">Christopher Rodriguez</p>
+</div>
+<<div th:each="Usuarios : ${Usuario}">
+    <a th:text="${Usuario.nombre}"></a>
+</div>
+</body>
+</html>

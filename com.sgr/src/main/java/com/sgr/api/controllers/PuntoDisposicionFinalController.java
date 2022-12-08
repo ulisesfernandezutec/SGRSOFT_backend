@@ -45,7 +45,6 @@ public class PuntoDisposicionFinalController {
             return e.getMessage();
         }
     }
-
     // update
     @PutMapping("/pdf")
     public boolean updatePuntoDisposicionFinal(@RequestBody PuntoDisposicionFinalDTO puntoDisposicionFinalDTO) {
