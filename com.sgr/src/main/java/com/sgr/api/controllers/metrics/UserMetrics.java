@@ -6,6 +6,7 @@ import com.sgr.entities.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -22,13 +23,14 @@ public class UserMetrics {
         String pattern = "dd-MM-yyyy";
         SimpleDateFormat sd = new SimpleDateFormat(pattern);
         List<Usuario> lista = usuarioServiceImplement.list();
-        Usuario p = lista.get(0);
-        Usuario l = lista.get(lista.size()-1);
+        long p = lista.stream().mapToLong(x -> x.get_id()).min().getAsLong();
+        long l = lista.stream().mapToLong(x -> x.get_id()).max().getAsLong();
         model.addAttribute("usuarios", lista);
         model.addAttribute("cantidad", lista.size());
-        model.addAttribute("primerreg",sd.format(new Date(p.get_id())));
-        model.addAttribute("ultimoreg",sd.format(new Date(l.get_id())));
+        model.addAttribute("primerreg",sd.format(new Date(p)));
+        model.addAttribute("ultimoreg",sd.format(new Date(l)));
         model.addAttribute("mesesusuarios",Utils.filtrarMeses(lista));
+        model.addAttribute("aniosusuarios",Utils.filtrarAños(lista));
         return "metrics/usuarios-list";
     }
 }

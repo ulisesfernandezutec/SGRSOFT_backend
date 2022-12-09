@@ -25,8 +25,10 @@ public class GoogleLogin {
 		if (resp.getError() == null && resp.getErrorDescription() == null) {
 			Optional<Usuario> u = repo.findFirstByEmailLike(resp.getEmail());
 			if (u.isPresent()) {
+				resp.setRol(u.get().getRol().toString());
 				String tokensgr = SecurityBussines.getJWTToken(u.get().getEmail(), u.get());
 				resp.setSgrToken(tokensgr);
+
 
 			} else {
 				String userInfo = SecurityGoogleTokenVerifier.googleUserInfo(token);

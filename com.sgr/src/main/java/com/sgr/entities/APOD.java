@@ -24,6 +24,7 @@ public class APOD {
 	private final String error;
 	private final String errorDescription;
 	private String sgrToken;
+	private String rol;
 
 	public APOD(@JsonProperty("azp") String azp,
 				@JsonProperty("aud") String aud,
@@ -42,7 +43,9 @@ public class APOD {
 				@JsonProperty("access_type") String accessType,
 				@JsonProperty("error") String error,
 				@JsonProperty("error_description") String errorDescription,
-				@JsonProperty("sgrToken") String sgrToken){
+				@JsonProperty("sgrToken") String sgrToken,
+				@JsonProperty("rol") String rol)
+		{
 				
 		this.azp = azp;
 		this.hd = hd;
@@ -62,5 +65,6 @@ public class APOD {
 		this.error = error;
 		this.errorDescription = errorDescription;
 		this.sgrToken = sgrToken;
+		this.rol = rol;
 	}
 }
