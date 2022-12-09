@@ -14,34 +14,43 @@
     #cont{
         width: 80%;
         margin: auto;
+        height: 100%;
+        background-color: #ffffff;
+    }
+    #contgra{
+        width: 39%;
+        margin-left: 1%;
+        float: left;
+        height: 100%;
+        background-color: #e0efcc;
+    }
+    #contmet{
+       width: 60%;
+       margin: auto;
+       float: left;
+       height: 100%;
+       background-color: #b3d983;
+    }
+    body {
+        background-color: #94cc4c;
     }
     </style>
     <script type="text/javascript" th:inline="javascript">
-
-        // Load the Visualization API and the corechart package.
         google.charts.load('current', {'packages':['corechart']});
-
-        // Set a callback to run when the Google Visualization API is loaded.
         google.charts.setOnLoadCallback(drawChart);
-
-        // Callback that creates and populates a data table,
-        // instantiates the pie chart, passes in the data and
-        // draws it.
         function drawChart() {
-
-            // Create the data table.
             var data = new google.visualization.DataTable();
             data.addColumn('string', 'Topping');
             data.addColumn('number', 'Slices');
            data.addRows([[${mesesusuarios}]])
 
             // Set chart options
-            var options = {'title':'Usuarios registrados por meses',
+            var options = {'title':'',
                 'width':400,
                 'height':300};
 
             // Instantiate and draw our chart, passing in some options.
-            var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+            var chart = new google.visualization.PieChart(document.getElementById('chart_meses'));
             chart.draw(data, options);
         }
     </script>
@@ -49,43 +58,43 @@
 </head>
 <body>
 <div id="cont">
-<div class="text-bg-primary fs-1 text-center">
-    <h1>Panel de control</h1>
+    <div class="text-bg-secondary fs-1 text-center">
+        <h1>Panel de control</h1>
+    </div>
+    <div id="contmet">
+        <div class="card text-bg-secondary mx-1" style="max-width: 25%; height: 200px;float: left">
+            <div class="card-header">Cantidad de Usuarios</div>
+            <div class="card-body">
+                <p class="card-text fs-1"  th:text="${cantidad}"></p>
+            </div>
+        </div>
+        <div class="card text-bg-secondary mx-1" style="max-width: 25%; height: 200px; float: left;">
+            <div class="card-header">Primer registro</div>
+            <div class="card-body">
+                <p class="card-text fs-3"  th:text="${primerreg}"></p>
+            </div>
+        </div>
+        <div class="card text-bg-secondary mx-1" style="max-width: 25%;  height: 200px; float: left;">
+            <div class="card-header">Último registo</div>
+            <div class="card-body">
+                <p class="card-text fs-3"  th:text="${ultimoreg}"></p>
+            </div>
+        </div>
+        <div class="card text-bg-secondary mx-1 overflow-auto" style="max-width: 25%; height: 200px;  float: left;">
+            <div class="card-header">Listado de Usuarios</div>
+            <div class="card-body">
+                <ul class="list-group" th:each="usuario : ${usuarios}">
+                    <li class="list-group-item" th:text="${usuario.email}"></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div id="contgra">
+        <div class="card text-bg-secondary mx-1" style="min-width: 100%;  float: left;">
+            <div class="card-header">Usuarios registrados por mes</div>
+            <div id="chart_meses"></div>
+        </div>
+    </div>
 </div>
-    <div class="card text-bg-secondary mx-1" style="max-width: 20%;float: left">
-        <div class="card-header">Cantidad de Usuarios</div>
-        <div class="card-body">
-            <p class="card-text fs-1"  th:text="${cantidad}"></p>
-        </div>
-    </div>
-
-    <div class="card text-bg-secondary mx-1" style="max-width: 20%;float: left;">
-        <div class="card-header">Primer registro</div>
-        <div class="card-body">
-            <p class="card-text fs-1"  th:text="${primerreg}"></p>
-        </div>
-    </div>
-    <div class="card text-bg-secondary mx-1" style="max-width: 20%;  float: left;">
-        <div class="card-header">Último registo</div>
-        <div class="card-body">
-            <p class="card-text fs-1"  th:text="${ultimoreg}"></p>
-        </div>
-    </div>
-    <div class="card text-bg-secondary mx-1" style="max-width: 20%;  float: left;">
-        <div class="card-header">Listado de Usuarios</div>
-        <div class="card-body">
-            <ul class="list-group" th:each="usuario : ${usuarios}">
-                <li class="list-group-item" th:text="${usuario.email}"></li>
-            </ul>
-        </div>
-    </div>
-    <div class="card text-bg-secondary mx-1" style="max-width: 50%;  float: left;">
-    <div class="card-header">Grafica</div>
-        <div id="chart_div"></div>
-
-
-    </div>
-</div>
-
 </body>
 </html>
