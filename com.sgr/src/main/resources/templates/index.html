@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="es" es xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>SGR API</title>
@@ -7,13 +7,13 @@
 <body>
 
 <div id="logo">
-    <p align="center"><img src="./img/logo.png"></p>
-    <h2><p align="center">SGR Soft API</p></h2>
-    <h2><p align="center">Creadores:</p></h2>
-    <h2><p align="center" th:text="${ultimoreg}"></p></h2>
+    <p ><img src="./img/logo.png"></p>
+    <h2><p >SGR Soft API</p></h2>
+    <h2><p >Creadores:</p></h2>
+    <h2><p th:text="${ultimoreg}"></p></h2>
     <div th:text="${#session.getAttribute('name')}">John Doe</div>
-    <p align="center">Ulises Fernandez</p>
-    <p align="center">Christopher Rodriguez</p>
+    <p>Ulises Fernandez</p>
+    <p>Christopher Rodriguez</p>
 </div>
 </body>
 </html>

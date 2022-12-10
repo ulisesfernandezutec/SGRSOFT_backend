@@ -30,7 +30,7 @@ public class UserMetrics {
         model.addAttribute("primerreg",sd.format(new Date(p)));
         model.addAttribute("ultimoreg",sd.format(new Date(l)));
         model.addAttribute("mesesusuarios",Utils.filtrarMeses(lista));
-        model.addAttribute("aniosusuarios",Utils.filtrarAños(lista));
+        //model.addAttribute("aniosusuarios",Utils.filtrarAnios(lista));
         return "metrics/usuarios-list";
     }
 }
