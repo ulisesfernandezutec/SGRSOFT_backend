@@ -26,19 +26,16 @@ public class SecurityJWTAuthFilter extends OncePerRequestFilter {
 	private static final String SECRET = "sgrsoft2022";
 	@Autowired
 	UsuarioServiceImplement usuarioServiceImplement;
-	//
+
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
 			throws ServletException, IOException {
 
 		try {
-
 			if (existeJWTToken(request)) {
 				Claims claims = validateToken(request);
 				if (claims.get("authorities") != null) {
 					setUpSpringAuthentication(claims);
-					Cookie c = new Cookie("xydyt", claims.getSubject());
-					response.addCookie(c);
 				} else {
 					SecurityContextHolder.clearContext();
 				}
