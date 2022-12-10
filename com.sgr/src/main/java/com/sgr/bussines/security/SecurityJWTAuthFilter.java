@@ -26,7 +26,7 @@ public class SecurityJWTAuthFilter extends OncePerRequestFilter {
 	private static final String SECRET = "sgrsoft2022";
 	@Autowired
 	UsuarioServiceImplement usuarioServiceImplement;
-	
+
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
 			throws ServletException, IOException {
