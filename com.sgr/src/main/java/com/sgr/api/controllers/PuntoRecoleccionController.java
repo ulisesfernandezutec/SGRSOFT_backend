@@ -3,9 +3,8 @@ package com.sgr.api.controllers;
 import java.util.List;
 
 import com.sgr.api.interfaces.impl.PuntoRecoleccionServiceImplement;
-import com.sgr.entities.PuntoRecoleccionEstado;
-import com.sgr.entities.TipoDeResiduo;
-import lombok.Data;
+import com.sgr.entities.dto.FromToDTO;
+import com.sgr.entities.dto.PuntoRecoleccionDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,17 +17,8 @@ import com.sgr.entities.PuntoRecoleccion;
 
 @RestController
 public class PuntoRecoleccionController {
-	@Data
-	public class PuntoRecoleccionDTO {
-		private Long id;
-		private TipoDeResiduo tipo;
-		private Long usuario;
-		private float latitud;
-		private float longitud;
-		private String direccion;
-		private String descripcion;
-		private List<PuntoRecoleccionEstado> estados;
-	}
+
+
 	@Autowired
 	private PuntoRecoleccionServiceImplement puntoDRServiceImplement;
 
@@ -36,6 +26,12 @@ public class PuntoRecoleccionController {
 	@GetMapping("/puntodr")
 	public List<PuntoRecoleccion> getAll() {
 			return puntoDRServiceImplement.list();
+	}
+
+	// getbetwen
+	@GetMapping("/puntodr/btw")
+	public List<PuntoRecoleccion> getBetween(@RequestBody FromToDTO fromToDTO) {
+		return puntoDRServiceImplement.findBetween(fromToDTO.getFrom(),fromToDTO.getTo());
 	}
 
 	// getone
@@ -46,9 +42,9 @@ public class PuntoRecoleccionController {
 
 	//setone
 	@PostMapping("/puntodr/")
-	public boolean setPersona(@RequestBody PuntoRecoleccionDTO puntoDr) {
+	public boolean setPuntoR(@RequestBody PuntoRecoleccionDTO puntoDr) {
 		try {
-			PuntoRecoleccion pdr = new PuntoRecoleccion(puntoDr.getId(), puntoDr.getTipo(), puntoDr.getUsuario(), puntoDr.getLatitud(),puntoDr.getLongitud(),puntoDr.getDireccion(), puntoDr.getDescripcion(),puntoDr.getEstados());
+			PuntoRecoleccion pdr = new PuntoRecoleccion(puntoDr.get_id(), puntoDr.getTipo(), puntoDr.getUsuario(), puntoDr.getLatitud(),puntoDr.getLongitud(),puntoDr.getDireccion(), puntoDr.getDescripcion(),puntoDr.getEstados());
 			puntoDRServiceImplement.create(pdr);
 			return true;
 		} catch (Exception e) {
@@ -60,7 +56,7 @@ public class PuntoRecoleccionController {
 	// update
 	@PutMapping("/puntodr/")
 	public boolean updatePuntoR(@RequestBody PuntoRecoleccionDTO puntoDr) {
-		PuntoRecoleccion pdr = new PuntoRecoleccion(puntoDr.getId(), puntoDr.getTipo(), puntoDr.getUsuario(), puntoDr.getLatitud(),puntoDr.getLongitud(),puntoDr.getDireccion(), puntoDr.getDescripcion(),puntoDr.getEstados());
+		PuntoRecoleccion pdr = new PuntoRecoleccion(puntoDr.get_id(), puntoDr.getTipo(), puntoDr.getUsuario(), puntoDr.getLatitud(),puntoDr.getLongitud(),puntoDr.getDireccion(), puntoDr.getDescripcion(),puntoDr.getEstados());
 
 		try {
 			if (puntoDRServiceImplement.getById(pdr.get_id()) != null) {

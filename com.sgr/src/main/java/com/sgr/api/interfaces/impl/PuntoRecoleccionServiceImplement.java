@@ -19,7 +19,6 @@ import com.sgr.entities.PuntoRecoleccion;
 public class PuntoRecoleccionServiceImplement implements PuntoRecoleccionService {
 	@Data
 	public class RolDTO {
-
 		private long _id;
 		private String nombre;
 	}
@@ -32,7 +31,6 @@ public class PuntoRecoleccionServiceImplement implements PuntoRecoleccionService
 			pdr.set_id(new Date().getTime());
 		}
 		return puntoDRRepository.save(pdr);
-
 	}
 
 	@Override
@@ -80,6 +78,14 @@ public class PuntoRecoleccionServiceImplement implements PuntoRecoleccionService
 
 	@Override
 	public List<PuntoRecoleccion> list() {
+
 		return this.puntoDRRepository.findAll();
 	}
+
+	@Override
+	public List<PuntoRecoleccion> findBetween(Long idIni, Long idFin) {
+		return this.puntoDRRepository.findBy_idBetween(idIni,idFin);
+	}
+
+
 }

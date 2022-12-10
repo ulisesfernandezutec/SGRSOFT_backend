@@ -6,6 +6,7 @@ import com.sgr.api.interfaces.impl.RutaServiceImplement;
 import com.sgr.bussines.Messages;
 import com.sgr.entities.Ruta;
 import com.sgr.entities.RutaPunto;
+import com.sgr.entities.dto.FromToDTO;
 import com.sgr.entities.dto.RutaDTO;
 import com.sgr.entities.dto.RutaPuntoDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,12 @@ public class RutaController {
     @GetMapping("/ruta")
     public List<Ruta> getAll() {
         return rutaServiceImplement.list();
+    }
+    //between
+    @GetMapping("/ruta/btw")
+    public List<Ruta> getBetween(FromToDTO fromToDTO)
+    {
+        return rutaServiceImplement.between(fromToDTO.getFrom(), fromToDTO.getFrom());
     }
     // getone
     @GetMapping("/ruta/{id}")
