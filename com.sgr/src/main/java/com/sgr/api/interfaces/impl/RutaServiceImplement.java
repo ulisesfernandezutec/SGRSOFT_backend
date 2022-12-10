@@ -67,4 +67,10 @@ public class RutaServiceImplement implements RutaService {
 
     @Override
     public List<Ruta> list() { return this.rutaRepository.findAll(); }
+
+    @Override
+    public List<Ruta> between(long from, long to) {
+        return this.rutaRepository.findBy_idBetween(from,to);
+    }
+
 }

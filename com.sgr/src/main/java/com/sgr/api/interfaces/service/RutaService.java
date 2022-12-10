@@ -15,4 +15,6 @@ public interface RutaService {
     boolean delete(long id);
 
     List< Ruta > list();
+
+    List< Ruta > between(long from, long to);
 }
