@@ -28,6 +28,13 @@ public class UsuarioController {
 		return usuarioRepository.getById(Long.parseLong(id));
 	}
 
+	//GetByEmail
+	@GetMapping("/usr/{email}")
+	public Usuario getUsuarioByEmail(@PathVariable("email") String email) {
+		Optional<Usuario>usr = usuarioRepository.findFirstByEmailLike(email);
+		return usr.isPresent()?usr.get():null;
+	}
+
 	// setone
 	@PostMapping("/usr")
 	public String setUsuario(@RequestBody UsuarioDTO usuarioDTO) {
@@ -49,7 +56,6 @@ public class UsuarioController {
 	@PutMapping("/usr")
 	public boolean updateUsuario(@RequestBody UsuarioDTO usuarioDTO) {
 		Usuario usuario = new Usuario(usuarioDTO.get_id(), usuarioDTO.getPwrd(), usuarioDTO.getRol(), usuarioDTO.getNombre(), usuarioDTO.getApellido(),usuarioDTO.getDocumento(), usuarioDTO.getTelefono(), usuarioDTO.getEmail(), usuarioDTO.getDireccion());
-
 		try {
 			if (usuarioRepository.getById(usuario.get_id()) != null) {
 				usuarioRepository.update(usuario);
