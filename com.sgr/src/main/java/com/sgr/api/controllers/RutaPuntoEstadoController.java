@@ -26,7 +26,7 @@ public class RutaPuntoEstadoController {
             return rutaPuntoEstadoServiceImplement.list();
         } catch (Exception e) {
             log.error(e.getMessage());
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.READ_ERROR + Messages.RUTAPE);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.READ_ERROR + e.getMessage());
         }
     }
 
@@ -37,7 +37,7 @@ public class RutaPuntoEstadoController {
             return rutaPuntoEstadoServiceImplement.getById(Long.parseLong(id));
         } catch (Exception e) {
             log.error(e.getMessage());
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.READ_ERROR + Messages.RUTAPE);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.READ_ERROR + e.getMessage());
         }
     }
     // setone
@@ -54,7 +54,7 @@ public class RutaPuntoEstadoController {
             return new Gson().fromJson(Messages.RPE_CREADO + id, JsonObject.class).toString();
         } catch (Exception e) {
             log.error(e.getMessage());
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.READ_ERROR + Messages.RUTAPE);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.READ_ERROR + e.getMessage());
         }
     }
     // update
@@ -71,7 +71,7 @@ public class RutaPuntoEstadoController {
             return true;
         } catch (Exception e) {
             log.error(e.getMessage());
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.UPDATE_ERROR + Messages.RUTAPE);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.UPDATE_ERROR + e.getMessage());
         }
     }
     // delete
@@ -82,7 +82,7 @@ public class RutaPuntoEstadoController {
             return Messages.RPE_ELIMINADO;
         } catch (Exception e) {
             log.error(e.getMessage());
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.DELETE_ERROR + Messages.RUTAPE);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.DELETE_ERROR + e.getMessage());
         }
     }
 

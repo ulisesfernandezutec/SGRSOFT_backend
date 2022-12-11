@@ -26,7 +26,7 @@ public class RutaPuntoController {
             return rutaPuntoServiceImplement.list();
         } catch (Exception e) {
             log.error(e.getMessage());
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.READ_ERROR + Messages.RUTAP);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.READ_ERROR + e.getMessage());
         }
     }
     // getone
@@ -36,7 +36,7 @@ public class RutaPuntoController {
             return rutaPuntoServiceImplement.getById(Long.parseLong(id));
         } catch (Exception e) {
             log.error(e.getMessage());
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.READ_ERROR + Messages.RUTAP);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.READ_ERROR + e.getMessage());
         }
     }
     // setone
@@ -55,7 +55,7 @@ public class RutaPuntoController {
             return new Gson().fromJson(Messages.RT_CREADO + id, JsonObject.class).toString();
         } catch (Exception e) {
             log.error(e.getMessage());
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.CREATE_ERROR + Messages.RUTAP);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.CREATE_ERROR + e.getMessage());
         }
     }
     // update
@@ -74,7 +74,7 @@ public class RutaPuntoController {
             return true;
         } catch (Exception e) {
             log.error(e.getMessage());
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.UPDATE_ERROR + Messages.RUTAP);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.UPDATE_ERROR + e.getMessage());
         }
     }
     // delete
@@ -85,7 +85,7 @@ public class RutaPuntoController {
             return Messages.RP_ELIMINADO;
         } catch (Exception e) {
             log.error(e.getMessage());
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.DELETE_ERROR+ Messages.RUTAP);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.DELETE_ERROR+ e.getMessage());
         }
     }
 }

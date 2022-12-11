@@ -31,7 +31,7 @@ public class RolController {
 			return rolserviceimplement.list();
 		} catch (Exception e) {
 			log.error(e.getMessage());
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.READ_ERROR + Messages.ROL);
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.READ_ERROR + e.getMessage());
 		}
 	}
 	//getone
@@ -41,7 +41,7 @@ public class RolController {
 			return rolserviceimplement.getById(id);
 		} catch (Exception e) {
 			log.error(e.getMessage());
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.READ_ERROR + Messages.ROL);
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.READ_ERROR + e.getMessage());
 		}
 	}
 	//setone
@@ -53,7 +53,7 @@ public class RolController {
 			return Messages.ROL_CREADO;
 		} catch (Exception e) {
 				log.error(e.getMessage());
-				throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.CREATE_ERROR+ Messages.ROL);
+				throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.CREATE_ERROR+ e.getMessage());
 		}
 	}
 	@PutMapping("/rol/")
@@ -66,7 +66,7 @@ public class RolController {
 			return true;
 		} catch (Exception e) {
 			log.error(e.getMessage());
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.UPDATE_ERROR+ Messages.ROL);
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.UPDATE_ERROR+ e.getMessage());
 		}
 	}
 	// delete
@@ -77,7 +77,7 @@ public class RolController {
 			return Messages.ROL_ELIMINADO;
 		} catch (Exception e) {
 			log.error(e.getMessage());
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.DELETE_ERROR+ Messages.ROL);
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.DELETE_ERROR+ e.getMessage());
 		}
 	}
 }

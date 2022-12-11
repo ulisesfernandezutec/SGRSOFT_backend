@@ -29,7 +29,7 @@ public class LoginController {
 			email = loginDTO.getEmail();
 			pwd = loginDTO.getPwd();
 		}catch(JsonParseException pe){
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.ERROR);
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.ERROR + pe.getMessage());
 		}
 
 		Optional<Usuario> u = user.findFirstByEmailLike(email);

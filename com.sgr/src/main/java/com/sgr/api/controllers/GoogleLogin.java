@@ -52,7 +52,7 @@ public class GoogleLogin {
 			return new Gson().toJson(resp);
 		}catch(Exception e){
 			log.error(e.getMessage());
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.CREATE_ERROR);
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.CREATE_ERROR +e.getMessage());
 		}
 	}
 }

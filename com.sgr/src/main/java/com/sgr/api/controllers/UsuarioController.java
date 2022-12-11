@@ -12,6 +12,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import com.sgr.entities.Usuario;
 import org.springframework.web.server.ResponseStatusException;
+import org.w3c.dom.html.HTMLTableRowElement;
+
 @Slf4j
 @RestController
 public class UsuarioController {
@@ -26,7 +28,7 @@ public class UsuarioController {
 			return usuarioRepository.list();
 		} catch (Exception e) {
 			log.error(e.getMessage());
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.READ_ERROR + Messages.USUARIO);
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.READ_ERROR + e.getMessage());
 		}
 	}
 
@@ -37,7 +39,7 @@ public class UsuarioController {
 			return usuarioRepository.getById(Long.parseLong(id));
 		} catch (Exception e) {
 			log.error(e.getMessage());
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.READ_ERROR + Messages.USUARIO);
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.READ_ERROR + e.getMessage());
 		}
 	}
 
@@ -49,25 +51,23 @@ public class UsuarioController {
 			return usr.isPresent()?usr.get():null;
 		} catch (Exception e) {
 			log.error(e.getMessage());
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.READ_ERROR + Messages.USUARIO);
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.READ_ERROR + e.getMessage());
 		}
 	}
 
 	// setone
 	@PostMapping("/usr")
-	public String setUsuario(@RequestBody UsuarioDTO usuarioDTO) {
+	public Usuario setUsuario(@RequestBody UsuarioDTO usuarioDTO) {
 		Usuario usuario = new Usuario(usuarioDTO.get_id(), usuarioDTO.getPwrd(), usuarioDTO.getRol(), usuarioDTO.getNombre(), usuarioDTO.getApellido(),usuarioDTO.getDocumento(), usuarioDTO.getTelefono(), usuarioDTO.getEmail(), usuarioDTO.getDireccion(), usuarioDTO.getEstado());
 		try {
 			Long id = 0L;
 			usuarioRepository.create(usuario);
 			Optional<Usuario> usr = usuarioRepository.findFirstByEmailLike(usuario.getEmail());
-			if(usr.isPresent()){
-				id = usr.get().get_id();
-			}
-			return Messages.USR_CREADO+ id;
+			return usr.isPresent()?usr.get():null;
+
 		} catch (Exception e) {
 			log.error(e.getMessage());
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.CREATE_ERROR + Messages.USUARIO);
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.CREATE_ERROR + e.getMessage());
 		}
 	}
 
@@ -82,7 +82,7 @@ public class UsuarioController {
 			return true;
 		} catch (Exception e) {
 			log.error(e.getMessage());
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.UPDATE_ERROR + Messages.USUARIO);
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.UPDATE_ERROR + e.getMessage());
 		}
 	}
 
@@ -94,7 +94,7 @@ public class UsuarioController {
 			return Messages.USR_ELIMINADO;
 		} catch (Exception e) {
 			log.error(e.getMessage());
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.DELETE_ERROR + Messages.USUARIO);
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.DELETE_ERROR + e.getMessage());
 		}
 	}
 }

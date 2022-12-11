@@ -28,7 +28,7 @@ public class PuntoSalidaController {
             return puntoSalidaServiceImplement.list();
         } catch (Exception e) {
             log.error(e.getMessage());
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.READ_ERROR+Messages.PUNTOS_DP);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.READ_ERROR+e.getMessage());
         }
     }
 
@@ -39,7 +39,7 @@ public class PuntoSalidaController {
             return puntoSalidaServiceImplement.getById(Long.parseLong(id));
         } catch (Exception e) {
             log.error(e.getMessage());
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.READ_ERROR+Messages.PUNTOS_DP);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.READ_ERROR+e.getMessage());
         }
     }
     // setone
@@ -58,7 +58,7 @@ public class PuntoSalidaController {
             return new Gson().fromJson(Messages.PNS_CREADO + id, JsonObject.class).toString();
         } catch (Exception e) {
             log.error(e.getMessage());
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.CREATE_ERROR+Messages.PUNTOS_DP);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.CREATE_ERROR+e.getMessage());
         }
     }
     // update
@@ -77,7 +77,7 @@ public class PuntoSalidaController {
             return true;
         } catch (Exception e) {
             log.error(e.getMessage());
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.UPDATE_ERROR+Messages.PUNTOS_DP);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.UPDATE_ERROR+e.getMessage());
         }
     }
     // delete
@@ -88,7 +88,7 @@ public class PuntoSalidaController {
             return Messages.PNS_ELIMINADO;
         } catch (Exception e) {
             log.error(e.getMessage());
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.DELETE_ERROR+Messages.PUNTOS_DP);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.DELETE_ERROR+e.getMessage());
         }
     }
 }

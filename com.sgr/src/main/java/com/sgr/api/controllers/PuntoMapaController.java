@@ -28,7 +28,7 @@ public class PuntoMapaController {
             return puntoMapaServiceImplement.list();
         } catch (Exception e) {
             log.error(e.getMessage());
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.READ_ERROR);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.READ_ERROR+e.getMessage());
         }
     }
     // getone
@@ -38,7 +38,7 @@ public class PuntoMapaController {
             return puntoMapaServiceImplement.getById(Long.parseLong(id));
         }catch (Exception e){
             log.error(e.getMessage());
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.READ_ERROR);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.READ_ERROR+e.getMessage());
         }
     }
 
@@ -58,7 +58,7 @@ public class PuntoMapaController {
             return new Gson().fromJson(Messages.PNT_CREADO + id, JsonObject.class).toString();
         } catch (Exception e) {
             log.error(e.getMessage());
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.CREATE_ERROR+Messages.PUNTOMAPA);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.CREATE_ERROR+e.getMessage());
         }
     }
     // update
@@ -77,7 +77,7 @@ public class PuntoMapaController {
             return true;
         } catch (Exception e) {
             log.error(e.getMessage());
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.UPDATE_ERROR+Messages.PUNTOMAPA);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.UPDATE_ERROR+e.getMessage());
         }
     }
     // delete

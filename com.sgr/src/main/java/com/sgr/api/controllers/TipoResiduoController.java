@@ -31,7 +31,7 @@ public class TipoResiduoController {
 			return tipoResiduoServiceImplement.list();
 		} catch (Exception e) {
 			log.error(e.getMessage());
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.READ_ERROR + Messages.TIPO_RESIDUO);
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.READ_ERROR + e.getMessage());
 		}
 	}
 
@@ -43,7 +43,7 @@ public class TipoResiduoController {
 			return tipoResiduoServiceImplement.getById(idL);
 		} catch (Exception e) {
 			log.error(e.getMessage());
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.READ_ERROR + Messages.TIPO_RESIDUO);
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.READ_ERROR + e.getMessage());
 		}
 	}
 
@@ -56,7 +56,7 @@ public class TipoResiduoController {
 			return Messages.TR_CREADO;
 		} catch (Exception e) {
 			log.error(e.getMessage());
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.CREATE_ERROR + Messages.TIPO_RESIDUO);
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.CREATE_ERROR + e.getMessage());
 		}
 	}
 
@@ -71,7 +71,7 @@ public class TipoResiduoController {
 			return true;
 		} catch (Exception e) {
 			log.error(e.getMessage());
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.UPDATE_ERROR + Messages.TIPO_RESIDUO);
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.UPDATE_ERROR + e.getMessage());
 		}
 	}
 
@@ -83,7 +83,7 @@ public class TipoResiduoController {
 			return Messages.TR_ELIMINADO;
 		} catch (Exception e) {
 			log.error(e.getMessage());
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.DELETE_ERROR + Messages.TIPO_RESIDUO);
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.DELETE_ERROR + e.getMessage());
 		}
 	}
 
