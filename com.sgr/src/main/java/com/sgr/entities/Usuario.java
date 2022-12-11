@@ -25,4 +25,5 @@ public class Usuario {
 	@Indexed(unique = true)
 	private String email;
 	private String direccion;
+	private String estado;
 }

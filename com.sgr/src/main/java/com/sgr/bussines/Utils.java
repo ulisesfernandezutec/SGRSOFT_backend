@@ -7,7 +7,6 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.LinkedList;
 import java.util.stream.Collectors;
 import java.util.List;
 import com.sgr.entities.Usuario;
@@ -52,13 +51,10 @@ public class Utils {
 				List.of("Diciembre", lista.stream().filter(c -> getMonth(c.get_id()) ==11).count())
 		);
 	}
-	public static List<List<LocalDateTime>> filtrarAños(List<Usuario> lista) {
+	public static List<List<LocalDateTime>> filtrarAnios(List<Usuario> lista) {
 		List<List<LocalDateTime>> groupedDates = lista.stream()
-				// Convert each date in miliseconds to a LocalDateTime object
 				.map(dateInMilliseconds -> LocalDateTime.ofInstant(Instant.ofEpochMilli(dateInMilliseconds.get_id()), ZoneId.systemDefault()))
-				// Group the dates by year
 				.collect(Collectors.groupingBy(LocalDateTime::getYear))
-				// Convert the map of grouped dates to a list of lists
 				.values().stream().collect(Collectors.toList());
 		
 		return groupedDates;

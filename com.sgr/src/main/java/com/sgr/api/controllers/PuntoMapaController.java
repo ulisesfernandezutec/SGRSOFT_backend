@@ -6,12 +6,16 @@ import com.sgr.api.interfaces.impl.PuntoMapaServiceImplement;
 import com.sgr.bussines.Messages;
 import com.sgr.entities.PuntoMapa;
 import com.sgr.entities.dto.PuntoMapaDTO;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
 @RestController
+@Slf4j
 public class PuntoMapaController {
 
     @Autowired
@@ -20,13 +24,22 @@ public class PuntoMapaController {
     // getall
     @GetMapping("/pmapa")
     public List<PuntoMapa> getAll() {
-        return puntoMapaServiceImplement.list();
+        try {
+            return puntoMapaServiceImplement.list();
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.READ_ERROR);
+        }
     }
-
     // getone
     @GetMapping("/pmapa/{id}")
     public PuntoMapa getPuntoDisposicionFinal(@PathVariable("id") String id) {
-        return puntoMapaServiceImplement.getById(Long.parseLong(id));
+        try {
+            return puntoMapaServiceImplement.getById(Long.parseLong(id));
+        }catch (Exception e){
+            log.error(e.getMessage());
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.READ_ERROR);
+        }
     }
 
     // setone
@@ -44,7 +57,8 @@ public class PuntoMapaController {
             puntoMapaServiceImplement.create(puntoMapa);
             return new Gson().fromJson(Messages.PNT_CREADO + id, JsonObject.class).toString();
         } catch (Exception e) {
-            return e.getMessage();
+            log.error(e.getMessage());
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.CREATE_ERROR+Messages.PUNTOMAPA);
         }
     }
     // update
@@ -62,8 +76,8 @@ public class PuntoMapaController {
             }
             return true;
         } catch (Exception e) {
-            e.getMessage();
-            return false;
+            log.error(e.getMessage());
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.UPDATE_ERROR+Messages.PUNTOMAPA);
         }
     }
     // delete
@@ -73,7 +87,8 @@ public class PuntoMapaController {
             puntoMapaServiceImplement.delete(id);
             return Messages.PNT_ELIMINADO;
         } catch (Exception e) {
-            return e.getMessage();
+            log.error(e.getMessage());
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.READ_ERROR);
         }
     }
 }

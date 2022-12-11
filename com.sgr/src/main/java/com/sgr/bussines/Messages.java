@@ -9,18 +9,25 @@ public class Messages {
 	}
 
 	//Collections
-	public static final String COL_PERSONAS = "Personas";
-	public static final String COL_PUNTOS_DR = "PuntosDR";
-	public static final String COL_ROLES = "Roles";
-	public static final String COL_TIPO_RESIDUO = "TipoDeResiduo";
-	public static final String COL_USUARIOS = "Usuarios";
-	public static final String COL_VEHICULOS = "Vehiculos";
-	public static final String COL_ZONAS = "Zonas";
-	//Names
+	public static final String PERSONAS = "Persona";
+	public static final String RUTA = "Ruta";
+	public static final String RUTAP = "Ruta Punto";
+	public static final String RUTAPE = "Ruta Punto Estado";
+	public static final String PUNTOS_DR = "Puntos De Recoleccion";
+	public static final String PUNTOS_DP = "Puntos De Partida";
+	public static final String PUNTOS_DL = "Puntos De LLegada";
+	public static final String ROL = "Rol";
+	public static final String TIPO_RESIDUO = "Tipo De Residuo";
+	public static final String USUARIO = "Usuario";
+	public static final String VEHICULOS = "Vehiculo";
+	public static final String ZONA = "Zona";
 	public static final String TOKEN 	= "Token";
 	public static final String MSG 		= "Msg";
+	public static final String PUNTOMAPA 		= "Punto Mapa";
+	public static final String PUNTODRE 		= "Punto de Recolleción Estado";
+
 	//Messages
-	public static final String PERSONA_NOT_FOUND = "No se encuentra el registro id: %s de Persona";
+	public static final String PERSONA_NOT_FOUND = "No se encuentra el registro";
 	public static final String PER_NOT_FOUND = "No se encuentra el registro id: %s de Punto de Persona";
 	public static final String USR_CREADO = "Usuario creado con id ";
 	public static final String USR_ELIMINADO = "Usuario eliminado";
@@ -45,5 +52,11 @@ public class Messages {
 	public static final String ROL_NOT_FOUND = "No se encuentra el registro id: %s de Rol";
 	public static final String EMAIL_SEND = "Mensaje enviado a";
 	public static final String EMAIL_ERROR = "Error al enviar mensaje a";
+	public static final String CREATE_ERROR = "Error al crear ";
+	public static final String UPDATE_ERROR = "Error al actualziar ";
+	public static final String DELETE_ERROR = "Error al borrar ";
+	public static final String READ_ERROR = "Error al leer ";
+	public static final String ERROR = "Error";
+
 
 }

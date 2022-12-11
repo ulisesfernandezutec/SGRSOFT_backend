@@ -1,11 +1,12 @@
 package com.sgr.api.controllers;
 
 import java.util.List;
-
 import com.sgr.api.interfaces.impl.RolServiceImplement;
 import com.sgr.bussines.Messages;
 import com.sgr.entities.dto.RolDTO;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,10 +14,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.sgr.entities.Rol;
+import org.springframework.web.server.ResponseStatusException;
 
 @RestController
+@Slf4j
 public class RolController {
 
 	@Autowired
@@ -25,14 +27,23 @@ public class RolController {
 	//getall
 	@GetMapping("/rol")
 	public List<Rol> getAll() {
+		try {
 			return rolserviceimplement.list();
+		} catch (Exception e) {
+			log.error(e.getMessage());
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.READ_ERROR + Messages.ROL);
+		}
 	}
 	//getone
 	@GetMapping("/rol/{id}")
 	public Rol getRol(@PathVariable Long id) {
-		return rolserviceimplement.getById(id);
+		try{
+			return rolserviceimplement.getById(id);
+		} catch (Exception e) {
+			log.error(e.getMessage());
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.READ_ERROR + Messages.ROL);
+		}
 	}
-
 	//setone
 	@PostMapping("/rol/")
 	public String setRol(@RequestBody RolDTO rolDTO) {
@@ -41,8 +52,8 @@ public class RolController {
 			rolserviceimplement.create(rol);
 			return Messages.ROL_CREADO;
 		} catch (Exception e) {
-
-			return 	e.getMessage();
+				log.error(e.getMessage());
+				throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.CREATE_ERROR+ Messages.ROL);
 		}
 	}
 	@PutMapping("/rol/")
@@ -54,8 +65,8 @@ public class RolController {
 			}
 			return true;
 		} catch (Exception e) {
-			e.getMessage();
-			return false;
+			log.error(e.getMessage());
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.UPDATE_ERROR+ Messages.ROL);
 		}
 	}
 	// delete
@@ -65,7 +76,8 @@ public class RolController {
 			rolserviceimplement.delete(id);
 			return Messages.ROL_ELIMINADO;
 		} catch (Exception e) {
-			return e.getMessage();
+			log.error(e.getMessage());
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.DELETE_ERROR+ Messages.ROL);
 		}
 	}
 }
