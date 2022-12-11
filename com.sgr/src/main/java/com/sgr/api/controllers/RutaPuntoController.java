@@ -6,11 +6,14 @@ import com.sgr.api.interfaces.impl.RutaPuntoServiceImplement;
 import com.sgr.bussines.Messages;
 import com.sgr.entities.RutaPunto;
 import com.sgr.entities.dto.RutaPuntoDTO;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
-
+@Slf4j
 @RestController
 public class RutaPuntoController {
     @Autowired
@@ -19,12 +22,22 @@ public class RutaPuntoController {
     // getall
     @GetMapping("/rp")
     public List<RutaPunto> getAll() {
-        return rutaPuntoServiceImplement.list();
+        try{
+            return rutaPuntoServiceImplement.list();
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.READ_ERROR + Messages.RUTAP);
+        }
     }
     // getone
     @GetMapping("/rp/{id}")
     public RutaPunto getRutaPunto(@PathVariable("id") String id) {
-        return rutaPuntoServiceImplement.getById(Long.parseLong(id));
+        try{
+            return rutaPuntoServiceImplement.getById(Long.parseLong(id));
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.READ_ERROR + Messages.RUTAP);
+        }
     }
     // setone
     @PostMapping("/rp")
@@ -41,7 +54,8 @@ public class RutaPuntoController {
             rutaPuntoServiceImplement.create(rutaPunto);
             return new Gson().fromJson(Messages.RT_CREADO + id, JsonObject.class).toString();
         } catch (Exception e) {
-            return e.getMessage();
+            log.error(e.getMessage());
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.CREATE_ERROR + Messages.RUTAP);
         }
     }
     // update
@@ -59,8 +73,8 @@ public class RutaPuntoController {
             }
             return true;
         } catch (Exception e) {
-            e.getMessage();
-            return false;
+            log.error(e.getMessage());
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.UPDATE_ERROR + Messages.RUTAP);
         }
     }
     // delete
@@ -70,7 +84,8 @@ public class RutaPuntoController {
             rutaPuntoServiceImplement.delete(id);
             return Messages.RP_ELIMINADO;
         } catch (Exception e) {
-            return e.getMessage();
+            log.error(e.getMessage());
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.DELETE_ERROR+ Messages.RUTAP);
         }
     }
 }

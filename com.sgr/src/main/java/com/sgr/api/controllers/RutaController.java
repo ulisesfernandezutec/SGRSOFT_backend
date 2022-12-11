@@ -2,6 +2,7 @@ package com.sgr.api.controllers;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import com.google.j2objc.annotations.LoopTranslation;
 import com.sgr.api.interfaces.impl.RutaServiceImplement;
 import com.sgr.bussines.Messages;
 import com.sgr.entities.Ruta;
@@ -9,29 +10,47 @@ import com.sgr.entities.RutaPunto;
 import com.sgr.entities.dto.FromToDTO;
 import com.sgr.entities.dto.RutaDTO;
 import com.sgr.entities.dto.RutaPuntoDTO;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
-
+@Slf4j
 public class RutaController {
     @Autowired
     RutaServiceImplement rutaServiceImplement;
     // getall
     @GetMapping("/ruta")
     public List<Ruta> getAll() {
+        try{
         return rutaServiceImplement.list();
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.READ_ERROR + Messages.RUTA);
+        }
     }
     //between
     @GetMapping("/ruta/btw")
     public List<Ruta> getBetween(FromToDTO fromToDTO)
     {
-        return rutaServiceImplement.between(fromToDTO.getFrom(), fromToDTO.getFrom());
+        try{
+            return rutaServiceImplement.between(fromToDTO.getFrom(), fromToDTO.getFrom());
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.READ_ERROR + Messages.RUTA);
+        }
     }
     // getone
     @GetMapping("/ruta/{id}")
     public Ruta getRutaPunto(@PathVariable("id") String id) {
-        return rutaServiceImplement.getById(Long.parseLong(id));
+        try{
+            return rutaServiceImplement.getById(Long.parseLong(id));
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.READ_ERROR + Messages.RUTA);
+        }
     }
     // setone
     @PostMapping("/ruta")
@@ -50,7 +69,8 @@ public class RutaController {
             rutaServiceImplement.create(ruta);
             return new Gson().fromJson(Messages.RT_CREADO + id, JsonObject.class).toString();
         } catch (Exception e) {
-            return e.getMessage();
+            log.error(e.getMessage());
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.CREATE_ERROR + Messages.RUTA);
         }
     }
     // update
@@ -70,8 +90,8 @@ public class RutaController {
             }
             return true;
         } catch (Exception e) {
-            e.getMessage();
-            return false;
+            log.error(e.getMessage());
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.UPDATE_ERROR + Messages.RUTA);
         }
     }
     // delete
@@ -81,7 +101,8 @@ public class RutaController {
             rutaServiceImplement.delete(id);
             return Messages.RT_ELIMINADO;
         } catch (Exception e) {
-            return e.getMessage();
+            log.error(e.getMessage());
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.DELETE_ERROR + Messages.RUTA);
         }
     }
 }

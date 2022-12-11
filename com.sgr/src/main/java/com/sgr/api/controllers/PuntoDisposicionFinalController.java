@@ -6,25 +6,38 @@ import com.sgr.api.interfaces.impl.PuntoDisposicionFinalServiceImplement;
 import com.sgr.bussines.Messages;
 import com.sgr.entities.PuntoDisposicionFinal;
 import com.sgr.entities.dto.PuntoDisposicionFinalDTO;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
+
 import java.util.List;
 @RestController
+@Slf4j
 public class PuntoDisposicionFinalController {
-
     @Autowired
     PuntoDisposicionFinalServiceImplement puntoDisposicionFinalServiceImplement;
 
     // getall
     @GetMapping("/pdf")
     public List<PuntoDisposicionFinal> getAll() {
-        return puntoDisposicionFinalServiceImplement.list();
+        try{
+            return puntoDisposicionFinalServiceImplement.list();
+        }catch(Exception e){
+            log.error(e.getMessage());
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.READ_ERROR);
+        }
     }
-
     // getone
     @GetMapping("/pdf/{id}")
     public PuntoDisposicionFinal getPuntoDisposicionFinal(@PathVariable("id") String id) {
-        return puntoDisposicionFinalServiceImplement.getById(Long.parseLong(id));
+        try {
+            return puntoDisposicionFinalServiceImplement.getById(Long.parseLong(id));
+        }catch(Exception e){
+            log.error(e.getMessage());
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.READ_ERROR);
+        }
     }
 
     // setone
@@ -42,7 +55,8 @@ public class PuntoDisposicionFinalController {
             puntoDisposicionFinalServiceImplement.create(puntoDisposicionFinal);
             return new Gson().fromJson(Messages.PDF_CREADO+ id, JsonObject.class).toString();
         }catch (Exception e) {
-            return e.getMessage();
+            log.error(e.getMessage());
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.CREATE_ERROR);
         }
     }
     // update
@@ -60,8 +74,8 @@ public class PuntoDisposicionFinalController {
             }
             return true;
         } catch (Exception e) {
-            e.getMessage();
-            return false;
+            log.error(e.getMessage());
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.UPDATE_ERROR);
         }
     }
     // delete
@@ -71,7 +85,8 @@ public class PuntoDisposicionFinalController {
             puntoDisposicionFinalServiceImplement.delete(id);
             return Messages.PDF_ELIMINADO;
         } catch (Exception e) {
-            return e.getMessage();
+            log.error(e.getMessage());
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.DELETE_ERROR);
         }
     }
 }

@@ -3,9 +3,12 @@ package com.sgr.api.controllers;
 import java.util.List;
 
 import com.sgr.api.interfaces.impl.PuntoRecoleccionServiceImplement;
+import com.sgr.bussines.Messages;
 import com.sgr.entities.dto.FromToDTO;
 import com.sgr.entities.dto.PuntoRecoleccionDTO;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,7 +17,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import com.sgr.entities.PuntoRecoleccion;
-
+import org.springframework.web.server.ResponseStatusException;
+@Slf4j
 @RestController
 public class PuntoRecoleccionController {
 
@@ -25,19 +29,34 @@ public class PuntoRecoleccionController {
 	// getall
 	@GetMapping("/puntodr")
 	public List<PuntoRecoleccion> getAll() {
+		try {
 			return puntoDRServiceImplement.list();
+		}catch (Exception e){
+			log.error(e.getMessage());
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.READ_ERROR+Messages.PUNTOS_DR);
+		}
 	}
 
 	// getbetwen
 	@GetMapping("/puntodr/btw")
 	public List<PuntoRecoleccion> getBetween(@RequestBody FromToDTO fromToDTO) {
-		return puntoDRServiceImplement.findBetween(fromToDTO.getFrom(),fromToDTO.getTo());
+		try {
+			return puntoDRServiceImplement.findBetween(fromToDTO.getFrom(), fromToDTO.getTo());
+		}catch (Exception e){
+			log.error(e.getMessage());
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.READ_ERROR+Messages.PUNTOS_DR);
+		}
 	}
 
 	// getone
 	@GetMapping("/puntodr/{id}")
-	public PuntoRecoleccion getPersona(@PathVariable int id) {
-		return puntoDRServiceImplement.getById(id);
+	public PuntoRecoleccion getPuntoDeRecolección(@PathVariable int id) {
+		try{
+			return puntoDRServiceImplement.getById(id);
+		}catch (Exception e){
+			log.error(e.getMessage());
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.READ_ERROR+Messages.PUNTOS_DR);
+		}
 	}
 
 	//setone
@@ -48,8 +67,8 @@ public class PuntoRecoleccionController {
 			puntoDRServiceImplement.create(pdr);
 			return true;
 		} catch (Exception e) {
-			e.getMessage();
-			return false;
+			log.error(e.getMessage());
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.CREATE_ERROR+Messages.PUNTOS_DR);
 		}
 	}
 
@@ -64,8 +83,8 @@ public class PuntoRecoleccionController {
 			}
 			return true;
 		} catch (Exception e) {
-			e.getMessage();
-			return false;
+			log.error(e.getMessage());
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.UPDATE_ERROR+Messages.PUNTOS_DR);
 		}
 	}
 

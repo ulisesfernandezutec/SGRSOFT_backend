@@ -3,8 +3,12 @@ package com.sgr.api.controllers;
 import java.util.List;
 
 import com.sgr.api.interfaces.impl.PuntoRecoleccionEstadoServiceImplement;
+import com.sgr.bussines.Messages;
+import com.sgr.entities.dto.PuntoRecoleccionEstadoDTO;
 import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,44 +18,47 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sgr.entities.PuntoRecoleccionEstado;
+import org.springframework.web.server.ResponseStatusException;
 
 @RestController
+@Slf4j
 public class PuntoRecoleccionEstadoController {
-	@Data
-	public class PuntoRecoleccionEstadoDTO {
 
-		private long _id;
-		private String fecha;
-		private long usuario;
-		private String estado;
-		private String detalle;
-
-	}
 	@Autowired
 	private PuntoRecoleccionEstadoServiceImplement puntoRecoleccionEstadoServiceImplement;
 
 	// getall
 	@GetMapping("/pdre")
 	public List<PuntoRecoleccionEstado> getAll() {
+		try {
 			return puntoRecoleccionEstadoServiceImplement.list();
+		}catch (Exception e){
+			log.error(e.getMessage());
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.READ_ERROR);
+		}
 	}
 
 	// getone
 	@GetMapping("/pdre/{id}")
 	public PuntoRecoleccionEstado getPuntoRecoleccionEstado(@PathVariable int id) {
-		return puntoRecoleccionEstadoServiceImplement.getById(id);
+		try{
+			return puntoRecoleccionEstadoServiceImplement.getById(id);
+		}catch (Exception e){
+			log.error(e.getMessage());
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.READ_ERROR);
+		}
 	}
 
 	//setone
 	@PostMapping("/pdre/")
 	public boolean setPuntoRecoleccionEstado(@RequestBody PuntoRecoleccionEstadoDTO pdreDTO) {
 		try {
-			PuntoRecoleccionEstado pdre = new PuntoRecoleccionEstado(pdreDTO.get_id(), pdreDTO.getFecha(), pdreDTO.usuario, pdreDTO.getEstado(), pdreDTO.getDetalle());
+			PuntoRecoleccionEstado pdre = new PuntoRecoleccionEstado(pdreDTO.get_id(), pdreDTO.getFecha(), pdreDTO.getUsuario(), pdreDTO.getEstado(), pdreDTO.getDetalle());
 			puntoRecoleccionEstadoServiceImplement.create(pdre);
 			return true;
-		} catch (Exception e) {
-			e.getMessage();
-			return false;
+		}catch (Exception e){
+			log.error(e.getMessage());
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.CREATE_ERROR+Messages.PUNTODRE);
 		}
 	}
 
@@ -65,8 +72,8 @@ public class PuntoRecoleccionEstadoController {
 			}
 			return true;
 		} catch (Exception e) {
-			e.getMessage();
-			return false;
+			log.error(e.getMessage());
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.UPDATE_ERROR+Messages.PUNTODRE);
 		}
 	}
 
@@ -77,8 +84,8 @@ public class PuntoRecoleccionEstadoController {
 			puntoRecoleccionEstadoServiceImplement.delete(id);
 			return true;
 		} catch (Exception e) {
-			e.getMessage();
-			return false;
+			log.error(e.getMessage());
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.DELETE_ERROR+Messages.PUNTODRE);
 		}
 	}
 

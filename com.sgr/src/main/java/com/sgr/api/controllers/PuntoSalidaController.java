@@ -6,12 +6,16 @@ import com.sgr.api.interfaces.impl.PuntoSalidaServiceImplement;
 import com.sgr.bussines.Messages;
 import com.sgr.entities.PuntoSalida;
 import com.sgr.entities.dto.PuntoSalidaDTO;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
 @RestController
+@Slf4j
 public class PuntoSalidaController {
 
     @Autowired
@@ -20,13 +24,23 @@ public class PuntoSalidaController {
     // getall
     @GetMapping("/psalida")
     public List<PuntoSalida> getAll() {
-        return puntoSalidaServiceImplement.list();
+        try{
+            return puntoSalidaServiceImplement.list();
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.READ_ERROR+Messages.PUNTOS_DP);
+        }
     }
 
     // getone
     @GetMapping("/psalida/{id}")
     public PuntoSalida getPuntoSalida(@PathVariable("id") String id) {
-        return puntoSalidaServiceImplement.getById(Long.parseLong(id));
+        try{
+            return puntoSalidaServiceImplement.getById(Long.parseLong(id));
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.READ_ERROR+Messages.PUNTOS_DP);
+        }
     }
     // setone
     @PostMapping("/psalida")
@@ -43,7 +57,8 @@ public class PuntoSalidaController {
             puntoSalidaServiceImplement.create(puntoSalida);
             return new Gson().fromJson(Messages.PNS_CREADO + id, JsonObject.class).toString();
         } catch (Exception e) {
-            return e.getMessage();
+            log.error(e.getMessage());
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.CREATE_ERROR+Messages.PUNTOS_DP);
         }
     }
     // update
@@ -61,8 +76,8 @@ public class PuntoSalidaController {
             }
             return true;
         } catch (Exception e) {
-            e.getMessage();
-            return false;
+            log.error(e.getMessage());
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.UPDATE_ERROR+Messages.PUNTOS_DP);
         }
     }
     // delete
@@ -72,7 +87,8 @@ public class PuntoSalidaController {
             puntoSalidaServiceImplement.delete(id);
             return Messages.PNS_ELIMINADO;
         } catch (Exception e) {
-            return e.getMessage();
+            log.error(e.getMessage());
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.DELETE_ERROR+Messages.PUNTOS_DP);
         }
     }
 }
