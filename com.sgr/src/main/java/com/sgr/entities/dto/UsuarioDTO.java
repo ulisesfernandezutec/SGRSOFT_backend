@@ -14,4 +14,5 @@ public class UsuarioDTO {
     private String telefono;
     private String email;
     private String direccion;
+    private String estado;
 }
