@@ -26,7 +26,7 @@ public class PuntoDisposicionFinalController {
             return puntoDisposicionFinalServiceImplement.list();
         }catch(Exception e){
             log.error(e.getMessage());
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.READ_ERROR);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.READ_ERROR +e.getMessage());
         }
     }
     // getone
@@ -36,7 +36,7 @@ public class PuntoDisposicionFinalController {
             return puntoDisposicionFinalServiceImplement.getById(Long.parseLong(id));
         }catch(Exception e){
             log.error(e.getMessage());
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.READ_ERROR);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.READ_ERROR+e.getMessage());
         }
     }
 
@@ -56,7 +56,7 @@ public class PuntoDisposicionFinalController {
             return new Gson().fromJson(Messages.PDF_CREADO+ id, JsonObject.class).toString();
         }catch (Exception e) {
             log.error(e.getMessage());
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.CREATE_ERROR);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.CREATE_ERROR+e.getMessage());
         }
     }
     // update
@@ -75,7 +75,7 @@ public class PuntoDisposicionFinalController {
             return true;
         } catch (Exception e) {
             log.error(e.getMessage());
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.UPDATE_ERROR);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.UPDATE_ERROR+e.getMessage());
         }
     }
     // delete
@@ -86,7 +86,7 @@ public class PuntoDisposicionFinalController {
             return Messages.PDF_ELIMINADO;
         } catch (Exception e) {
             log.error(e.getMessage());
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.DELETE_ERROR);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.DELETE_ERROR+e.getMessage());
         }
     }
 }

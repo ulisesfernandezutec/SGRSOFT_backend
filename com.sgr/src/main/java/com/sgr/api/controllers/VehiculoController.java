@@ -31,7 +31,7 @@ public class VehiculoController {
 			return vehiculoServiceImplement.list();
 		} catch (Exception e) {
 			log.error(e.getMessage());
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.READ_ERROR + Messages.VEHICULOS);
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.READ_ERROR + e.getMessage());
 		}
 	}
 
@@ -42,7 +42,7 @@ public class VehiculoController {
 			return vehiculoServiceImplement.getById(id);
 		} catch (Exception e) {
 			log.error(e.getMessage());
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.READ_ERROR + Messages.VEHICULOS);
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.READ_ERROR + e.getMessage());
 		}
 	}
 
@@ -55,7 +55,7 @@ public class VehiculoController {
 			return true;
 		} catch (Exception e) {
 			log.error(e.getMessage());
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.CREATE_ERROR + Messages.VEHICULOS);
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.CREATE_ERROR + e.getMessage());
 		}
 	}
 
@@ -69,10 +69,9 @@ public class VehiculoController {
 			return true;
 		} catch (Exception e) {
 			log.error(e.getMessage());
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.UPDATE_ERROR + Messages.VEHICULOS);
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.UPDATE_ERROR + e.getMessage());
 		}
 	}
-
 	// delete
 	@DeleteMapping("/vehiculo/{id}")
 	public boolean deleteVehiculo(@PathVariable Long id) {
@@ -81,7 +80,7 @@ public class VehiculoController {
 			return true;
 		} catch (Exception e) {
 			log.error(e.getMessage());
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.DELETE_ERROR+ Messages.VEHICULOS);
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.DELETE_ERROR+ e.getMessage());
 		}
 	}
 }

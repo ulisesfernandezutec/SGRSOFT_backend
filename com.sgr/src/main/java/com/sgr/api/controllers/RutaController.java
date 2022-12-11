@@ -28,7 +28,7 @@ public class RutaController {
         return rutaServiceImplement.list();
         } catch (Exception e) {
             log.error(e.getMessage());
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.READ_ERROR + Messages.RUTA);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.READ_ERROR + e.getMessage());
         }
     }
     //between
@@ -39,7 +39,7 @@ public class RutaController {
             return rutaServiceImplement.between(fromToDTO.getFrom(), fromToDTO.getFrom());
         } catch (Exception e) {
             log.error(e.getMessage());
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.READ_ERROR + Messages.RUTA);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.READ_ERROR + e.getMessage());
         }
     }
     // getone
@@ -49,7 +49,7 @@ public class RutaController {
             return rutaServiceImplement.getById(Long.parseLong(id));
         } catch (Exception e) {
             log.error(e.getMessage());
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.READ_ERROR + Messages.RUTA);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.READ_ERROR + e.getMessage());
         }
     }
     // setone
@@ -70,7 +70,7 @@ public class RutaController {
             return new Gson().fromJson(Messages.RT_CREADO + id, JsonObject.class).toString();
         } catch (Exception e) {
             log.error(e.getMessage());
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.CREATE_ERROR + Messages.RUTA);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.CREATE_ERROR + e.getMessage());
         }
     }
     // update
@@ -91,7 +91,7 @@ public class RutaController {
             return true;
         } catch (Exception e) {
             log.error(e.getMessage());
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.UPDATE_ERROR + Messages.RUTA);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.UPDATE_ERROR + e.getMessage());
         }
     }
     // delete
@@ -102,7 +102,7 @@ public class RutaController {
             return Messages.RT_ELIMINADO;
         } catch (Exception e) {
             log.error(e.getMessage());
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.DELETE_ERROR + Messages.RUTA);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.DELETE_ERROR + e.getMessage());
         }
     }
 }

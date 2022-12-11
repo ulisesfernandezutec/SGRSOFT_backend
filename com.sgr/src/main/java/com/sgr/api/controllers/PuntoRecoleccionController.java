@@ -33,7 +33,7 @@ public class PuntoRecoleccionController {
 			return puntoDRServiceImplement.list();
 		}catch (Exception e){
 			log.error(e.getMessage());
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.READ_ERROR+Messages.PUNTOS_DR);
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.READ_ERROR+e.getMessage());
 		}
 	}
 
@@ -44,7 +44,7 @@ public class PuntoRecoleccionController {
 			return puntoDRServiceImplement.findBetween(fromToDTO.getFrom(), fromToDTO.getTo());
 		}catch (Exception e){
 			log.error(e.getMessage());
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.READ_ERROR+Messages.PUNTOS_DR);
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.READ_ERROR+e.getMessage());
 		}
 	}
 
@@ -55,7 +55,7 @@ public class PuntoRecoleccionController {
 			return puntoDRServiceImplement.getById(id);
 		}catch (Exception e){
 			log.error(e.getMessage());
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.READ_ERROR+Messages.PUNTOS_DR);
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.READ_ERROR+e.getMessage());
 		}
 	}
 
@@ -68,7 +68,7 @@ public class PuntoRecoleccionController {
 			return true;
 		} catch (Exception e) {
 			log.error(e.getMessage());
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.CREATE_ERROR+Messages.PUNTOS_DR);
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.CREATE_ERROR+e.getMessage());
 		}
 	}
 
@@ -84,7 +84,7 @@ public class PuntoRecoleccionController {
 			return true;
 		} catch (Exception e) {
 			log.error(e.getMessage());
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.UPDATE_ERROR+Messages.PUNTOS_DR);
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.UPDATE_ERROR+e.getMessage());
 		}
 	}
 
