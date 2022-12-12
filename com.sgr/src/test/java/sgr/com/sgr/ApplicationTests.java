@@ -3,18 +3,14 @@ package sgr.com.sgr;
 import java.util.*;
 
 import com.sgr.api.interfaces.impl.*;
-import com.sgr.api.interfaces.service.EmailService;
 import com.sgr.bussines.Messages;
 import com.sgr.bussines.security.SecurityBussines;
 import com.sgr.bussines.security.SecurityGoogleTokenVerifier;
 import com.sgr.entities.*;
-
 import com.sgr.entities.google.GoogleBound;
 import com.sgr.entities.google.GoogleDistance;
 import com.sgr.entities.google.GoogleDuration;
 import lombok.extern.log4j.Log4j2;
-
-import net.bytebuddy.matcher.FilterableList;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
@@ -23,7 +19,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.ComponentScan;
-
 import static org.hamcrest.Matchers.containsString;
 import static org.junit.Assert.*;
 
@@ -156,7 +151,7 @@ class ApplicationTests {
 	@Order(9)
 	void createVehiculosTest() {
 		log.info(test+" > Creando Vehiculo Test");
-		Vehiculo vh = new Vehiculo(999999996L, "vh1", "MatTest", "MarcaTest", "ModeloTest", 999999996L);
+		Vehiculo vh = new Vehiculo(999999996L, "vh1", "MatTest", "MarcaTest", "ModeloTest", 999999996L, "1000","5","60");
 		vehiculo.create(vh);
 
 	}
@@ -576,7 +571,11 @@ class ApplicationTests {
 		List<RutaPunto> lista = null;
 		ruta.setPuntos(lista);
 		ruta.setChofer(usuario.findFirstByEmailLike("test1@test.com").get());
-		ruta.setVehiculo(new Vehiculo(999999996L, "VehiculoTest", "MAT1234", "Marca", "Modelo", 999999996L));
+		ruta.setVehiculo(new Vehiculo(999999996L, "VehiculoTest", "MAT1234", "Marca", "Modelo", 999999996L,"1000","1000","1000"));
+		ruta.setKilometrosTotales("100");
+		ruta.setTiempo_total("60");
+		ruta.setTiempo_traslado("60");
+		ruta.setTiempo_trabajo("90");
 		Ruta rstest = rutaServiceImplement.create(ruta);
 		assertEquals(999999996L,rstest.get_id());
 	}

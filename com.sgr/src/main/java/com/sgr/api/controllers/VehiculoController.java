@@ -23,7 +23,6 @@ public class VehiculoController {
 
 	@Autowired
 	private VehiculoServiceImplement vehiculoServiceImplement;
-
 	//getall
 	@GetMapping("/vehiculo")
 	public List<Vehiculo> getAll() {
@@ -49,7 +48,7 @@ public class VehiculoController {
 	//setone
 	@PostMapping("/vehiculo/")
 	public boolean setvehiculo(@RequestBody VehiculoDTO vehiculoDTO) {
-		Vehiculo vehiculo = new Vehiculo(vehiculoDTO.get_id(), vehiculoDTO.getNombre(), vehiculoDTO.getMatricula(), vehiculoDTO.getMarca(), vehiculoDTO.getModelo(), vehiculoDTO.getChofer());
+		Vehiculo vehiculo = new Vehiculo(vehiculoDTO.get_id(), vehiculoDTO.getNombre(), vehiculoDTO.getMatricula(), vehiculoDTO.getMarca(), vehiculoDTO.getModelo(), vehiculoDTO.getChofer(), vehiculoDTO.getTotalkilometros(), vehiculoDTO.getTotalrutas(), vehiculoDTO.getTotaltiempotrabajo());
 		try {
 			vehiculoServiceImplement.create(vehiculo);
 			return true;
@@ -58,10 +57,9 @@ public class VehiculoController {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.CREATE_ERROR + e.getMessage());
 		}
 	}
-
 	@PutMapping("/vehiculo/")
 	public boolean updatevehiculo(@RequestBody VehiculoDTO vehiculoDTO) {
-		Vehiculo vehiculo = new Vehiculo(vehiculoDTO.get_id(), vehiculoDTO.getNombre(), vehiculoDTO.getMatricula(), vehiculoDTO.getMarca(), vehiculoDTO.getModelo(), vehiculoDTO.getChofer());
+		Vehiculo vehiculo = new Vehiculo(vehiculoDTO.get_id(), vehiculoDTO.getNombre(), vehiculoDTO.getMatricula(), vehiculoDTO.getMarca(), vehiculoDTO.getModelo(), vehiculoDTO.getChofer(),vehiculoDTO.getTotalkilometros(), vehiculoDTO.getTotalrutas(), vehiculoDTO.getTotaltiempotrabajo());
 		try {
 			if (vehiculoServiceImplement.getById(vehiculo.get_id()) != null) {
 				vehiculoServiceImplement.update(vehiculo);
