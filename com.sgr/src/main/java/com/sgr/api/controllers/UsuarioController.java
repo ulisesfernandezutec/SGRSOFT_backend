@@ -15,6 +15,7 @@ import com.sgr.entities.Usuario;
 import org.springframework.web.server.ResponseStatusException;
 import org.w3c.dom.html.HTMLTableRowElement;
 
+import javax.mail.internet.AddressException;
 import javax.swing.text.html.Option;
 
 @Slf4j
@@ -48,7 +49,7 @@ public class UsuarioController {
 
 	//GetByEmail
 	@GetMapping("/usr/{email}")
-	public Usuario getUsuarioByEmail(@PathVariable("email") String email) {
+	public Usuario getUsuarioByEmail(@PathVariable("email") String email) throws AddressException {
 		email = Utils.validarEmail(email)?email:"";
 			try {
 				Optional<Usuario> usr = usuarioRepository.findFirstByEmailLike(email);
@@ -61,7 +62,7 @@ public class UsuarioController {
 
 	// setone
 	@PostMapping("/usr")
-	public Usuario setUsuario(@RequestBody UsuarioDTO usuarioDTO) {
+	public Usuario setUsuario(@RequestBody UsuarioDTO usuarioDTO) throws AddressException {
 		String email = Utils.validarEmail(usuarioDTO.getEmail())?usuarioDTO.getEmail():"";
 		 try {
 			 Usuario usuario = new Usuario(usuarioDTO.get_id(), usuarioDTO.getPwrd(), usuarioDTO.getRol(), usuarioDTO.getNombre(), usuarioDTO.getApellido(), usuarioDTO.getDocumento(), usuarioDTO.getTelefono(), email, usuarioDTO.getDireccion(), usuarioDTO.getEstado());

@@ -4,6 +4,7 @@ import java.util.*;
 
 import com.sgr.api.interfaces.impl.*;
 import com.sgr.bussines.Messages;
+import com.sgr.bussines.Utils;
 import com.sgr.bussines.security.SecurityBussines;
 import com.sgr.bussines.security.SecurityGoogleTokenVerifier;
 import com.sgr.entities.*;
@@ -19,6 +20,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.web.server.ResponseStatusException;
+
+import javax.mail.internet.AddressException;
+
 import static org.hamcrest.Matchers.containsString;
 import static org.junit.Assert.*;
 
@@ -687,5 +692,21 @@ class ApplicationTests {
 		mail.setRecipient("christopher.rodrigue@estudiantes.utec.edu.uy");
 		mail.setSubject("Email Test desde SGRSoft");
 		assertThat(emailServiceImplement.sendSimpleMail(mail), containsString(Messages.EMAIL_SEND));
+	}
+	@Test
+	@Order(60)
+	void emailValidator(){
+		String email = "sssssssssss.com";
+		Exception exception = assertThrows(ResponseStatusException.class, () -> {
+			Utils.validarEmail(email);
+		});
+		String actualMessage = exception.getMessage();
+		assertTrue(actualMessage.contains(Messages.EMAIL_INVALID));
+	}
+	@Test
+	@Order(61)
+	void emailValidatorTrue() throws AddressException {
+		String email = "imperiogweb@gmail.com";
+		assertTrue(Utils.validarEmail(email));
 	}
 }

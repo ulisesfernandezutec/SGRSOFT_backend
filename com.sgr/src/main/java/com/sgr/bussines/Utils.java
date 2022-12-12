@@ -78,7 +78,7 @@ public class Utils {
 		int y = cal.get(Calendar.YEAR);
 		return y;
 	}
-	public static boolean validarEmail(String email) {
+	public static boolean validarEmail(String email) throws AddressException{
 		boolean valid = false;
 		try {
 			InternetAddress emailAddr = new InternetAddress(email);
