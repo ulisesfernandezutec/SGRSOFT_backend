@@ -48,8 +48,8 @@ public class RutaPuntoController {
         rutaPunto.setGoogleDistance(rutaPuntoDTO.getGoogleDistance());
         rutaPunto.setEstado(rutaPunto.getEstado());
         rutaPunto.setPunto(rutaPunto.getPunto());
-        rutaPunto.setTiempo_trabajo(rutaPuntoDTO.getTiempo_trabajo());
-        rutaPunto.setTiempo_traslado(rutaPuntoDTO.getTiempo_traslado());
+        rutaPunto.setTiempoTrabajo(rutaPuntoDTO.getTiempoTrabajo());
+        rutaPunto.setTiempoTraslado(rutaPuntoDTO.getTiempoTraslado());
         try {
             Long id = 0L;
             rutaPunto.set_id(id);
@@ -69,8 +69,8 @@ public class RutaPuntoController {
         rutaPunto.setGoogleDistance(rutaPuntoDTO.getGoogleDistance());
         rutaPunto.setEstado(rutaPunto.getEstado());
         rutaPunto.setPunto(rutaPunto.getPunto());
-        rutaPunto.setTiempo_trabajo(rutaPuntoDTO.getTiempo_trabajo());
-        rutaPunto.setTiempo_traslado(rutaPuntoDTO.getTiempo_traslado());
+        rutaPunto.setTiempoTrabajo(rutaPuntoDTO.getTiempoTrabajo());
+        rutaPunto.setTiempoTraslado(rutaPuntoDTO.getTiempoTraslado());
         try {
             if (rutaPuntoServiceImplement.getById(rutaPunto.get_id()) != null) {
                 rutaPuntoServiceImplement.update(rutaPunto);

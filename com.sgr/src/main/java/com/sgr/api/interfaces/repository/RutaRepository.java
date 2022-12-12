@@ -1,6 +1,5 @@
 package com.sgr.api.interfaces.repository;
 
-import com.sgr.entities.PuntoRecoleccion;
 import com.sgr.entities.Ruta;
 import org.springframework.data.mongodb.repository.MongoRepository;
 

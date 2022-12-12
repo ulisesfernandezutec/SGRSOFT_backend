@@ -2,7 +2,6 @@ package com.sgr.api.interfaces.impl.google;
 
 import com.sgr.api.interfaces.repository.google.GoogleLocationRepository;
 import com.sgr.api.interfaces.service.google.GoogleLocationService;
-import com.sgr.entities.google.GoogleBound;
 import com.sgr.entities.google.GoogleLocation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -17,8 +17,8 @@ public class RutaDTO {
     private GoogleBound bound;
     private List<RutaPunto> puntos;
     private String estado;
-    private String tiempo_total;
-    private String tiempo_traslado;
-    private String tiempo_trabajo;
+    private String tiempoTotal;
+    private String tiempoTraslado;
+    private String tiempoTrabajo;
     private String kilometrosTotales;
 }

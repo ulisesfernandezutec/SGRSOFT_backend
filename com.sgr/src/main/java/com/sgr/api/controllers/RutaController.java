@@ -2,7 +2,6 @@ package com.sgr.api.controllers;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import com.google.j2objc.annotations.LoopTranslation;
 import com.sgr.api.interfaces.impl.RutaServiceImplement;
 import com.sgr.bussines.Messages;
 import com.sgr.entities.Ruta;
@@ -62,9 +61,9 @@ public class RutaController {
         ruta.setChofer(rutaDTO.getChofer());
         ruta.setBound(rutaDTO.getBound());
         ruta.setEstado(rutaDTO.getEstado());
-        ruta.setTiempo_total(rutaDTO.getTiempo_total());
-        ruta.setTiempo_trabajo(rutaDTO.getTiempo_trabajo());
-        ruta.setTiempo_traslado(rutaDTO.getTiempo_traslado());
+        ruta.setTiempoTotal(rutaDTO.getTiempoTotal());
+        ruta.setTiempoTrabajo(rutaDTO.getTiempoTrabajo());
+        ruta.setTiempoTraslado(rutaDTO.getTiempoTraslado());
         ruta.setKilometrosTotales(rutaDTO.getKilometrosTotales());
 
         try {
@@ -89,9 +88,9 @@ public class RutaController {
         ruta.setChofer(rutaDTO.getChofer());
         ruta.setBound(rutaDTO.getBound());
         ruta.setEstado(rutaDTO.getEstado());
-        ruta.setTiempo_total(rutaDTO.getTiempo_total());
-        ruta.setTiempo_trabajo(rutaDTO.getTiempo_trabajo());
-        ruta.setTiempo_traslado(rutaDTO.getTiempo_traslado());
+        ruta.setTiempoTotal(rutaDTO.getTiempoTotal());
+        ruta.setTiempoTrabajo(rutaDTO.getTiempoTrabajo());
+        ruta.setTiempoTraslado(rutaDTO.getTiempoTraslado());
         ruta.setKilometrosTotales(rutaDTO.getKilometrosTotales());
         try {
             if (rutaServiceImplement.getById(ruta.get_id()) != null) {
