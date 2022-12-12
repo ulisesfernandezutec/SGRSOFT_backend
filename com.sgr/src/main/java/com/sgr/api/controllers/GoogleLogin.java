@@ -40,7 +40,7 @@ public class GoogleLogin {
 				} else {
 					String userInfo = SecurityGoogleTokenVerifier.googleUserInfo(token);
 					JsonObject obj = new Gson().fromJson(userInfo, JsonObject.class);
-					Usuario user = new Usuario(1L, "", new Rol(3, "USER"), "", "", "", "", obj.get("email").getAsString(), "", "");
+					Usuario user = new Usuario(1L, "", new Rol(3, "Usuario"), "", "", "", "", obj.get("email").getAsString(), "", "Activo");
 					repo.create(user);
 					Optional<Usuario> us = repo.findFirstByEmailLike(resp.getEmail());
 					if (us.isPresent()) {
