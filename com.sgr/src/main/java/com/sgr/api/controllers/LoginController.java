@@ -14,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import javax.mail.internet.AddressException;
 import java.util.Optional;
 @RestController
 @Slf4j
@@ -31,6 +32,8 @@ public class LoginController {
 			pwd = loginDTO.getPwd();
 		}catch(JsonParseException pe){
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.ERROR + pe.getMessage());
+		} catch (AddressException e) {
+			throw new RuntimeException(e);
 		}
 		Optional<Usuario> u = user.findFirstByEmailLike(email);
 		AuthUser authUser = new AuthUser();
