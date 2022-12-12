@@ -11,9 +11,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class AuthUser {
 
- private String token;
- private String email;
- private Rol rol;
- private String login;
+ private String sgrToken;
+private Usuario usuario;
  
 }

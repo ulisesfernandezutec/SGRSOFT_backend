@@ -53,13 +53,16 @@ public class Messages {
 	public static final String EMAIL_SEND = "Mensaje enviado a";
 	public static final String EMAIL_ERROR = "Error al enviar mensaje a";
 	public static final String EMAIL_INVALID ="Email inválido";
-
+	public static final String EMAIL_EXIST = "Email ya existe";
 	public static final String CREATE_ERROR = "Error al crear ";
-
 	public static final String UPDATE_ERROR = "Error al actualziar ";
 	public static final String DELETE_ERROR = "Error al borrar ";
 	public static final String READ_ERROR = "Error al leer ";
 	public static final String ERROR = "Error";
+	public static final String ACTIVE = "SGR Soft - Activar Usuario";
+
+
+
 
 
 }

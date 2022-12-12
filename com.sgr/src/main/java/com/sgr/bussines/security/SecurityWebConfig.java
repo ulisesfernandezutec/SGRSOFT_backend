@@ -22,6 +22,7 @@ public class SecurityWebConfig {
 				.csrf().disable()
 				.authorizeRequests().antMatchers(HttpMethod.GET, "/glogin/**").permitAll()
 				.antMatchers(HttpMethod.POST, "/login/**").permitAll()
+				.antMatchers(HttpMethod.POST, "/usr/unsecure/**").permitAll()
 				.anyRequest().authenticated();
 		return http.build();
 	}
@@ -31,8 +32,7 @@ public class SecurityWebConfig {
 	            new UrlBasedCorsConfigurationSource();
 	        CorsConfiguration config = new CorsConfiguration();
 	        config.setAllowCredentials(true);
-	        config.addAllowedOrigin("https://www.karaiguazu.com/*");
-		 	config.addAllowedOrigin("https://api.karaiguazu.com/*");
+	        config.addAllowedOrigin("*");
 	        config.addAllowedHeader("*");
 	        config.addAllowedMethod("*");
 	        source.registerCorsConfiguration("/**", config);

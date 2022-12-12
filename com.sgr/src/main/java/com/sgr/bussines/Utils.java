@@ -7,10 +7,15 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.UUID;
 import java.util.stream.Collectors;
 import java.util.List;
+
+import com.sgr.api.interfaces.impl.EmailServiceImplement;
+import com.sgr.entities.Email;
 import com.sgr.entities.Usuario;
 import org.bson.Document;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -19,9 +24,11 @@ import javax.mail.internet.InternetAddress;
 
 
 public class Utils {
+	@Autowired
+	static EmailServiceImplement emailServiceImplement;
 	private Utils(){
 	}
-	
+
 	//Parsea una clase en un objeto Json
 	public static Document genJsonDocs(Object o) {
 		Gson gson = new Gson();
@@ -86,6 +93,24 @@ public class Utils {
 		} catch (AddressException ex) {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.EMAIL_INVALID);
 		}
+	}
+	public static boolean crearEmailValidación(UUID uuid, String email) throws AddressException{
+		boolean ok = false;
+		ok = validarEmail(email);
+		try{
+			Email mail = new Email();
+			mail.setRecipient(email);
+			mail.setSubject(Messages.ACTIVE);
+			mail.setMsgBody("Clic en el enlace para activar el usuario\r\n"+"....");
+
+			emailServiceImplement.sendSimpleMail(mail);
+
+
+		}
+		catch (Exception e){
+
+		}
+		return ok;
 	}
 
 }
