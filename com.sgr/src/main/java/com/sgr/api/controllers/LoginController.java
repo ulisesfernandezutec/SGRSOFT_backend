@@ -1,6 +1,7 @@
 package com.sgr.api.controllers;
 
 import com.google.gson.*;
+import com.sgr.api.interfaces.impl.UsuarioServiceImplement;
 import com.sgr.api.interfaces.repository.UsuarioRepository;
 import com.sgr.bussines.Messages;
 import com.sgr.bussines.Utils;
@@ -28,7 +29,7 @@ import java.util.UUID;
 public class LoginController {
 
 	@Autowired
-	UsuarioRepository user;
+	UsuarioServiceImplement user;
 
 	@PostMapping("/login")
 	public AuthUser login(@RequestBody LoginDTO loginDTO) {
@@ -69,7 +70,7 @@ public class LoginController {
 				usuario.set_id(id);
 				UUID ui = UUID.randomUUID();
 				usuario.setEstado(ui.toString());
-				user.save(usuario);
+				user.create(usuario);
 				usr = user.findFirstByEmailLike(usuarioDTO.getEmail());
 				Utils.crearEmailValidación(ui,usuario.getEmail());
 
@@ -89,6 +90,8 @@ public class LoginController {
 		Usuario usuario = new Usuario();
 		if(usr.isPresent()){
 		 	usuario = usr.get();
+			 usuario.setEstado("Activado");
+			 user.create(usuario);
 		}
 		model.addAttribute("email",usuario.getEmail());
 		return "confirm/confirm";

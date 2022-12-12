@@ -101,8 +101,7 @@ public class Utils {
 			Email mail = new Email();
 			mail.setRecipient(email);
 			mail.setSubject(Messages.ACTIVE);
-			mail.setMsgBody("Clic en el enlace para activar el usuario\r\n"+"http://localhost:8080/login/newuserok\"");
-
+			mail.setMsgBody("Clic en el enlace para activar el usuario\r\n"+"http://localhost:8080/login/newuserok/uuid="+uuid);
 			emailServiceImplement.sendSimpleMail(mail);
 
 
