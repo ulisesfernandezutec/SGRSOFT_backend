@@ -31,7 +31,7 @@ public class TokenController {
     @PostMapping("/tkn/{token}")
     public String refresh(@PathVariable String token) {
         HashMap<String, String> map = new HashMap<>();
-        if (SecurityBussines.chekTockenExp(token)) {
+        if (Boolean.TRUE.equals(SecurityBussines.chekTockenExp(token))) {
             String email = SecurityBussines.getTockenUsr(token);
             Optional<Usuario> op = usuarioServiceImplement.findFirstByEmailLike(email);
             map.put(Messages.TOKEN, SecurityBussines.getJWTToken(SecurityBussines.getTockenUsr(token), op.isPresent()? op.get() : null));

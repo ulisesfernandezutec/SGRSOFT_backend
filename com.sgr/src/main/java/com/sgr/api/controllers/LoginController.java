@@ -33,7 +33,7 @@ public class LoginController {
 		}catch(JsonParseException pe){
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.ERROR + pe.getMessage());
 		} catch (AddressException e) {
-			throw new RuntimeException(e);
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.ERROR + e.getMessage());
 		}
 		Optional<Usuario> u = user.findFirstByEmailLike(email);
 		AuthUser authUser = new AuthUser();

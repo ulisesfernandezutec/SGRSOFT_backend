@@ -61,8 +61,6 @@ class ApplicationTests {
 	@Autowired
 	RutaPuntoServiceImplement rutaPuntoServiceImplement;
 	@Autowired
-	RutaPuntoEstadoServiceImplement rutaPuntoEstadoServiceImplement;
-	@Autowired
 	EmailServiceImplement emailServiceImplement;
 
 	// TEST DE USUARIOS
@@ -578,9 +576,9 @@ class ApplicationTests {
 		ruta.setChofer(usuario.findFirstByEmailLike("test1@test.com").get());
 		ruta.setVehiculo(new Vehiculo(999999996L, "VehiculoTest", "MAT1234", "Marca", "Modelo", 999999996L,"1000","1000","1000"));
 		ruta.setKilometrosTotales("100");
-		ruta.setTiempo_total("60");
-		ruta.setTiempo_traslado("60");
-		ruta.setTiempo_trabajo("90");
+		ruta.setTiempoTotal("60");
+		ruta.setTiempoTraslado("60");
+		ruta.setTiempoTrabajo("90");
 		Ruta rstest = rutaServiceImplement.create(ruta);
 		assertEquals(999999996L,rstest.get_id());
 	}
@@ -614,11 +612,7 @@ class ApplicationTests {
 		RutaPunto rutap = new RutaPunto();
 		rutap.set_id(999999996L);
 		rutap.setPunto(new PuntoMapa());
-		RutaPuntoEstado rpe = new RutaPuntoEstado();
-		rpe.set_id(999999996L);
-		rpe.setNombre("RutaPuntoEstado test");
-		rpe.setDescripcion("Nueva Desc");
-		rutap.setEstado(rpe);
+		rutap.setEstado("Estado Test");
 		rutap.setGoogleDistance(new GoogleDistance());
 		rutap.setGoogleDuration(new GoogleDuration());
 		RutaPunto ptest = rutaPuntoServiceImplement.create(rutap);
@@ -636,11 +630,9 @@ class ApplicationTests {
 		log.info(test+" > Actualizando Ruta Punto");
 		String nombre = "Ruta 25";
 		RutaPunto rutaPunto = rutaPuntoServiceImplement.getById(999999996L);
-		RutaPuntoEstado rpe = rutaPunto.getEstado();
-		rpe.setDescripcion(nombre);
-		rutaPunto.setEstado(rpe);
+		rutaPunto.setEstado(nombre);
 		rutaPuntoServiceImplement.update(rutaPunto);
-		assertEquals(rutaPuntoServiceImplement.getById(999999996L).getEstado().getDescripcion(), nombre);
+		assertEquals(rutaPuntoServiceImplement.getById(999999996L).getEstado(), nombre);
 	}
 	@Test
 	@Order(54)
@@ -649,42 +641,9 @@ class ApplicationTests {
 		rutaPuntoServiceImplement.delete(999999996L);
 		assertNull(rutaPuntoServiceImplement.getById(999999996L));
 	}
+
 	@Test
 	@Order(55)
-	void createRPE() {
-		log.info(test+" > Creando Ruta Punto Estado");
-		RutaPuntoEstado rutaPuntoEstado = new RutaPuntoEstado();
-		rutaPuntoEstado.set_id(999999996L);
-		rutaPuntoEstado.setNombre("Nombre");
-		rutaPuntoEstado.setDescripcion("Desc");
-		RutaPuntoEstado rpetest = rutaPuntoEstadoServiceImplement.create(rutaPuntoEstado);
-		assertEquals(999999996L,rpetest.get_id());
-	}
-	@Test
-	@Order(56)
-	void findRPE() {
-		log.info(test+" > Obteniendo Ruta Punto Estado");
-		assertEquals(999999996L,rutaPuntoEstadoServiceImplement.getById(999999996L).get_id());
-	}
-	@Test
-	@Order(57)
-	void updateRPE() {
-		log.info(test+" > Actualizando Ruta Punto Estado");
-		String nombre = "Nuevo nombre";
-		RutaPuntoEstado ruta = rutaPuntoEstadoServiceImplement.getById(999999996L);
-		ruta.setNombre(nombre);
-		rutaPuntoEstadoServiceImplement.update(ruta);
-		assertEquals(rutaPuntoEstadoServiceImplement.getById(999999996L).getNombre(), nombre);
-	}
-	@Test
-	@Order(58)
-	void deleteRPE(){
-		log.info(test+" > Eliminando Ruta Punto Estado");
-		rutaPuntoEstadoServiceImplement.delete(999999996L);
-		assertNull(rutaPuntoEstadoServiceImplement.getById(999999996L));
-	}
-	@Test
-	@Order(59)
 	void email(){
 		log.info(test+" > Enviando emails test");
 		Email mail = new Email();
@@ -694,7 +653,7 @@ class ApplicationTests {
 		assertThat(emailServiceImplement.sendSimpleMail(mail), containsString(Messages.EMAIL_SEND));
 	}
 	@Test
-	@Order(60)
+	@Order(56)
 	void emailValidator(){
 		String email = "sssssssssss.com";
 		Exception exception = assertThrows(ResponseStatusException.class, () -> {
@@ -704,7 +663,7 @@ class ApplicationTests {
 		assertTrue(actualMessage.contains(Messages.EMAIL_INVALID));
 	}
 	@Test
-	@Order(61)
+	@Order(57)
 	void emailValidatorTrue() throws AddressException {
 		String email = "imperiogweb@gmail.com";
 		assertTrue(Utils.validarEmail(email));

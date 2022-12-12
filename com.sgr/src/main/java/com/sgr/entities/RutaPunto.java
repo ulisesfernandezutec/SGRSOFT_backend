@@ -16,8 +16,8 @@ public class RutaPunto {
     private PuntoMapa punto;
     private GoogleDuration googleDuration;
     private GoogleDistance googleDistance;
-    private RutaPuntoEstado estado;
-    private String tiempo_trabajo;
-    private String tiempo_traslado;
+    private String estado;
+    private String tiempoTrabajo;
+    private String tiempoTraslado;
 
 }

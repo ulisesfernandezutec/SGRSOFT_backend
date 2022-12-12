@@ -3,7 +3,6 @@ package com.sgr.api.interfaces.impl.google;
 import com.sgr.api.interfaces.repository.google.GoogleDistanceRepository;
 import com.sgr.api.interfaces.service.google.GoogleDistanceService;
 import com.sgr.entities.google.GoogleDistance;
-import com.sgr.entities.google.GoogleLocation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
