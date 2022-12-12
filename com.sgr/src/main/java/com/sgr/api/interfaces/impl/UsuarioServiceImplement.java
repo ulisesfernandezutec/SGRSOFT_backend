@@ -83,4 +83,9 @@ public class UsuarioServiceImplement implements UsuarioService {
 	public Optional<Usuario> findFirstByEmailLike(String email) {
 		 return usuarioRepository.findFirstByEmailLike(email);
 	}
+
+	@Override
+	public Optional<Usuario> findFirstByEstadoLike(String uuid) {
+		return usuarioRepository.findFirstByEstadoLike(uuid);
+	}
 }

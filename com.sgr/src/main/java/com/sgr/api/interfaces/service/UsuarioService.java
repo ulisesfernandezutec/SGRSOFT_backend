@@ -18,4 +18,7 @@ public interface UsuarioService {
     List < Usuario > list();
 
     Optional<Usuario> findFirstByEmailLike(String email);
+
+	Optional<Usuario> findFirstByEstadoLike(String uuid);
+
 }

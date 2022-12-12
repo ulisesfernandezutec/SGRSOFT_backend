@@ -8,4 +8,6 @@ public interface UsuarioRepository extends MongoRepository <Usuario, Long >{
 
 	 Optional<Usuario> findFirstByEmailLike(String email);
 
+	Optional<Usuario> findFirstByEstadoLike(String estado);
+
 }
