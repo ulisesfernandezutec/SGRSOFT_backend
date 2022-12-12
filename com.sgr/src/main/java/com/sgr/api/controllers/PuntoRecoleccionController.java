@@ -95,8 +95,7 @@ public class PuntoRecoleccionController {
 			puntoDRServiceImplement.delete(id);
 			return true;
 		} catch (Exception e) {
-			e.getMessage();
-			return false;
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.DELETE_ERROR+e.getMessage());
 		}
 	}
 
