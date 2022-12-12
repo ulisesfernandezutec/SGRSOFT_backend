@@ -6,10 +6,8 @@ import com.google.j2objc.annotations.LoopTranslation;
 import com.sgr.api.interfaces.impl.RutaServiceImplement;
 import com.sgr.bussines.Messages;
 import com.sgr.entities.Ruta;
-import com.sgr.entities.RutaPunto;
 import com.sgr.entities.dto.FromToDTO;
 import com.sgr.entities.dto.RutaDTO;
-import com.sgr.entities.dto.RutaPuntoDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -63,6 +61,12 @@ public class RutaController {
         ruta.setNombre(rutaDTO.getNombre());
         ruta.setChofer(rutaDTO.getChofer());
         ruta.setBound(rutaDTO.getBound());
+        ruta.setEstado(rutaDTO.getEstado());
+        ruta.setTiempo_total(rutaDTO.getTiempo_total());
+        ruta.setTiempo_trabajo(rutaDTO.getTiempo_trabajo());
+        ruta.setTiempo_traslado(rutaDTO.getTiempo_traslado());
+        ruta.setKilometrosTotales(rutaDTO.getKilometrosTotales());
+
         try {
             Long id = 0L;
             ruta.set_id(id);
@@ -84,6 +88,11 @@ public class RutaController {
         ruta.setNombre(rutaDTO.getNombre());
         ruta.setChofer(rutaDTO.getChofer());
         ruta.setBound(rutaDTO.getBound());
+        ruta.setEstado(rutaDTO.getEstado());
+        ruta.setTiempo_total(rutaDTO.getTiempo_total());
+        ruta.setTiempo_trabajo(rutaDTO.getTiempo_trabajo());
+        ruta.setTiempo_traslado(rutaDTO.getTiempo_traslado());
+        ruta.setKilometrosTotales(rutaDTO.getKilometrosTotales());
         try {
             if (rutaServiceImplement.getById(ruta.get_id()) != null) {
                 rutaServiceImplement.update(ruta);

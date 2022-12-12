@@ -9,4 +9,7 @@ public class VehiculoDTO {
         private String marca;
         private String modelo;
         private Long chofer;
+        private String totalkilometros;
+        private String totalrutas;
+        private String totaltiempotrabajo;
 }
