@@ -11,6 +11,12 @@ import java.util.stream.Collectors;
 import java.util.List;
 import com.sgr.entities.Usuario;
 import org.bson.Document;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.server.ResponseStatusException;
+
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+
 
 public class Utils {
 	private Utils(){
@@ -71,6 +77,16 @@ public class Utils {
 		cal.setTime(new Date(c));
 		int y = cal.get(Calendar.YEAR);
 		return y;
+	}
+	public static boolean validarEmail(String email) {
+		boolean valid = false;
+		try {
+			InternetAddress emailAddr = new InternetAddress(email);
+			emailAddr.validate();
+			return true;
+		} catch (AddressException ex) {
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.EMAIL_INVALID);
+		}
 	}
 
 }

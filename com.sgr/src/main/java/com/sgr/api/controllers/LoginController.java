@@ -3,6 +3,7 @@ package com.sgr.api.controllers;
 import com.google.gson.*;
 import com.sgr.api.interfaces.repository.UsuarioRepository;
 import com.sgr.bussines.Messages;
+import com.sgr.bussines.Utils;
 import com.sgr.bussines.security.SecurityBussines;
 import com.sgr.entities.AuthUser;
 import com.sgr.entities.Usuario;
@@ -26,12 +27,11 @@ public class LoginController {
 		String email = "";
 		String pwd = "";
 		try {
-			email = loginDTO.getEmail();
+			email = Utils.validarEmail(loginDTO.getEmail())?loginDTO.getEmail():null;
 			pwd = loginDTO.getPwd();
 		}catch(JsonParseException pe){
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.ERROR + pe.getMessage());
 		}
-
 		Optional<Usuario> u = user.findFirstByEmailLike(email);
 		AuthUser authUser = new AuthUser();
 		//Veriicar PSW
