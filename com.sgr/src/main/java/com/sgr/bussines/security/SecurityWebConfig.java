@@ -22,7 +22,7 @@ public class SecurityWebConfig {
 				.csrf().disable().cors().disable()
 				.authorizeRequests().antMatchers(HttpMethod.GET, "/glogin/**").permitAll()
 				.antMatchers(HttpMethod.POST, "/login/**").permitAll()
-				.antMatchers(HttpMethod.POST, "/usr/unsecure/**").permitAll()
+				.antMatchers(HttpMethod.GET, "/login/**").permitAll()
 				.anyRequest().authenticated();
 		return http.build();
 	}

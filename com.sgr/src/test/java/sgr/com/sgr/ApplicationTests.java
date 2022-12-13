@@ -2,6 +2,8 @@ package sgr.com.sgr;
 
 import java.util.*;
 
+import com.sgr.api.controllers.LoginController;
+import com.sgr.api.controllers.MailController;
 import com.sgr.api.interfaces.impl.*;
 import com.sgr.bussines.Messages;
 import com.sgr.bussines.Utils;
@@ -648,7 +650,7 @@ class ApplicationTests {
 		log.info(test+" > Enviando emails test");
 		Email mail = new Email();
 		mail.setMsgBody("Mensaje de prueba");
-		mail.setRecipient("christopher.rodrigue@estudiantes.utec.edu.uy");
+		mail.setRecipient("chrimig@hotmail.com");
 		mail.setSubject("Email Test desde SGRSoft");
 		assertThat(emailServiceImplement.sendSimpleMail(mail), containsString(Messages.EMAIL_SEND));
 	}

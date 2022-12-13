@@ -46,7 +46,6 @@ public class APOD {
 				@JsonProperty("sgrToken") String sgrToken,
 				@JsonProperty("usuario") Usuario usuario)
 		{
-				
 		this.azp = azp;
 		this.hd = hd;
 		this.sub = sub;

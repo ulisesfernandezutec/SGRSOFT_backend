@@ -14,10 +14,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import com.sgr.entities.Usuario;
 import org.springframework.web.server.ResponseStatusException;
-import org.w3c.dom.html.HTMLTableRowElement;
-
 import javax.mail.internet.AddressException;
-import javax.swing.text.html.Option;
+import javax.websocket.server.PathParam;
 
 @Slf4j
 @RestController
@@ -49,7 +47,7 @@ public class UsuarioController {
 	}
 
 	//GetByEmail
-	@GetMapping("/usr/{email}")
+	@GetMapping("/usr/email/{email}")
 	public Usuario getUsuarioByEmail(@PathVariable("email") String email) throws AddressException {
 		email = Utils.validarEmail(email)?email:"";
 			try {
