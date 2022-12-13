@@ -7,12 +7,9 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.UUID;
 import java.util.stream.Collectors;
 import java.util.List;
-
-import com.sgr.api.interfaces.impl.EmailServiceImplement;
-import com.sgr.entities.Email;
+import com.sgr.api.interfaces.service.EmailService;
 import com.sgr.entities.Usuario;
 import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +22,7 @@ import javax.mail.internet.InternetAddress;
 
 public class Utils {
 	@Autowired
-	static EmailServiceImplement emailServiceImplement;
+	private static EmailService emailService;
 	private Utils(){
 	}
 
@@ -65,25 +62,21 @@ public class Utils {
 		);
 	}
 	public static List<List<LocalDateTime>> filtrarAnios(List<Usuario> lista) {
-		List<List<LocalDateTime>> groupedDates = lista.stream()
+		return lista.stream()
 				.map(dateInMilliseconds -> LocalDateTime.ofInstant(Instant.ofEpochMilli(dateInMilliseconds.get_id()), ZoneId.systemDefault()))
 				.collect(Collectors.groupingBy(LocalDateTime::getYear))
 				.values().stream().collect(Collectors.toList());
-		
-		return groupedDates;
 	}
 
 	public static int getMonth(long c){
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(new Date(c));
-		int month = cal.get(Calendar.MONTH);
-		return month;
+		return cal.get(Calendar.MONTH);
 	}
 	public static int getYear(long c){
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(new Date(c));
-		int y = cal.get(Calendar.YEAR);
-		return y;
+		return cal.get(Calendar.YEAR);
 	}
 	public static boolean validarEmail(String email) throws AddressException{
 		try {
@@ -94,22 +87,4 @@ public class Utils {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.EMAIL_INVALID);
 		}
 	}
-	public static boolean crearEmailValidación(UUID uuid, String email) throws AddressException{
-		boolean ok = false;
-		ok = validarEmail(email);
-		try{
-			Email mail = new Email();
-			mail.setRecipient(email);
-			mail.setSubject(Messages.ACTIVE);
-			mail.setMsgBody("Clic en el enlace para activar el usuario\r\n"+"http://localhost:8080/login/newuserok/uuid="+uuid);
-			emailServiceImplement.sendSimpleMail(mail);
-
-
-		}
-		catch (Exception e){
-
-		}
-		return ok;
-	}
-
 }

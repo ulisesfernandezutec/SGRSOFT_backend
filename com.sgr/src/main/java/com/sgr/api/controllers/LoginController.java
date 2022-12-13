@@ -1,26 +1,23 @@
 package com.sgr.api.controllers;
 
 import com.google.gson.*;
+import com.sgr.api.interfaces.impl.EmailServiceImplement;
 import com.sgr.api.interfaces.impl.UsuarioServiceImplement;
-import com.sgr.api.interfaces.repository.UsuarioRepository;
 import com.sgr.bussines.Messages;
 import com.sgr.bussines.Utils;
 import com.sgr.bussines.security.SecurityBussines;
 import com.sgr.entities.AuthUser;
+import com.sgr.entities.Email;
 import com.sgr.entities.Usuario;
 import com.sgr.entities.dto.UsuarioDTO;
 import com.sgr.entities.dto.google.LoginDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.mail.internet.AddressException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -30,7 +27,8 @@ public class LoginController {
 
 	@Autowired
 	UsuarioServiceImplement user;
-
+	@Autowired
+	EmailServiceImplement emailServiceImplement;
 	@PostMapping("/login")
 	public AuthUser login(@RequestBody LoginDTO loginDTO) {
 		String email;
@@ -72,8 +70,16 @@ public class LoginController {
 				usuario.setEstado(ui.toString());
 				user.create(usuario);
 				usr = user.findFirstByEmailLike(usuarioDTO.getEmail());
-				Utils.crearEmailValidación(ui,usuario.getEmail());
+				if(usr.isPresent()){
+					//Crear email
 
+					Email mail = new Email();
+					mail.setRecipient(usr.get().getEmail());
+					mail.setSubject(Messages.ACTIVE);
+					String msg = "Clic en el enlace para activar el usuario\r\n"+"https://api.karaiguazu.com/login/newuserok/?uuid="+usr.get().getEstado();
+					mail.setMsgBody(msg);
+					emailServiceImplement.sendSimpleMail(mail);
+				}
 				return usr.orElse(null);
 			} catch (Exception e) {
 				log.error(e.getMessage());
@@ -83,17 +89,7 @@ public class LoginController {
 			log.error(Messages.CREATE_ERROR + Messages.EMAIL_EXIST);
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.CREATE_ERROR + Messages.EMAIL_EXIST);
 		}
-
-	}@GetMapping("/login/newuserok")
-	public String allArticles(@PathVariable String uuid, Model model) {
-		Optional <Usuario> usr =user.findFirstByEstadoLike(uuid);
-		Usuario usuario = new Usuario();
-		if(usr.isPresent()){
-		 	usuario = usr.get();
-			 usuario.setEstado("Activado");
-			 user.create(usuario);
-		}
-		model.addAttribute("email",usuario.getEmail());
-		return "confirm/confirm";
 	}
+
+
 }

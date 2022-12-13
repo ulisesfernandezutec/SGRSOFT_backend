@@ -42,6 +42,7 @@ public class UsuarioServiceImplement implements UsuarioService {
 			usr.setEmail(usuario.getEmail());
 			usr.setRol(usuario.getRol());
 			usr.setTelefono(usuario.getTelefono());
+			usr.setEstado(usuario.getEstado());
 			this.usuarioRepository.save(usr);
 			return usr;
 		} else {
