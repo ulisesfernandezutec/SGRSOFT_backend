@@ -32,7 +32,7 @@ import static org.junit.Assert.*;
 @Log4j2
 @SpringBootTest
 @SpringBootConfiguration
-@ComponentScan(basePackages = { "com.sgr" })
+@ComponentScan(basePackages = { "com.sgr.properties" })
 @TestMethodOrder(OrderAnnotation.class)
 
 class ApplicationTests {

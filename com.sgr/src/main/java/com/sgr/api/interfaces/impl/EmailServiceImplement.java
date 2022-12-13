@@ -9,6 +9,8 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
+import java.util.Properties;
+
 @Slf4j
 @Service
 public class EmailServiceImplement implements EmailService {
@@ -21,6 +23,8 @@ public class EmailServiceImplement implements EmailService {
     public String sendSimpleMail(Email details)
     {
         try {
+
+
             SimpleMailMessage mailMessage = new SimpleMailMessage();
             mailMessage.setFrom(USERNAME);
             mailMessage.setTo(details.getRecipient());
