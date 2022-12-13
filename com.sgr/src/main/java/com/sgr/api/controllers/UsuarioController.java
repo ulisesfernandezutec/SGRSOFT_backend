@@ -64,7 +64,7 @@ public class UsuarioController {
 	public Usuario setUsuario(@RequestBody UsuarioDTO usuarioDTO) throws AddressException {
 		String email = Utils.validarEmail(usuarioDTO.getEmail())?usuarioDTO.getEmail():"";
 		 try {
-			 Usuario usuario = new Usuario(usuarioDTO.get_id(), usuarioDTO.getPwrd(), usuarioDTO.getRol(), usuarioDTO.getNombre(), usuarioDTO.getApellido(), usuarioDTO.getDocumento(), usuarioDTO.getTelefono(), email, usuarioDTO.getDireccion(), usuarioDTO.getEstado());
+			 Usuario usuario = new Usuario(usuarioDTO.get_id(), usuarioDTO.getPwrd(), usuarioDTO.getRol(), usuarioDTO.getNombre(), usuarioDTO.getApellido(), usuarioDTO.getTelefono(), email, usuarioDTO.getDireccion(), usuarioDTO.getEstado());
 			 Long id = 0L;
 			 usuario.set_id(id);
 			 usuarioRepository.create(usuario);
@@ -79,7 +79,7 @@ public class UsuarioController {
 	// update
 	@PutMapping("/usr")
 	public boolean updateUsuario(@RequestBody UsuarioDTO usuarioDTO) {
-		Usuario usuario = new Usuario(usuarioDTO.get_id(), usuarioDTO.getPwrd(), usuarioDTO.getRol(), usuarioDTO.getNombre(), usuarioDTO.getApellido(),usuarioDTO.getDocumento(), usuarioDTO.getTelefono(), usuarioDTO.getEmail(), usuarioDTO.getDireccion(), usuarioDTO.getEstado());
+		Usuario usuario = new Usuario(usuarioDTO.get_id(), usuarioDTO.getPwrd(), usuarioDTO.getRol(), usuarioDTO.getNombre(), usuarioDTO.getApellido(), usuarioDTO.getTelefono(), usuarioDTO.getEmail(), usuarioDTO.getDireccion(), usuarioDTO.getEstado());
 		try {
 			if (usuarioRepository.getById(usuario.get_id()) != null) {
 				usuarioRepository.update(usuario);
