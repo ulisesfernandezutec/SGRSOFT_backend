@@ -2,7 +2,7 @@ package com.sgr.bussines;
 
 import com.google.gson.Gson;
 
-import java.nio.charset.Charset;
+import java.security.NoSuchAlgorithmException;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -18,12 +18,17 @@ import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
-
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 
-
 public class Utils {
+
+	static final String KEY = "thisesalakey";
+	public static String getKey(){
+		return KEY;
+	}
+
+
 	@Autowired
 	private static EmailService emailService;
 	private Utils(){
@@ -103,10 +108,9 @@ public class Utils {
 		Random random = new Random();
 
 		String generatedString = random.ints(leftLimit, rightLimit + 1)
-				.limit(targetStringLength)
+			.limit(targetStringLength)
 				.collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
 				.toString();
 		return generatedString;
-		
 	}
 }

@@ -9,6 +9,7 @@ import com.sgr.api.controllers.MailController;
 import com.sgr.api.interfaces.impl.*;
 import com.sgr.bussines.Messages;
 import com.sgr.bussines.Utils;
+import com.sgr.bussines.security.AESEncryptionDecryption;
 import com.sgr.bussines.security.SecurityBussines;
 import com.sgr.bussines.security.SecurityGoogleTokenVerifier;
 import com.sgr.entities.*;
@@ -659,6 +660,7 @@ class ApplicationTests {
 	@Test
 	@Order(56)
 	void emailValidator(){
+		log.info(test+" > Validando estructura de cuentas de correo");
 		String email = "sssssssssss.com";
 		Exception exception = assertThrows(ResponseStatusException.class, () -> {
 			Utils.validarEmail(email);
@@ -669,7 +671,18 @@ class ApplicationTests {
 	@Test
 	@Order(57)
 	void emailValidatorTrue() throws AddressException {
+		log.info(test+" > Validando estructura de cuentas de correo");
 		String email = "imperiogweb@gmail.com";
 		assertTrue(Utils.validarEmail(email));
+	}
+	@Test
+	@Order(58)
+	void encrypt() {
+		log.info(test+" > Validando funcion de encriptado");
+		String email = "Test encript";
+		AESEncryptionDecryption crypt = new AESEncryptionDecryption();
+		String encriptada = crypt.encrypt(email);
+		String decriptada = crypt.decrypt(encriptada);
+		assertEquals(email, decriptada);
 	}
 }
