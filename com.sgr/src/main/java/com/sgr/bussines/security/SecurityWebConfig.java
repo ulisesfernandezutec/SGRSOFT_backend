@@ -19,7 +19,7 @@ public class SecurityWebConfig {
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http.addFilterAfter(new SecurityJWTAuthFilter(), UsernamePasswordAuthenticationFilter.class)
-				.csrf().disable().cors(cors -> cors.disable())
+				.csrf().disable()
 				.authorizeRequests()
 				.antMatchers(HttpMethod.GET, "/glogin/**").permitAll()
 				.antMatchers(HttpMethod.POST, "/login/**").permitAll()
@@ -33,12 +33,15 @@ public class SecurityWebConfig {
 	            new UrlBasedCorsConfigurationSource();
 	        CorsConfiguration config = new CorsConfiguration();
 	        config.setAllowCredentials(true);
+			config.addAllowedOrigin("https://www.karaiguazu.com");
+		 	config.addAllowedOrigin("https://www.api.karaiguazu.com");
+		 	config.addAllowedOrigin("https://api.karaiguazu.com");
 	        config.addAllowedHeader("*");
 	        config.addAllowedMethod("*");
 	        source.registerCorsConfiguration("/**", config);
 	        return new CorsFilter(source);
 	    }
-	/*
+
 	@Bean
 	public ClassLoaderTemplateResolver secondaryTemplateResolver() {
 		ClassLoaderTemplateResolver secondaryTemplateResolver = new ClassLoaderTemplateResolver();
@@ -50,7 +53,5 @@ public class SecurityWebConfig {
 		secondaryTemplateResolver.setCheckExistence(true);
 		return secondaryTemplateResolver;
 		}
-	}
-	 */
 }
 
