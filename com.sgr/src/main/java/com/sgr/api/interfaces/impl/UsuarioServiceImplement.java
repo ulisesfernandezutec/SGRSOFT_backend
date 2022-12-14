@@ -38,7 +38,6 @@ public class UsuarioServiceImplement implements UsuarioService {
 			usr.setApellido(usuario.getApellido());
 			usr.setPwrd(usuario.getPwrd());
 			usr.setDireccion(usuario.getDireccion());
-			usr.setDocumento(usuario.getDocumento());
 			usr.setEmail(usuario.getEmail());
 			usr.setRol(usuario.getRol());
 			usr.setTelefono(usuario.getTelefono());

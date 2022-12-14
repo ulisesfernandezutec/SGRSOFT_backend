@@ -1,7 +1,9 @@
 package sgr.com.sgr;
 
+import java.time.Instant;
 import java.util.*;
 
+import ch.qos.logback.core.CoreConstants;
 import com.sgr.api.controllers.LoginController;
 import com.sgr.api.controllers.MailController;
 import com.sgr.api.interfaces.impl.*;
@@ -26,6 +28,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import javax.mail.internet.AddressException;
 
+import static com.sgr.bussines.Utils.fechasAleatorias;
 import static org.hamcrest.Matchers.containsString;
 import static org.junit.Assert.*;
 
@@ -71,7 +74,7 @@ class ApplicationTests {
 	void createUsuario() {
 		log.info(test+"Creando Usuario Test");
 		// Usuario tp = new Usuario(999999996L,);
-		Usuario usr = new Usuario(999999996L, "apiId", null, "nombre", "apellido", "documento", "telefono", "email", "direccion","estado");
+		Usuario usr = new Usuario(999999996L, "apiId", null, "nombre", "apellido", "documento", "telefono", "email","estado");
 		usuario.create(usr);
 	}
 
@@ -329,7 +332,7 @@ class ApplicationTests {
 		String email = "test"+1+"@test.com";
 		Optional<Usuario> op = usuario.findFirstByEmailLike(email);
 		if(!op.isPresent()) {
-			Usuario usr = new Usuario(1L, "apiId", new Rol(1, "ADMIN"), "nombre", "apellido", "documento", "telefono",
+			Usuario usr = new Usuario(1L, "apiId", new Rol(1, "ADMIN"), "nombre", "apellido", "telefono",
 					email, "direccion", "estado");
 			usuario.create(usr);
 			op = usuario.findFirstByEmailLike(email);
@@ -344,7 +347,7 @@ class ApplicationTests {
 		String email = "test"+2+"@test.com";
 		Optional<Usuario> op = usuario.findFirstByEmailLike(email);
 		if(!op.isPresent()) {
-			Usuario usr = new Usuario(1L, "username2", new Rol(2, "USER"), "nombre", "apellido", "documento", "telefono",
+			Usuario usr = new Usuario(1L, "username2", new Rol(2, "USER"), "nombre", "apellido", "telefono",
 					email, "direccion","estado");
 			usuario.create(usr);
 			op = usuario.findFirstByEmailLike(email);
@@ -359,7 +362,7 @@ class ApplicationTests {
 		String email = "test"+3+"@test.com";
 		Optional<Usuario> op = usuario.findFirstByEmailLike(email);
 		if(!op.isPresent()) {
-			Usuario usr = new Usuario(1L, "apiId", new Rol(3, "CHOFER"), "nombre", "apellido", "documento", "telefono",
+			Usuario usr = new Usuario(1L, "apiId", new Rol(3, "CHOFER"), "nombre", "apellido", "telefono",
 					email, "direccion", "estado");
 			usuario.create(usr);
 			op = usuario.findFirstByEmailLike(email);
@@ -373,7 +376,7 @@ class ApplicationTests {
 		String email = "test"+3+"@test.com";
 		Optional<Usuario> op = usuario.findFirstByEmailLike(email);
 		if(!op.isPresent()) {
-			Usuario usr = new Usuario(1L, "apiId", new Rol(3, "CHOFER"), "nombre", "apellido", "documento", "telefono",
+			Usuario usr = new Usuario(1L, "apiId", new Rol(3, "CHOFER"), "nombre", "apellido", "telefono",
 					email, "direccion","estado");
 			usuario.create(usr);
 			op = usuario.findFirstByEmailLike(email);
@@ -389,7 +392,7 @@ class ApplicationTests {
 		Optional<Usuario> op = usuario.findFirstByEmailLike(u);
 		if(!op.isPresent()) {
 
-			Usuario usr = new Usuario(1L, "apiId", new Rol(3, "CHOFER"), "nombre", "apellido", "documento", "telefono", "test@i123.com", "direccion","estado");
+			Usuario usr = new Usuario(1L, "apiId", new Rol(3, "CHOFER"), "nombre", "apellido", "telefono", "test@i123.com", "direccion","estado");
 			usuario.create(usr);
 			op = usuario.findFirstByEmailLike(u);
 		}
@@ -643,7 +646,6 @@ class ApplicationTests {
 		rutaPuntoServiceImplement.delete(999999996L);
 		assertNull(rutaPuntoServiceImplement.getById(999999996L));
 	}
-
 	@Test
 	@Order(55)
 	void email(){

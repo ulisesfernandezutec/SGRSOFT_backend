@@ -1,12 +1,12 @@
 package com.sgr.bussines;
 
 import com.google.gson.Gson;
-
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 import java.util.List;
 import com.sgr.api.interfaces.service.EmailService;
@@ -86,5 +86,11 @@ public class Utils {
 		} catch (AddressException ex) {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.EMAIL_INVALID);
 		}
+	}
+	public static Instant fechasAleatorias(Instant start, Instant end) {
+		long startSeconds = start.getEpochSecond();
+		long endSeconds = end.getEpochSecond();
+		long random = ThreadLocalRandom.current().nextLong(startSeconds, endSeconds);
+		return Instant.ofEpochSecond(random);
 	}
 }

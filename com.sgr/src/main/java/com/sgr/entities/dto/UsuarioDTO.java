@@ -10,7 +10,6 @@ public class UsuarioDTO {
     private Rol rol;
     private String nombre;
     private String apellido;
-    private String documento;
     private String telefono;
     private String email;
     private String direccion;
