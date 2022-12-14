@@ -4,6 +4,7 @@ import java.time.Instant;
 import java.util.*;
 
 import ch.qos.logback.core.CoreConstants;
+import com.google.api.client.util.DateTime;
 import com.sgr.api.controllers.LoginController;
 import com.sgr.api.controllers.MailController;
 import com.sgr.api.interfaces.impl.*;
@@ -581,10 +582,9 @@ class ApplicationTests {
 		ruta.setPuntos(lista);
 		ruta.setChofer(usuario.findFirstByEmailLike("test1@test.com").get());
 		ruta.setVehiculo(new Vehiculo(999999996L, "VehiculoTest", "MAT1234", "Marca", "Modelo", 999999996L,"1000","1000","1000"));
-		ruta.setKilometrosTotales("100");
-		ruta.setTiempoTotal("60");
-		ruta.setTiempoTraslado("60");
-		ruta.setTiempoTrabajo("90");
+		ruta.setFecha(new Date().getTime());
+		ruta.setTiempoTotal(100.00);
+		ruta.setTiempoTrabajo(100.5);
 		Ruta rstest = rutaServiceImplement.create(ruta);
 		assertEquals(999999996L,rstest.get_id());
 	}
@@ -619,8 +619,9 @@ class ApplicationTests {
 		rutap.set_id(999999996L);
 		rutap.setPunto(new PuntoMapa());
 		rutap.setEstado("Estado Test");
-		rutap.setGoogleDistance(new GoogleDistance());
-		rutap.setGoogleDuration(new GoogleDuration());
+		rutap.setDistancia(100.5);
+		rutap.setTiempoTraslado("1000.5");
+		rutap.setTiempoTraslado("25");
 		RutaPunto ptest = rutaPuntoServiceImplement.create(rutap);
 		assertEquals(999999996L,ptest.get_id());
 	}

@@ -1,5 +1,6 @@
 package com.sgr.entities;
 
+import com.google.api.client.util.DateTime;
 import com.sgr.entities.google.GoogleBound;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,12 +16,13 @@ public class Ruta {
     private Usuario chofer;
     private Usuario administrador;
     private GoogleBound bound;
+    PuntoSalida salida;
+    PuntoDisposicionFinal disposicionFinal;
     private List<RutaPunto> puntos;
     private String estado;
-    private String tiempoTotal;
-    private String tiempoTraslado;
-    private String tiempoTrabajo;
-    private String kilometrosTotales;
-
-
+    private Double distancia;
+    private Double tiempoTotal;
+    private Double tiempoTrabajo;
+    private Double tiempoTraslado;
+    private long fecha;
 }

@@ -8,11 +8,10 @@ import lombok.Data;
 @Data
 public class RutaPuntoDTO {
 
-    private int _id;
+    private long _id;
     private PuntoMapa punto;
-    private GoogleDuration googleDuration;
-    private GoogleDistance googleDistance;
     private String estado;
+    private double distancia;
     private String tiempoTrabajo;
     private String tiempoTraslado;
 }
