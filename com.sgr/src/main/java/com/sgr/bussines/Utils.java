@@ -1,11 +1,14 @@
 package com.sgr.bussines;
 
 import com.google.gson.Gson;
+
+import java.security.NoSuchAlgorithmException;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 import java.util.List;
@@ -15,12 +18,17 @@ import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
-
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 
-
 public class Utils {
+
+	static final String KEY = "thisesalakey";
+	public static String getKey(){
+		return KEY;
+	}
+
+
 	@Autowired
 	private static EmailService emailService;
 	private Utils(){
@@ -92,5 +100,17 @@ public class Utils {
 		long endSeconds = end.getEpochSecond();
 		long random = ThreadLocalRandom.current().nextLong(startSeconds, endSeconds);
 		return Instant.ofEpochSecond(random);
+	}
+	public static String generateRandomString() {
+		int leftLimit = 97;
+		int rightLimit = 122;
+		int targetStringLength = 10;
+		Random random = new Random();
+
+		String generatedString = random.ints(leftLimit, rightLimit + 1)
+			.limit(targetStringLength)
+				.collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
+				.toString();
+		return generatedString;
 	}
 }
