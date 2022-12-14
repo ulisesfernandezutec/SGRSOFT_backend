@@ -55,16 +55,20 @@ public class RutaController {
         Ruta ruta = new Ruta();
         ruta.set_id(rutaDTO.get_id());
         ruta.setVehiculo(rutaDTO.getVehiculo());
+        ruta.setChofer(rutaDTO.getChofer());
         ruta.setAdministrador(rutaDTO.getAdministrador());
+        ruta.setBound(rutaDTO.getBound());
         ruta.setPuntos(rutaDTO.getPuntos());
         ruta.setNombre(rutaDTO.getNombre());
         ruta.setChofer(rutaDTO.getChofer());
-        ruta.setBound(rutaDTO.getBound());
+        ruta.setSalida(rutaDTO.getSalida());
         ruta.setEstado(rutaDTO.getEstado());
-        ruta.setTiempoTotal(rutaDTO.getTiempoTotal());
+        ruta.setDisposicionFinal(rutaDTO.getDisposicionFinal());
+        ruta.setFecha(rutaDTO.getFecha());
+        ruta.setEstado(rutaDTO.getEstado());
+        ruta.setDistancia(rutaDTO.getDistancia());
         ruta.setTiempoTrabajo(rutaDTO.getTiempoTrabajo());
         ruta.setTiempoTraslado(rutaDTO.getTiempoTraslado());
-        ruta.setKilometrosTotales(rutaDTO.getKilometrosTotales());
 
         try {
             Long id = 0L;
@@ -82,16 +86,20 @@ public class RutaController {
         Ruta ruta = new Ruta();
         ruta.set_id(rutaDTO.get_id());
         ruta.setVehiculo(rutaDTO.getVehiculo());
+        ruta.setChofer(rutaDTO.getChofer());
         ruta.setAdministrador(rutaDTO.getAdministrador());
+        ruta.setBound(rutaDTO.getBound());
         ruta.setPuntos(rutaDTO.getPuntos());
         ruta.setNombre(rutaDTO.getNombre());
         ruta.setChofer(rutaDTO.getChofer());
-        ruta.setBound(rutaDTO.getBound());
+        ruta.setSalida(rutaDTO.getSalida());
         ruta.setEstado(rutaDTO.getEstado());
-        ruta.setTiempoTotal(rutaDTO.getTiempoTotal());
+        ruta.setDisposicionFinal(rutaDTO.getDisposicionFinal());
+        ruta.setFecha(rutaDTO.getFecha());
+        ruta.setEstado(rutaDTO.getEstado());
+        ruta.setDistancia(rutaDTO.getDistancia());
         ruta.setTiempoTrabajo(rutaDTO.getTiempoTrabajo());
         ruta.setTiempoTraslado(rutaDTO.getTiempoTraslado());
-        ruta.setKilometrosTotales(rutaDTO.getKilometrosTotales());
         try {
             if (rutaServiceImplement.getById(ruta.get_id()) != null) {
                 rutaServiceImplement.update(ruta);

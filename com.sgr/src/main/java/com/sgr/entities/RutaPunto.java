@@ -14,9 +14,8 @@ public class RutaPunto {
     @Id
     private long _id;
     private PuntoMapa punto;
-    private GoogleDuration googleDuration;
-    private GoogleDistance googleDistance;
     private String estado;
+    private double distancia;
     private String tiempoTrabajo;
     private String tiempoTraslado;
 

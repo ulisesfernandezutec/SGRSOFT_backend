@@ -44,12 +44,12 @@ public class RutaPuntoController {
     public String setRutaPunto(@RequestBody RutaPuntoDTO rutaPuntoDTO) {
         RutaPunto rutaPunto = new RutaPunto();
         rutaPunto.set_id(rutaPuntoDTO.get_id());
-        rutaPunto.setGoogleDuration(rutaPuntoDTO.getGoogleDuration());
-        rutaPunto.setGoogleDistance(rutaPuntoDTO.getGoogleDistance());
-        rutaPunto.setEstado(rutaPunto.getEstado());
         rutaPunto.setPunto(rutaPunto.getPunto());
+        rutaPunto.setEstado(rutaPunto.getEstado());
+        rutaPunto.setDistancia(rutaPuntoDTO.getDistancia());
         rutaPunto.setTiempoTrabajo(rutaPuntoDTO.getTiempoTrabajo());
         rutaPunto.setTiempoTraslado(rutaPuntoDTO.getTiempoTraslado());
+
         try {
             Long id = 0L;
             rutaPunto.set_id(id);
@@ -65,10 +65,9 @@ public class RutaPuntoController {
     public boolean updateRutaPunto(@RequestBody RutaPuntoDTO rutaPuntoDTO) {
         RutaPunto rutaPunto = new RutaPunto();
         rutaPunto.set_id(rutaPuntoDTO.get_id());
-        rutaPunto.setGoogleDuration(rutaPuntoDTO.getGoogleDuration());
-        rutaPunto.setGoogleDistance(rutaPuntoDTO.getGoogleDistance());
-        rutaPunto.setEstado(rutaPunto.getEstado());
         rutaPunto.setPunto(rutaPunto.getPunto());
+        rutaPunto.setEstado(rutaPunto.getEstado());
+        rutaPunto.setDistancia(rutaPuntoDTO.getDistancia());
         rutaPunto.setTiempoTrabajo(rutaPuntoDTO.getTiempoTrabajo());
         rutaPunto.setTiempoTraslado(rutaPuntoDTO.getTiempoTraslado());
         try {

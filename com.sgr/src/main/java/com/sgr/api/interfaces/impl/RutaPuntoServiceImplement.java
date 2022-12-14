@@ -35,8 +35,9 @@ public class RutaPuntoServiceImplement implements RutaPuntoService {
             rpf.set_id(rp.get_id());
             rpf.setPunto(rp.getPunto());
             rpf.setEstado(rp.getEstado());
-            rpf.setGoogleDistance(rp.getGoogleDistance());
-            rpf.setGoogleDuration(rp.getGoogleDuration());
+            rpf.setTiempoTrabajo(rp.getTiempoTrabajo());
+            rpf.setDistancia(rp.getDistancia());
+            rpf.setTiempoTraslado(rp.getTiempoTraslado());
             this.rutaPuntoRepository.save(rpf);
         }
         Optional<RutaPunto> result = this.rutaPuntoRepository.findById(Long.parseLong(String.valueOf(rp.get_id())));
