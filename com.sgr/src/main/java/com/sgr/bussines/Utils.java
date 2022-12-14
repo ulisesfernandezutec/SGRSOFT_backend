@@ -1,11 +1,14 @@
 package com.sgr.bussines;
 
 import com.google.gson.Gson;
+
+import java.nio.charset.Charset;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 import java.util.List;
@@ -92,5 +95,18 @@ public class Utils {
 		long endSeconds = end.getEpochSecond();
 		long random = ThreadLocalRandom.current().nextLong(startSeconds, endSeconds);
 		return Instant.ofEpochSecond(random);
+	}
+	public static String generateRandomString() {
+		int leftLimit = 97;
+		int rightLimit = 122;
+		int targetStringLength = 10;
+		Random random = new Random();
+
+		String generatedString = random.ints(leftLimit, rightLimit + 1)
+				.limit(targetStringLength)
+				.collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
+				.toString();
+		return generatedString;
+		
 	}
 }

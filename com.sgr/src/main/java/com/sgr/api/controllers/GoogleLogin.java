@@ -1,9 +1,12 @@
 package com.sgr.api.controllers;
 
 import java.util.Optional;
+import java.util.UUID;
+
 import com.google.gson.JsonObject;
 import com.sgr.api.interfaces.impl.UsuarioServiceImplement;
 import com.sgr.bussines.Messages;
+import com.sgr.bussines.Utils;
 import com.sgr.entities.Rol;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +43,7 @@ public class GoogleLogin {
 				} else {
 					String userInfo = SecurityGoogleTokenVerifier.googleUserInfo(token);
 					JsonObject obj = new Gson().fromJson(userInfo, JsonObject.class);
-					Usuario user = new Usuario(1L, "", new Rol(3, "Usuario"), "", "", "", obj.get("email").getAsString(),"", "Activo");
+					Usuario user = new Usuario(1L, Utils.generateRandomString(), new Rol(3, "Usuario"), "", "", "", obj.get("email").getAsString(),"", "Activo");
 					repo.create(user);
 					Optional<Usuario> us = repo.findFirstByEmailLike(resp.getEmail());
 					if (us.isPresent()) {
