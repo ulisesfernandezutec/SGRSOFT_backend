@@ -36,6 +36,8 @@ public class SecurityWebConfig {
 			config.addAllowedOrigin("https://www.karaiguazu.com");
 		 	config.addAllowedOrigin("https://www.api.karaiguazu.com");
 		 	config.addAllowedOrigin("https://api.karaiguazu.com");
+		 	config.addAllowedOrigin("https://api.karaiguazu.com/**");
+			config.addAllowedOrigin("https://www.karaiguazu.com/**");
 	        config.addAllowedHeader("*");
 	        config.addAllowedMethod("*");
 	        source.registerCorsConfiguration("/**", config);
