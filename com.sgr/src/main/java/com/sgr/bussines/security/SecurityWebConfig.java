@@ -1,4 +1,5 @@
 package com.sgr.bussines.security;
+import com.google.common.collect.ImmutableList;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -31,17 +32,13 @@ public class SecurityWebConfig {
 	    public CorsFilter corsFilter() {
 	        UrlBasedCorsConfigurationSource source =
 	            new UrlBasedCorsConfigurationSource();
-	        CorsConfiguration config = new CorsConfiguration();
-	        config.setAllowCredentials(true);
-			config.addAllowedOrigin("https://www.karaiguazu.com");
-		 	config.addAllowedOrigin("https://www.api.karaiguazu.com");
-		 	config.addAllowedOrigin("https://api.karaiguazu.com");
-		 	config.addAllowedOrigin("https://api.karaiguazu.com/**");
-			config.addAllowedOrigin("https://www.karaiguazu.com/**");
-	        config.addAllowedHeader("*");
-	        config.addAllowedMethod("*");
-	        source.registerCorsConfiguration("/**", config);
-	        return new CorsFilter(source);
+			CorsConfiguration config = new CorsConfiguration();
+		 config.setAllowedOrigins(ImmutableList.of("*"));
+		 config.setAllowedMethods(ImmutableList.of("HEAD","GET", "POST", "PUT", "DELETE", "PATCH"));
+		 config.setAllowCredentials(true);
+		 config.setAllowedHeaders(ImmutableList.of("Authorization", "Cache-Control", "Content-Type"));
+		 source.registerCorsConfiguration("/**", config);
+		 return new CorsFilter(source);
 	    }
 
 	@Bean
