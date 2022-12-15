@@ -37,7 +37,7 @@ public class SecurityWebConfig {
 	@EnableWebMvc
 	public class WebConfig implements WebMvcConfigurer {
 
-	}/*
+	}/*No funciona
 	 @Bean
 	    public CorsFilter corsFilter() {
 	        UrlBasedCorsConfigurationSource source =
@@ -50,7 +50,9 @@ public class SecurityWebConfig {
 	        source.registerCorsConfiguration("/**", config);
 	        return new CorsFilter(source);
 	    }*/
+	/*
 	@Bean
+	 Funciona pero no funciona el registro
 	public CorsFilter corsWebFilter() {
 		CorsConfiguration corsConfig = new CorsConfiguration();
 		corsConfig.setAllowedOrigins(Arrays.asList("https://api.karaiguazu.com", "https://www.karaiguazu.com"));
@@ -58,13 +60,28 @@ public class SecurityWebConfig {
 		corsConfig.addAllowedMethod("*");
 		corsConfig.addAllowedHeader("Requestor-Type");
 		corsConfig.addExposedHeader("X-Get-Header");
-
 		UrlBasedCorsConfigurationSource source =
 				new UrlBasedCorsConfigurationSource();
 		source.registerCorsConfiguration("/**", corsConfig);
 		return new CorsFilter(source);
+	}*/
+	@Bean
+	public CorsFilter corsFilter() {
+		final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+		final CorsConfiguration config = new CorsConfiguration();
+		config.setAllowCredentials(true);
+		config.addAllowedOrigin("*"); // this allows all origin
+		config.addAllowedHeader("*"); // this allows all headers
+		config.addAllowedMethod("OPTIONS");
+		config.addAllowedMethod("HEAD");
+		config.addAllowedMethod("GET");
+		config.addAllowedMethod("PUT");
+		config.addAllowedMethod("POST");
+		config.addAllowedMethod("DELETE");
+		config.addAllowedMethod("PATCH");
+		source.registerCorsConfiguration("/**", config);
+		return new CorsFilter(source);
 	}
-
 	@Bean
 	public ClassLoaderTemplateResolver secondaryTemplateResolver() {
 		ClassLoaderTemplateResolver secondaryTemplateResolver = new ClassLoaderTemplateResolver();
