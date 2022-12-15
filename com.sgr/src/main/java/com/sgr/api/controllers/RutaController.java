@@ -70,6 +70,7 @@ public class RutaController {
         ruta.setDistancia(rutaDTO.getDistancia());
         ruta.setTiempoTrabajo(rutaDTO.getTiempoTrabajo());
         ruta.setTiempoTraslado(rutaDTO.getTiempoTraslado());
+        ruta.setOptimizada(rutaDTO.isOptimizada());
 
         try {
             Long id = 0L;
@@ -101,6 +102,7 @@ public class RutaController {
         ruta.setDistancia(rutaDTO.getDistancia());
         ruta.setTiempoTrabajo(rutaDTO.getTiempoTrabajo());
         ruta.setTiempoTraslado(rutaDTO.getTiempoTraslado());
+        ruta.setOptimizada(rutaDTO.isOptimizada());
         try {
             if (rutaServiceImplement.getById(ruta.get_id()) != null) {
                 rutaServiceImplement.update(ruta);
