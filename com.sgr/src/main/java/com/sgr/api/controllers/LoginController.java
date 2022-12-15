@@ -55,6 +55,7 @@ public class LoginController {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.PERSONA_NOT_FOUND + authUser.getUsuario().getEmail());
 		}
 	}
+	@CrossOrigin(origins = "https://www.karaiguazu.com", maxAge = 3600)
 	@PostMapping("/login/newuser")
 	public Usuario setNewUsuario(@RequestBody UsuarioDTO usuarioDTO) throws AddressException {
 		boolean ok;

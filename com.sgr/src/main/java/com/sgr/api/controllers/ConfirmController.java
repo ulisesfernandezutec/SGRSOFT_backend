@@ -3,13 +3,16 @@ package com.sgr.api.controllers;
 import com.sgr.api.interfaces.impl.UsuarioServiceImplement;
 import com.sgr.entities.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Optional;
 import java.util.UUID;
+@CrossOrigin(origins = "https://www.karaiguazu.com", maxAge = 3600)
 @RestController
+
 public class ConfirmController {
     @Autowired
     UsuarioServiceImplement usuarioServiceImplement;
