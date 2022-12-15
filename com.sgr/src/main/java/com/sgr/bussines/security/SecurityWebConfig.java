@@ -41,7 +41,7 @@ public class SecurityWebConfig {
 	@Bean
 	public CorsFilter corsWebFilter() {
 		CorsConfiguration corsConfig = new CorsConfiguration();
-		corsConfig.setAllowedOrigins(Arrays.asList("https://api.karaiguazu.com", "https://www.karaiguazu.com"));
+		corsConfig.setAllowedOrigins(Arrays.asList("https://api.karaiguazu.com", "https://www.karaiguazu.com", "http://api.karaiguazu.com/login/newuser"));
 		corsConfig.setMaxAge(3600L);
 		corsConfig.addAllowedMethod("*");
 		corsConfig.addAllowedHeader("Requestor-Type");
