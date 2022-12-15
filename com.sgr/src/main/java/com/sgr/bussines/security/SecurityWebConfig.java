@@ -25,27 +25,28 @@ public class SecurityWebConfig {
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http.addFilterAfter(new SecurityJWTAuthFilter(), UsernamePasswordAuthenticationFilter.class)
-				.csrf().and().cors().disable()
+				.csrf().disable()
 				.authorizeRequests()
 				.antMatchers(HttpMethod.GET, "/glogin/**").permitAll()
+				.antMatchers(HttpMethod.POST, "/glogin/**").permitAll()
 				.antMatchers(HttpMethod.POST, "/login/**").permitAll()
 				.antMatchers(HttpMethod.GET, "/login/**").permitAll()
 				.anyRequest().authenticated();
 		return http.build();
-	}/*
-	@Bean
-	public CorsFilter corsWebFilter() {
-		CorsConfiguration corsConfig = new CorsConfiguration();
-		corsConfig.setAllowedOrigins(Arrays.asList("https://api.karaiguazu.com", "https://www.karaiguazu.com", "http://api.karaiguazu.com/login/newuser"));
-		corsConfig.setMaxAge(3600L);
-		corsConfig.addAllowedMethod("*");
-		corsConfig.addAllowedHeader("Requestor-Type");
-		corsConfig.addExposedHeader("X-Get-Header");
-		UrlBasedCorsConfigurationSource source =
-				new UrlBasedCorsConfigurationSource();
-		source.registerCorsConfiguration("/**", corsConfig);
-		return new CorsFilter(source);
 	}
+	 @Bean
+	    public CorsFilter corsFilter() {
+	        UrlBasedCorsConfigurationSource source =
+	            new UrlBasedCorsConfigurationSource();
+	        CorsConfiguration config = new CorsConfiguration();
+	        config.setAllowCredentials(true);
+	        config.addAllowedOrigin("https://www.karaiguazu.com/*");
+		 	config.addAllowedOrigin("https://api.karaiguazu.com/*");
+	        config.addAllowedHeader("*");
+	        config.addAllowedMethod("*");
+	        source.registerCorsConfiguration("/**", config);
+	        return new CorsFilter(source);
+	    }
 	@Bean
 	public ClassLoaderTemplateResolver secondaryTemplateResolver() {
 		ClassLoaderTemplateResolver secondaryTemplateResolver = new ClassLoaderTemplateResolver();
@@ -56,6 +57,5 @@ public class SecurityWebConfig {
 		secondaryTemplateResolver.setOrder(1);
 		secondaryTemplateResolver.setCheckExistence(true);
 		return secondaryTemplateResolver;
-		}*/
-}
-
+		}
+	}
