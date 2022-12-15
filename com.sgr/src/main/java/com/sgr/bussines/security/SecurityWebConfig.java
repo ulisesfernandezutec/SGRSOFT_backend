@@ -35,18 +35,15 @@ public class SecurityWebConfig {
 	    public CorsFilter corsFilter() {
 	        UrlBasedCorsConfigurationSource source =
 	            new UrlBasedCorsConfigurationSource();
-			CorsConfiguration config = new CorsConfiguration();
-		 config.setAllowCredentials(true);
-		 config.addAllowedOriginPattern("/**");
-		 config.addAllowedOrigin("*");
-		 config.addAllowedOrigin("/**");
-		 config.addAllowedOrigin("https://www.karaiguazu.com");
-		 config.addAllowedOrigin("https://www.karaiguazu.com");
-		 config.addAllowedOrigin("https://api.karaiguazu.com");
-		 config.addAllowedHeader("*");
-		 config.addAllowedMethod("*");
-		 source.registerCorsConfiguration("/**", config);
-		 return new CorsFilter(source);
+	        CorsConfiguration config = new CorsConfiguration();
+	        config.setAllowCredentials(true);
+			config.addAllowedOrigin("https://www.karaiguazu.com");
+		 	config.addAllowedOrigin("https://www.api.karaiguazu.com");
+		 	config.addAllowedOrigin("https://api.karaiguazu.com");
+	        config.addAllowedHeader("*");
+	        config.addAllowedMethod("*");
+	        source.registerCorsConfiguration("/**", config);
+	        return new CorsFilter(source);
 	    }
 
 	@Bean
