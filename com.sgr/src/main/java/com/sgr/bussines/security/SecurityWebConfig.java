@@ -13,6 +13,9 @@ import org.springframework.web.filter.CorsFilter;
 import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 
+import java.util.Arrays;
+import java.util.List;
+
 @Configuration
 @EnableWebSecurity
 public class SecurityWebConfig {
@@ -33,10 +36,10 @@ public class SecurityWebConfig {
 	        UrlBasedCorsConfigurationSource source =
 	            new UrlBasedCorsConfigurationSource();
 			CorsConfiguration config = new CorsConfiguration();
-		 config.setAllowedOrigins(ImmutableList.of("*"));
-		 config.setAllowedMethods(ImmutableList.of("HEAD","GET", "POST", "PUT", "DELETE", "PATCH"));
 		 config.setAllowCredentials(true);
-		 config.setAllowedHeaders(ImmutableList.of("Authorization", "Cache-Control", "Content-Type"));
+		 config.addAllowedOrigin("*");
+		 config.addAllowedHeader("*");
+		 config.addAllowedMethod("*");
 		 source.registerCorsConfiguration("/**", config);
 		 return new CorsFilter(source);
 	    }
