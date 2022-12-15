@@ -62,8 +62,7 @@ public class SecurityWebConfig {
 		UrlBasedCorsConfigurationSource source =
 				new UrlBasedCorsConfigurationSource();
 		source.registerCorsConfiguration("/**", corsConfig);
-
-		return new  new CorsFilter(source);
+		return new CorsFilter(source);
 	}
 
 	@Bean
