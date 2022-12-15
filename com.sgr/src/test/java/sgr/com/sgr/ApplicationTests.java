@@ -585,6 +585,7 @@ class ApplicationTests {
 		ruta.setFecha(new Date().getTime());
 		ruta.setTiempoTotal(100.00);
 		ruta.setTiempoTrabajo(100.5);
+		ruta.setOptimizada(true);
 		Ruta rstest = rutaServiceImplement.create(ruta);
 		assertEquals(999999996L,rstest.get_id());
 	}

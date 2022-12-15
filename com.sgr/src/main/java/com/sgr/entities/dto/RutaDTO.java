@@ -22,5 +22,6 @@ public class RutaDTO {
     private Double distancia;
     private Double tiempoTrabajo;
     private Double tiempoTraslado;
+    private boolean optimizada;
 
 }

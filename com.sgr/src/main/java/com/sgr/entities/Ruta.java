@@ -25,4 +25,5 @@ public class Ruta {
     private Double tiempoTrabajo;
     private Double tiempoTraslado;
     private long fecha;
+    private boolean optimizada;
 }
