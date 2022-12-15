@@ -1,5 +1,4 @@
 package com.sgr.bussines.security;
-import com.google.common.collect.ImmutableList;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -13,17 +12,14 @@ import org.springframework.web.filter.CorsFilter;
 import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 
-import java.util.Arrays;
-import java.util.List;
-
 @Configuration
 @EnableWebSecurity
 public class SecurityWebConfig {
 
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-		http.addFilterAfter(new SecurityJWTAuthFilter(), UsernamePasswordAuthenticationFilter.class);
-				http.csrf().disable()
+		http.addFilterAfter(new SecurityJWTAuthFilter(), UsernamePasswordAuthenticationFilter.class)
+				.csrf().disable()
 				.authorizeRequests()
 				.antMatchers(HttpMethod.GET, "/glogin/**").permitAll()
 				.antMatchers(HttpMethod.POST, "/login/**").permitAll()
