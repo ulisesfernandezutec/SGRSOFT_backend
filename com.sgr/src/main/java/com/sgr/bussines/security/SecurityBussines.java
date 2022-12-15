@@ -57,8 +57,7 @@ public class SecurityBussines {
 						grantedAuthorities.stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList()))
 				.setIssuedAt(new Date(System.currentTimeMillis()))
 				.claim("Email", usuario.getEmail())
-				//duración 30 min
-				.setExpiration(new Date(System.currentTimeMillis() + 1800000))
+				.setExpiration(new Date(System.currentTimeMillis() + 5600000))
 				.signWith(SignatureAlgorithm.HS512, secretKey.getBytes()).compact();
 
 		return "Bearer " + token;

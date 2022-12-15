@@ -27,7 +27,6 @@ public class SecurityJWTAuthFilter extends OncePerRequestFilter {
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
 			throws ServletException, IOException {
-
 		try {
 			if (existeJWTToken(request)) {
 				Claims claims = validateToken(request);
