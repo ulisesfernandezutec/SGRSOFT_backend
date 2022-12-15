@@ -8,9 +8,15 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.cors.reactive.CorsWebFilter;
 import org.springframework.web.filter.CorsFilter;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
+
+import java.util.Arrays;
 
 @Configuration
 @EnableWebSecurity
@@ -27,6 +33,11 @@ public class SecurityWebConfig {
 				.anyRequest().authenticated();
 		return http.build();
 	}
+	@Configuration
+	@EnableWebMvc
+	public class WebConfig implements WebMvcConfigurer {
+
+	}/*
 	 @Bean
 	    public CorsFilter corsFilter() {
 	        UrlBasedCorsConfigurationSource source =
@@ -38,7 +49,22 @@ public class SecurityWebConfig {
 	        config.addAllowedMethod("*");
 	        source.registerCorsConfiguration("/**", config);
 	        return new CorsFilter(source);
-	    }
+	    }*/
+	@Bean
+	public CorsFilter corsWebFilter() {
+		CorsConfiguration corsConfig = new CorsConfiguration();
+		corsConfig.setAllowedOrigins(Arrays.asList("https://api.karaiguazu.com", "https://www.karaiguazu.com"));
+		corsConfig.setMaxAge(3600L);
+		corsConfig.addAllowedMethod("*");
+		corsConfig.addAllowedHeader("Requestor-Type");
+		corsConfig.addExposedHeader("X-Get-Header");
+
+		UrlBasedCorsConfigurationSource source =
+				new UrlBasedCorsConfigurationSource();
+		source.registerCorsConfiguration("/**", corsConfig);
+
+		return new  new CorsFilter(source);
+	}
 
 	@Bean
 	public ClassLoaderTemplateResolver secondaryTemplateResolver() {
