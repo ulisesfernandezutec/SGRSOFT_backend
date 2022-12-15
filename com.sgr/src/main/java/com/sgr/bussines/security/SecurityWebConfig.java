@@ -32,12 +32,7 @@ public class SecurityWebConfig {
 				.antMatchers(HttpMethod.GET, "/login/**").permitAll()
 				.anyRequest().authenticated();
 		return http.build();
-	}
-	@Configuration
-	@EnableWebMvc
-	public class WebConfig implements WebMvcConfigurer {
-
-	}
+	}/*
 	@Bean
 	public CorsFilter corsWebFilter() {
 		CorsConfiguration corsConfig = new CorsConfiguration();
@@ -61,6 +56,6 @@ public class SecurityWebConfig {
 		secondaryTemplateResolver.setOrder(1);
 		secondaryTemplateResolver.setCheckExistence(true);
 		return secondaryTemplateResolver;
-		}
+		}*/
 }
 

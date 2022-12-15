@@ -16,7 +16,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
-
 import javax.mail.internet.AddressException;
 import java.util.Optional;
 import java.util.UUID;
@@ -55,7 +54,6 @@ public class LoginController {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.PERSONA_NOT_FOUND + authUser.getUsuario().getEmail());
 		}
 	}
-	@CrossOrigin(origins = "https://www.karaiguazu.com", maxAge = 3600)
 	@PostMapping("/login/newuser")
 	public Usuario setNewUsuario(@RequestBody UsuarioDTO usuarioDTO) throws AddressException {
 		boolean ok;
@@ -73,7 +71,6 @@ public class LoginController {
 				usr = user.findFirstByEmailLike(usuarioDTO.getEmail());
 				if(usr.isPresent()){
 					//Crear email
-
 					Email mail = new Email();
 					mail.setRecipient(usr.get().getEmail());
 					mail.setSubject(Messages.ACTIVE);
@@ -91,6 +88,4 @@ public class LoginController {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Messages.CREATE_ERROR + Messages.EMAIL_EXIST);
 		}
 	}
-
-
 }
