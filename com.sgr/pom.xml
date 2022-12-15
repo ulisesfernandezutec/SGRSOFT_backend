@@ -21,18 +21,18 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
-            <version>3.0.0</version>
+            <version>2.7.3</version>
         </dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
-			<version>3.0.0</version>
+			<version>2.7.3</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-mail -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-mail</artifactId>
-			<version>3.0.0</version>
+			<version>2.7.6</version>
 		</dependency>
 		<!-- JWT dependencias-->
 		<dependency>
@@ -44,7 +44,7 @@
 		<dependency>
 			<groupId>com.google.api-client</groupId>
 			<artifactId>google-api-client</artifactId>
-			<version>2.1.1</version>
+			<version>2.0.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.social</groupId>
@@ -60,7 +60,7 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
-            <version>3.0.0</version>
+            <version>2.7.3</version>
         </dependency>
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
@@ -70,17 +70,17 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web-services</artifactId>
-            <version>3.0.0</version>
+            <version>2.7.3</version>
         </dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-web</artifactId>
-            <version>6.0.2</version>
+            <version>5.3.22</version>
         </dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
-            <version>3.0.0</version>
+            <version>2.7.3</version>
             <scope>test</scope>
 		</dependency>
 		<dependency>
@@ -92,13 +92,13 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-mongodb</artifactId>
-            <version>3.0.0</version>
+            <version>2.7.3</version>
         </dependency>
 		<!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
 		<dependency>
 			<groupId>com.google.code.gson</groupId>
 			<artifactId>gson</artifactId>
-            <version>2.10</version>
+            <version>2.9.1</version>
         </dependency>
 		<!-- Depencias junit -->
 		<dependency>
@@ -112,21 +112,22 @@
 			<artifactId>springfox-swagger-ui</artifactId>
 			<version>3.0.0</version>
 		</dependency>
+
 		<!-- Seguridad-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-oauth2-client</artifactId>
-            <version>3.0.0</version>
+            <version>2.7.3</version>
         </dependency>
 		<dependency>
 			<groupId>org.springdoc</groupId>
 			<artifactId>springdoc-openapi-ui</artifactId>
-			<version>1.6.13</version>
+			<version>1.6.11</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
-            <version>3.0.0</version>
+            <version>2.7.3</version>
         </dependency>
 		<dependency>
 			<groupId>org.springframework.security</groupId>
